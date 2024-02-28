@@ -85,96 +85,36 @@
 
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click"
-                        class="menu-item menu-accordion">
+                        class="menu-item menu-accordion"
+                        *ngFor="let menu of _sidebar.menu">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-address-book fs-2">
+                                <i [class]="menu.icono" class="fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">User Profile</span>
+                            <span class="menu-title">{{ menu.titulo }}</span>
                             <span class="menu-arrow"></span>
                         </span>
                         <!--end:Menu link-->
                         <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-sub menu-sub-accordion"
+                            *ngIf="menu.submenu.length > 0">
                             <!--begin:Menu item-->
-                            <div class="menu-item">
+                            <div class="menu-item"
+                                *ngFor="let submenu of menu.submenu">
                                 <!--begin:Menu link-->
                                 <a class="menu-link"
-                                    href="pages/user-profile/overview.html">
+                                    routerLinkActive="active"
+                                    [routerLink]="[ submenu.url]">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Overview</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link"
-                                    href="pages/user-profile/projects.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Projects</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link"
-                                    href="pages/user-profile/campaigns.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Campaigns</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link"
-                                    href="pages/user-profile/documents.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Documents</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link"
-                                    href="pages/user-profile/followers.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Followers</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link"
-                                    href="pages/user-profile/activity.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Activity</span>
+                                    <span class="menu-title">{{ submenu.titulo
+                                        }}</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
