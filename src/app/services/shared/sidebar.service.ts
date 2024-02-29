@@ -13,7 +13,9 @@ export class SidebarService {
         { titulo: 'Usuarios', url: '/usuarios' },
         { titulo: 'Roles', url: '/login' },
         { titulo: 'Graficas', url: '/graficas1' },
-        { titulo: 'Progress', url: '/progress' }
+        { titulo: 'Progress', url: '/progress' },
+        { titulo: 'Promesas', url: '/promesas' },
+        { titulo: 'Rxjs', url: '/rxjs' }
       ]
     }
   ];

@@ -16,6 +16,8 @@ import { ProgressComponent } from "./progress/progress.component";
 import { SharedModule } from "../shared/shared.module";
 import { FormsModule } from "@angular/forms";
 import { GraficoDonaComponent } from "../components/grafico-dona/grafico-dona.component";
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { GraficoDonaComponent } from "../components/grafico-dona/grafico-dona.co
         ProgressComponent,
         Graficas1Component,
         IncrementadorComponent,
-        GraficoDonaComponent
+        GraficoDonaComponent,
+        PromesasComponent,
+        RxjsComponent
     ],
     exports: [
         DashboardComponent,
