@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../services/service.index';
+import { Usuario } from '../models/usuario.model';
 
 declare function init_plugins(): any;
 
@@ -11,7 +14,13 @@ const BODY_CLASSES = ['app-blank', 'bgi-size-cover', 'bgi-attachment-fixed', 'bg
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor(public router: Router) {
+  recuerdame: boolean = false;
+  email: string = '';
+
+  constructor(
+    public router: Router,
+    public _usuarioService: UsuarioService
+  ) {
 
   }
 
@@ -23,6 +32,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     bodyTag.classList.remove('kt_app_body');
     BODY_CLASSES.forEach((c) => document.body.classList.add(c));
     bodyTag.style.backgroundImage = "url('../../assets/media/auth/bg10.jpeg')";
+
+    this.email = localStorage.getItem('email') || '';
+    if (this.email.length > 1) {
+      this.recuerdame = true;
+    }
   }
 
   ngOnDestroy() {
@@ -33,7 +47,29 @@ export class LoginComponent implements OnInit, OnDestroy {
     bodyTag.style.backgroundImage = "";
   }
 
-  navegar() {
-    this.router.navigate(['/dashboard']);
+  ingresar(forma: NgForm) {
+
+    if (forma.invalid) {
+      return;
+    }
+
+    let usuario = new Usuario(
+      0,
+      0,
+      '',
+      'null',
+      forma.value.email,
+      '',
+      forma.value.password,
+      0,
+      0,
+      0,
+      0,
+      0,
+      'tipo_admin'
+    );
+    this._usuarioService.login(usuario, forma.value.recuerdame)
+      .subscribe(resp => this.router.navigate(['/dashboard']));
+
   }
 }

@@ -18,6 +18,7 @@ import { FormsModule } from "@angular/forms";
 import { GraficoDonaComponent } from "../components/grafico-dona/grafico-dona.component";
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         IncrementadorComponent,
         GraficoDonaComponent,
         PromesasComponent,
-        RxjsComponent
+        RxjsComponent,
+        UsuariosComponent
     ],
     exports: [
         DashboardComponent,

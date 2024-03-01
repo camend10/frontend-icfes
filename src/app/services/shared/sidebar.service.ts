@@ -10,7 +10,7 @@ export class SidebarService {
       titulo: 'Usuarios',
       icono: 'ki-duotone ki-profile-user',
       submenu: [
-        { titulo: 'Usuarios', url: '/usuarios' },
+        { titulo: 'Gestion de usuarios', url: '/usuarios' },
         { titulo: 'Roles', url: '/login' },
         { titulo: 'Graficas', url: '/graficas1' },
         { titulo: 'Progress', url: '/progress' },

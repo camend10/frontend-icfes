@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UsuarioService } from '../../services/service.index';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class HeaderComponent {
+
+  constructor(public _usuarioService: UsuarioService) {
+
+  }
 
 }

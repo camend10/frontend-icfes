@@ -51,9 +51,10 @@
 
                         <!--begin::Form-->
                         <form
-                            class="form w-100"                            
+                            #f="ngForm"
+                            class="form w-100"
                             id="kt_sign_in_form"
-                            (ngSubmit)="navegar()">
+                            (ngSubmit)="ingresar( f )">
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
@@ -69,26 +70,6 @@
                             </div>
                             <!--begin::Heading-->
 
-                            <!-- <ng-container *ngIf="!hasError">
-      <div class="mb-10 alert alert-custom alert-light-info alert-dismissible">
-         <div class="alert text">
-            Ingresa tus credenciales por ejemplo:
-            <strong>{{ defaultAuth.email }}</strong> y contraseña
-            <strong> {{ defaultAuth.password }}</strong> a continuación.
-         </div>
-      </div>
-   </ng-container> -->
-
-                            <!-- <ng-container *ngIf="hasError">
-      <div
-         class="mb-10 alert alert-custom alert-light-danger alert-dismissible"
-      >
-         <div class="alert text">
-            Los datos de inicio de sesión son incorrectos
-         </div>
-      </div>
-   </ng-container> -->
-
                             <!--begin::Separator-->
                             <!-- <div class="separator separator-content my-14">
       <span class="w-125px text-gray-500 fw-semibold fs-7">Login</span>
@@ -100,11 +81,12 @@
                                     <!--begin::Email-->
                                     <input
                                         type="text"
+                                        required
                                         placeholder="Email"
                                         name="email"
                                         autocomplete="off"
                                         class="form-control bg-transparent"
-                                         />
+                                        [ngModel]="email" />
 
                                     <!--end::Email-->
                                 </div>
@@ -114,17 +96,34 @@
                                 <div class="col-md-12">
                                     <!--begin::Password-->
                                     <input
+                                        ngModel
+                                        required
                                         type="password"
                                         placeholder="Password"
                                         name="password"
                                         autocomplete="off"
-                                        class="form-control bg-transparent"
-                                         />
+                                        class="form-control bg-transparent" />
 
                                     <!--end::Password-->
                                 </div>
                             </div>
                             <!--end::Input group=-->
+
+                            <!--begin::Accept-->
+                            <div class="fv-row mb-8">
+                                <label class="form-check form-check-inline">
+                                    <input
+                                        [(ngModel)]="recuerdame"
+                                        name="recuerdame"
+                                        class="form-check-input"
+                                        type="checkbox" value="1" />
+                                    <span
+                                        class="form-check-label fw-semibold text-gray-700 fs-base ms-1">Recuerdame
+                                    </span>
+                                </label>
+                            </div>
+                            <!--end::Accept-->
+
                             <!--begin::Submit button-->
                             <div class="d-grid mb-10">
                                 <button
