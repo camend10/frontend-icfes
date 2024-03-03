@@ -9,10 +9,14 @@ import { HeaderComponent } from "./header/header.component";
 import { NopagefoundComponent } from "./nopagefound/nopagefound.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 
+//Pipes
+import { PipesModule } from "../pipes/pipes.module";
+
 @NgModule({
     imports: [
         RouterModule,
-        CommonModule
+        CommonModule,
+        PipesModule
     ],
     declarations: [
         NopagefoundComponent,

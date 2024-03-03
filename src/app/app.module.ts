@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Rutas
 import { APP_ROUTES } from './app.routes';
 
@@ -15,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 
 // Servicios
 import { ServiceModule } from './services/service.module';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -23,10 +26,12 @@ import { ServiceModule } from './services/service.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     APP_ROUTES,
     PagesModule,
     FormsModule,
-    ServiceModule
+    ServiceModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

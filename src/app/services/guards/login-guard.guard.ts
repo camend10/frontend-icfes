@@ -7,10 +7,8 @@ export const LoginGuardGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   if (_usuarioService.estaLogueado()) {
-    console.log('PASO EL GUARD');
     return true;
   }else{
-    console.log('BLOQUEADO POR EL GUARD');
     router.navigate(["/login"]);
     return false;
   }

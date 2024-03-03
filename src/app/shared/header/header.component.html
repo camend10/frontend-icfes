@@ -76,12 +76,12 @@
                         class="h-20px border-gray-200 border-start mx-4"></span>
                     <!--end::Separator-->
                     <!--begin::Title-->
-                    <h1
+                    <h4
                         class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
                         <span class="badge badge-danger">
-                            Administrador
+                            {{ usuario.name }}
                         </span>
-                    </h1>
+                    </h4>
                     <!--end::Title-->
                 </div>
                 <!--end::Theme mode-->
@@ -94,8 +94,9 @@
                         data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
                         data-kt-menu-attach="parent"
                         data-kt-menu-placement="bottom-end">
-                        <img src="assets/media/avatars/300-3.jpg"
-                            class="rounded-3" alt="user" />
+                        <img
+                            [src]="usuario | imagen"
+                            class="rounded-3" alt="Foto" />
                     </div>
                     <!--begin::User account menu-->
                     <div
@@ -107,19 +108,23 @@
                                 class="menu-content d-flex align-items-center px-3">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo"
-                                        src="assets/media/avatars/300-3.jpg" />
+                                    <img alt="Foto"
+                                        [src]="usuario | imagen" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
                                     <div
-                                        class="fw-bold d-flex align-items-center fs-5">Robert
-                                        Fox
-                                        <span
-                                            class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
+                                        class="fw-bold d-flex align-items-center fs-5">
+                                        <h4 style="font-size: 13px;">
+                                            {{ usuario.name }}
+                                        </h4>
+                                        <!-- <span
+                                            class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span> -->
+                                    </div>
                                     <a href="#"
-                                        class="fw-semibold text-muted text-hover-primary fs-7">robertcom</a>
+                                        class="fw-semibold text-muted text-hover-primary fs-7">{{
+                                        usuario.email }}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -130,7 +135,7 @@
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="account/overview.html"
+                            <a routerLink="/perfil"
                                 class="menu-link px-5">Mi perfil</a>
                         </div>
                         <!--end::Menu item-->

@@ -22,7 +22,9 @@ export class Usuario {
         public codigo?: string,
         public jornada?: string,
         public fecha_nacimiento?: Date,
-        public user_id?: number
+        public user_id?: number,
+        public foto?: string,
+        public genero?: string
     ) {
 
     }

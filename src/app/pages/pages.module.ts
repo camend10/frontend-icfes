@@ -20,6 +20,11 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
+// Pipe Modulo
+import { PipesModule } from "../pipes/pipes.module";
+import { PerfilComponent } from './perfil/perfil.component';
+import { CommonModule } from "@angular/common";
+
 
 @NgModule({
     declarations: [
@@ -31,7 +36,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
         GraficoDonaComponent,
         PromesasComponent,
         RxjsComponent,
-        UsuariosComponent
+        UsuariosComponent,
+        PerfilComponent
     ],
     exports: [
         DashboardComponent,
@@ -42,7 +48,9 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
-        NgChartsModule
+        NgChartsModule,
+        PipesModule,
+        CommonModule
     ]
 })
 
