@@ -25,6 +25,12 @@ import { PipesModule } from "../pipes/pipes.module";
 import { PerfilComponent } from './perfil/perfil.component';
 import { CommonModule } from "@angular/common";
 
+// Modulos
+import { ModalUploadComponent } from "../components/modal-upload/modal-upload.component";
+//Paginacion
+import {NgxPaginationModule} from 'ngx-pagination';
+
+
 
 @NgModule({
     declarations: [
@@ -37,7 +43,8 @@ import { CommonModule } from "@angular/common";
         PromesasComponent,
         RxjsComponent,
         UsuariosComponent,
-        PerfilComponent
+        PerfilComponent,
+        ModalUploadComponent
     ],
     exports: [
         DashboardComponent,
@@ -50,7 +57,8 @@ import { CommonModule } from "@angular/common";
         FormsModule,
         NgChartsModule,
         PipesModule,
-        CommonModule
+        CommonModule,
+        NgxPaginationModule
     ]
 })
 

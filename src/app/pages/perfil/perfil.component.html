@@ -7,7 +7,8 @@
             <div class="me-7 mb-4">
                 <div
                     class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                    <img [src]="usuario | imagen"
+                    <img
+                        [src]="usuario.foto! | imagen:usuario.id.toString() :usuario.tipo "
                         alt="image" />
                     <div
                         class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
@@ -172,10 +173,13 @@
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
 
-                        <div class="row mb-6 justify-content-center" >
+                        <div class="row mb-6 justify-content-center">
 
-                            <img *ngIf="!imagenTemp" [src]="usuario | imagen" class="w150" alt>
-                            <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150" alt>
+                            <img *ngIf="!imagenTemp"
+                                [src]="usuario.foto! | imagen:usuario.id.toString() :usuario.tipo "
+                                class="w150" alt>
+                            <img *ngIf="imagenTemp" [src]="imagenTemp"
+                                class="w150" alt>
 
                         </div>
 

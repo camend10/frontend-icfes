@@ -1,3 +1,5 @@
+import { Role } from "./role.model";
+
 export class Usuario {
 
 
@@ -24,7 +26,8 @@ export class Usuario {
         public fecha_nacimiento?: Date,
         public user_id?: number,
         public foto?: string,
-        public genero?: string
+        public genero?: string,
+        public rol?: Role,
     ) {
 
     }

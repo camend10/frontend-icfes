@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     init_plugins();
-    console.log("init funcion");
     const bodyTag = document.body;
     bodyTag.classList.add('app-default');
     bodyTag.classList.remove('kt_app_body');

@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
+import Swal from 'sweetalert2'
 
 
 @Injectable({
@@ -161,5 +162,61 @@ export class UsuarioService {
 
   }
 
+  cargarUsuarios(desde: number = 0) {
+
+    let url = URL_SERVICIOS + '/users';
+
+    let data = {
+      txtbusqueda: ''
+    };
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return this.http.post(url, data, { headers: headers });
+  }
+
+  buscarUsuario(termino: string) {
+    let url = URL_SERVICIOS + '/users';
+
+    let data = {
+      txtbusqueda: termino
+    };
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return this.http.post(url, data, { headers: headers })
+      .pipe(
+        map((resp: any) => resp.users)
+      );
+  }
+
+  borrarUsuario(id: string, estado: number, mensaje: string) {
+    let url = URL_SERVICIOS + '/users/estado';
+
+    let data = {
+      id: id,
+      estado: estado
+    };
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return this.http.post(url, data, { headers: headers })
+      .pipe(
+        map((resp: any) => {
+          Swal.fire({
+            title: "Operación!",
+            text: mensaje,
+            icon: "success"
+          });
+          return resp.user;
+        })
+      );
+  }
 
 }

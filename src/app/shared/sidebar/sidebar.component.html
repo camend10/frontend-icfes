@@ -8,7 +8,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
-        <a href="index.html">
+        <a [routerLink]="['/dashboard']">
             <img alt="Logo" src="assets/media/logos/default.svg"
                 class="h-25px app-sidebar-logo-default theme-light-show" />
             <img alt="Logo" src="assets/media/logos/default-small.svg"
@@ -58,7 +58,8 @@
                     <div data-kt-menu-trigger="click"
                         class="menu-item menu-accordion">
                         <!--begin:Menu link-->
-                        <span class="menu-link">
+                        <a class="menu-link" routerLinkActive="active"
+                            [routerLink]="['/dashboard']">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-element-11 fs-2">
                                     <span class="path1"></span>
@@ -68,7 +69,7 @@
                                 </i>
                             </span>
                             <span class="menu-title">Dashboards</span>
-                        </span>
+                        </a>
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
@@ -135,7 +136,7 @@
     <!--begin::Footer-->
     <div class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6"
         id="kt_app_sidebar_footer">
-        <a href="https://preview.keenthemes.com/html/metronic/docs"
+        <a href="#/"
             class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
             data-bs-toggle="tooltip" data-bs-trigger="hover"
             data-bs-dismiss-="click"
