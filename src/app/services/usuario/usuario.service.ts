@@ -54,7 +54,7 @@ export class UsuarioService {
         curso_id: 0,
         departamento_id: 0,
         municipio_id: 0,
-        rol_id: 0,
+        role_id: 0,
         grado_id: 0,
         tipo: ''
       };
@@ -87,7 +87,7 @@ export class UsuarioService {
       curso_id: 0,
       departamento_id: 0,
       municipio_id: 0,
-      rol_id: 0,
+      role_id: 0,
       grado_id: 0,
       tipo: ''
     };
@@ -116,6 +116,55 @@ export class UsuarioService {
 
         })
       );
+  }
+
+  guardarUsuario(usuario: Usuario) {
+
+    if (usuario.id) {
+      // actualizando
+      let url = URL_SERVICIOS + '/users/modify/' + usuario.id;
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      return this.http.put(url, usuario, { headers })
+        .pipe(
+          map((resp: any) => {
+
+            this.toastr.success('Usuario modificado ' + usuario.name + ' de manera exitosa', '!Exitoso', {
+              timeOut: 3000,
+              positionClass: 'toast-top-right',
+              closeButton: true
+            });
+            return resp.user;
+
+          })
+        )
+
+    } else {
+
+      // creando
+      let url = URL_SERVICIOS + '/users/create';
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      return this.http.post(url, usuario, { headers })
+        .pipe(
+          map((resp: any) => {
+
+            this.toastr.success('Usuario creado ' + usuario.name + ' de manera exitosa', '!Exitoso', {
+              timeOut: 3000,
+              positionClass: 'toast-top-right',
+              closeButton: true
+            });
+
+            return resp.user;
+
+          })
+        )
+    }
+
   }
 
   actualizarUsuario(usuario: Usuario) {
@@ -214,6 +263,25 @@ export class UsuarioService {
             text: mensaje,
             icon: "success"
           });
+          return resp.user;
+        })
+      );
+  }
+
+  cargarUsuario(id: string) {
+    let url = URL_SERVICIOS + '/users/by-id';
+
+    let data = {
+      id: id
+    };
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return this.http.post(url, data, { headers: headers })
+      .pipe(
+        map((resp: any) => {
           return resp.user;
         })
       );

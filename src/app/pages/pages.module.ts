@@ -14,7 +14,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { Graficas1Component } from "./graficas1/graficas1.component";
 import { ProgressComponent } from "./progress/progress.component";
 import { SharedModule } from "../shared/shared.module";
-import { FormsModule } from "@angular/forms";
+import { FormsModule,ReactiveFormsModule } from "@angular/forms";
 import { GraficoDonaComponent } from "../components/grafico-dona/grafico-dona.component";
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
@@ -29,6 +29,7 @@ import { CommonModule } from "@angular/common";
 import { ModalUploadComponent } from "../components/modal-upload/modal-upload.component";
 //Paginacion
 import {NgxPaginationModule} from 'ngx-pagination';
+import { UsuarioComponent } from './usuarios/usuario.component';
 
 
 
@@ -44,7 +45,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
         RxjsComponent,
         UsuariosComponent,
         PerfilComponent,
-        ModalUploadComponent
+        ModalUploadComponent,
+        UsuarioComponent
     ],
     exports: [
         DashboardComponent,
@@ -55,6 +57,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
+        ReactiveFormsModule,
         NgChartsModule,
         PipesModule,
         CommonModule,

@@ -12,7 +12,7 @@
 
 <div class="row" *ngIf="!cargando">
     <div class="col-12">
-        <div class="card mb-5 mb-xl-8">
+        <div class="card mb-5 mb-xl-8 shadow-sm card-flush">
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
                     <div
@@ -58,7 +58,8 @@
                     <div class="d-flex justify-content-end"
                         data-kt-user-table-toolbar="base">
                         <!--begin::Add user-->
-                        <a href class="btn btn-primary">
+                        <a [routerLink]="['/usuario','nuevo']"
+                            class="btn btn-primary">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                             <i class="ki-duotone ki-plus">
                             </i>
@@ -71,9 +72,9 @@
                 </div>
             </div>
             <div class="card-body pb-0">
-                <h3 class="card-title">Usuarios registrados
+                <h3 class="card-title pb-0">Usuarios registrados
                     (<small>{{ totalRegistros }}</small>)</h3>
-                <div class="card-px  pt-20 pb-5">
+                <div class="card-px pt-1 pb-0">
                     <div class="table-responsive">
                         <!-- <table class="table align-middle table-row-dashed "> -->
                         <table
@@ -149,7 +150,8 @@
                                             <i
                                                 class="fas fa-search fs-4 "></i>
                                         </a>
-                                        <a href="#"
+                                        <a
+                                            [routerLink]="['/usuario',usuario.id]"
                                             class="btn btn-icon btn-warning btn-sm me-1"
                                             title="Editar">
                                             <i

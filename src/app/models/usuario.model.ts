@@ -15,7 +15,7 @@ export class Usuario {
         public curso_id: number,
         public departamento_id: number,
         public municipio_id: number,
-        public rol_id: number,
+        public role_id: number,
         public grado_id: number,
         public tipo: string,
         public telefono?: string,

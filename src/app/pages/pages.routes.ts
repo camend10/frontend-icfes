@@ -8,6 +8,7 @@ import { RxjsComponent } from "./rxjs/rxjs.component";
 import { UsuariosComponent } from "./usuarios/usuarios.component";
 import { LoginGuardGuard } from "../services/service.index";
 import { PerfilComponent } from "./perfil/perfil.component";
+import { UsuarioComponent } from "./usuarios/usuario.component";
 
 const routes: Routes = [
     {
@@ -24,6 +25,7 @@ const routes: Routes = [
 
             //Usuarios
             { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Gestión de Usuarios' } },
+            { path: 'usuario/:id', component: UsuarioComponent, data: { titulo: 'Actualizar Usuario' } },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     },
