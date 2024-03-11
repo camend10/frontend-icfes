@@ -26,6 +26,8 @@ export class UsuarioComponent implements OnInit {
   municipios: Municipio[] = [];
   tipodocumentos: TipoDocumento[] = [];
 
+  cargando: boolean = true;
+
   constructor(
     private toastr: ToastrService,
     private fb: FormBuilder,
@@ -37,7 +39,7 @@ export class UsuarioComponent implements OnInit {
   ) {
     activateRoute.params.subscribe(params => {
       let id = params['id'];
-
+      this.cargando = false;
       if (id !== 'nuevo') {
         this.cargarUsuario(id);
       }
@@ -214,10 +216,11 @@ export class UsuarioComponent implements OnInit {
       genero: result['genero'],
     };
 
-
+    // this.cargando = true;
     this._usuarioService.guardarUsuario(this.usuario)
       .subscribe((usuario: Usuario) => {
         this.usuario.id = usuario.id;
+        // this.cargando = false;
         this.router.navigate(['/usuario', usuario.id]);
       });
   }
@@ -271,11 +274,12 @@ export class UsuarioComponent implements OnInit {
   }
 
   cargarUsuario(id: string) {
+    this.cargando = true;
     this._usuarioService.cargarUsuario(id)
       .subscribe(usuario => {
-        console.log(usuario);
         this.usuario = usuario;
         this.cargarData(this.usuario);
+        this.cargando = false;
       });
   }
 

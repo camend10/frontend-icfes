@@ -68,7 +68,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       'tipo_admin'
     );
     this._usuarioService.login(usuario, forma.value.recuerdame)
-      .subscribe(resp => this.router.navigate(['/dashboard']));
+      .subscribe(resp => {
+        setTimeout(() => {
+          this.router.navigate(['/dashboard'])
+        }, 3000);
+      });
 
   }
 }

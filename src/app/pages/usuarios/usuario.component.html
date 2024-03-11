@@ -1,4 +1,16 @@
-<div class="row g-5 d-flex justify-content-center">
+<div class="row" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-dismissible bg-info text-center ">
+            <strong class="text-light">Cargando</strong>
+            <br>
+            <i class="fas fa-refresh fa-spin fa-2x" aria-hidden="true"></i>
+            <br>
+            <span class="text-light">Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row g-5 d-flex justify-content-center" *ngIf="!cargando">
     <div class="col-12">
         <!--begin::Card-->
         <div class="card shadow-sm card-flush">
@@ -15,7 +27,10 @@
                         <!--begin::Heading-->
                         <div class="mb-13 text-center">
                             <!--begin::Title-->
-                            <h1 class="mb-3">Crear Usuario</h1>
+                            <h1 class="mb-3" *ngIf="!f['id'].value">Crear
+                                Usuario</h1>
+                            <h1 class="mb-3" *ngIf="f['id'].value">Editar
+                                Usuario</h1>
                             <!--end::Title-->
                         </div>
                         <!--end::Heading-->

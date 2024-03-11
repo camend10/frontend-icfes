@@ -2,11 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { URL_SERVICIOS } from '../../config/config';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { Observable, of, throwError } from 'rxjs';
+
 
 
 @Injectable({
@@ -17,6 +19,7 @@ export class UsuarioService {
   usuario!: Usuario;
   token!: string;
   edad: number = 0;
+  menu: any = [];
 
   constructor(
 
@@ -41,6 +44,10 @@ export class UsuarioService {
       if (dato) {
         this.usuario = JSON.parse(dato);
       }
+      const dato2 = localStorage.getItem('menu');
+      if (dato2) {
+        this.menu = JSON.parse(dato2);
+      }
     } else {
       this.token = '';
       this.usuario = {
@@ -59,18 +66,21 @@ export class UsuarioService {
         tipo: ''
       };
       this.edad = 0;
+      this.menu = [];
     }
   }
 
-  guardarStorage(id: string, token: string, usuario: Usuario, edad: number) {
+  guardarStorage(id: string, token: string, usuario: Usuario, edad: number, menu: any) {
     localStorage.setItem('id', id);
     localStorage.setItem('edad', edad.toString());
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
+    localStorage.setItem('menu', JSON.stringify(menu));
 
     this.usuario = usuario;
     this.token = token;
     this.edad = edad;
+    this.menu = menu;
 
   }
 
@@ -92,9 +102,11 @@ export class UsuarioService {
       tipo: ''
     };
     this.edad = 0;
+    this.menu = [];
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
     localStorage.removeItem('edad');
+    localStorage.removeItem('menu');
     this.router.navigate(['/login']);
   }
 
@@ -110,11 +122,27 @@ export class UsuarioService {
     return this.http.post(url, usuario)
       .pipe(
         map((resp: any) => {
+          this.guardarStorage(resp.id, resp.token, resp.user, resp.edad, resp.menu);
 
-          this.guardarStorage(resp.id, resp.token, resp.user, resp.edad);
-          return true;
-
+          this.toastr.success('Inicio de sesión exitoso', 'Iniciando sesión', {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+            closeButton: true
+          });
+        }),
+        catchError(err => {
+          if(err.error.errors){
+            this.mostrarError(err.error.errors);
+          }else{
+            Swal.fire({
+              title: "Error en el login!",
+              text: err.error.error,
+              icon: "error"
+            });
+          }
+          return throwError(() => err);
         })
+
       );
   }
 
@@ -137,7 +165,10 @@ export class UsuarioService {
               closeButton: true
             });
             return resp.user;
-
+          }),
+          catchError(err => {
+            this.mostrarError(err.error.errors);
+            return throwError(() => err);
           })
         )
 
@@ -158,9 +189,11 @@ export class UsuarioService {
               positionClass: 'toast-top-right',
               closeButton: true
             });
-
             return resp.user;
-
+          }),
+          catchError(err => {
+            this.mostrarError(err.error.errors);
+            return throwError(() => err);
           })
         )
     }
@@ -176,7 +209,7 @@ export class UsuarioService {
     return this.http.put(url, usuario, { headers })
       .pipe(
         map((resp: any) => {
-          this.guardarStorage(resp.user.id, this.token, resp.user, resp.edad);
+          this.guardarStorage(resp.user.id, this.token, resp.user, resp.edad, this.menu);
 
           this.toastr.success('Perfil actualizado', '!Exitoso', {
             timeOut: 3000,
@@ -186,6 +219,10 @@ export class UsuarioService {
 
           return true;
 
+        }),
+        catchError(err => {
+          this.mostrarError(err.error.errors);
+          return throwError(() => err);
         })
       )
   }
@@ -196,7 +233,7 @@ export class UsuarioService {
       .then((resp: any) => {
 
         this.usuario.foto = resp.user.foto;
-        this.guardarStorage(resp.user.id, this.token, resp.user, this.edad);
+        this.guardarStorage(resp.user.id, this.token, resp.user, this.edad, this.menu);
         this.toastr.success('Foto actualizada', this.usuario.name, {
           timeOut: 3000,
           positionClass: 'toast-top-right',
@@ -285,6 +322,20 @@ export class UsuarioService {
           return resp.user;
         })
       );
+  }
+
+  mostrarError(errors: any) {
+    let errorMessage = '';
+    for (const key in errors) {
+      if (errors.hasOwnProperty(key)) {
+        errorMessage += `${key}: ${errors[key]}<br>`;
+      }
+    }
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      html: errorMessage
+    });
   }
 
 }
