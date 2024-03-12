@@ -9,6 +9,7 @@ import { UsuariosComponent } from "./usuarios/usuarios.component";
 import { LoginGuardGuard, adminGuard } from "../services/service.index";
 import { PerfilComponent } from "./perfil/perfil.component";
 import { UsuarioComponent } from "./usuarios/usuario.component";
+import { CambiarComponent } from "./perfil/cambiar.component";
 
 const routes: Routes = [
     {
@@ -22,6 +23,7 @@ const routes: Routes = [
             { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
             { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' } },
             { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de usuario' } },
+            { path: 'cambiar-clave', component: CambiarComponent, data: { titulo: 'Cambiar Clave' } },
 
             //Usuarios
             {
@@ -31,6 +33,7 @@ const routes: Routes = [
                 data: { titulo: 'Gestión de Usuarios' }
             },
             { path: 'usuario/:id', component: UsuarioComponent, data: { titulo: 'Gestión de Usuario' } },
+            
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     },

@@ -22,12 +22,10 @@ export class UsuarioService {
   menu: any = [];
 
   constructor(
-
     public http: HttpClient,
     public router: Router,
     private toastr: ToastrService,
     public _subirArchivoService: SubirArchivoService
-
   ) {
     this.cargarStorage();
   }
@@ -131,11 +129,11 @@ export class UsuarioService {
           });
         }),
         catchError(err => {
-          if(err.error.errors){
+          if (err.error.errors) {
             this.mostrarError(err.error.errors);
-          }else{
+          } else {
             Swal.fire({
-              title: "Error en el login!",
+              title: "Error!",
               text: err.error.error,
               icon: "error"
             });
@@ -241,8 +239,17 @@ export class UsuarioService {
         });
         window.location.reload();
       })
-      .catch(resp => {
-        console.log(resp);
+      .catch(err => {
+        if (err.error.errors) {
+          this.mostrarError(err.error.errors);
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Ocurrió un error en la operación",
+            icon: "error"
+          });
+        }
+        return throwError(() => err);
       });
 
 
@@ -260,7 +267,21 @@ export class UsuarioService {
       'Authorization': 'Bearer ' + this.token
     });
 
-    return this.http.post(url, data, { headers: headers });
+    return this.http.post(url, data, { headers: headers })
+      .pipe(
+        catchError(err => {
+          if (err.error.errors) {
+            this.mostrarError(err.error.errors);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: "Ocurrió un error en la operación",
+              icon: "error"
+            });
+          }
+          return throwError(() => err);
+        })
+      );
   }
 
   buscarUsuario(termino: string) {
@@ -276,7 +297,19 @@ export class UsuarioService {
 
     return this.http.post(url, data, { headers: headers })
       .pipe(
-        map((resp: any) => resp.users)
+        map((resp: any) => resp.users),
+        catchError(err => {
+          if (err.error.errors) {
+            this.mostrarError(err.error.errors);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: "Ocurrió un error en la operación",
+              icon: "error"
+            });
+          }
+          return throwError(() => err);
+        })
       );
   }
 
@@ -295,12 +328,62 @@ export class UsuarioService {
     return this.http.post(url, data, { headers: headers })
       .pipe(
         map((resp: any) => {
-          Swal.fire({
-            title: "Operación!",
-            text: mensaje,
-            icon: "success"
+
+          this.toastr.success(mensaje, this.usuario.name, {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+            closeButton: true
           });
           return resp.user;
+        }),
+        catchError(err => {
+          if (err.error.errors) {
+            this.mostrarError(err.error.errors);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: "Ocurrió un error en la operación",
+              icon: "error"
+            });
+          }
+          return throwError(() => err);
+        })
+      );
+  }
+
+  resetearClave(usuario: Usuario) {
+    let url = URL_SERVICIOS + '/users/resetear';
+
+    let data = {
+      id: usuario.id
+    };
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return this.http.post(url, data, { headers: headers })
+      .pipe(
+        map((resp: any) => {
+
+          this.toastr.success(resp.mensaje, this.usuario.name, {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+            closeButton: true
+          });
+          return resp.user;
+        }),
+        catchError(err => {
+          if (err.error.errors) {
+            this.mostrarError(err.error.errors);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: "Ocurrió un error en la operación",
+              icon: "error"
+            });
+          }
+          return throwError(() => err);
         })
       );
   }
@@ -320,6 +403,59 @@ export class UsuarioService {
       .pipe(
         map((resp: any) => {
           return resp.user;
+        }),
+        catchError(err => {
+          if (err.error.errors) {
+            this.mostrarError(err.error.errors);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: "Ocurrió un error en la operación",
+              icon: "error"
+            });
+          }
+          return throwError(() => err);
+        })
+      );
+  }
+
+  cambiarClave(id: string, password: string, newpassword: string, confirmpassword: string) {
+    let url = URL_SERVICIOS + '/users/cambiar';
+
+    let data = {
+      id: id,
+      password: password,
+      newpassword: newpassword,
+      confirmpassword: confirmpassword
+    };
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return this.http.post(url, data, { headers: headers })
+      .pipe(
+        map((resp: any) => {
+          console.log(resp);
+          this.toastr.success(resp.mensaje, "Cambiar clave", {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+            closeButton: true
+          });
+          return resp.ok;
+        }),
+        catchError(err => {
+          console.log(err.error.error);
+          if (err.error.error) {
+            this.mostrarError(err.error.error);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: err.error.error,
+              icon: "error"
+            });
+          }
+          return throwError(() => err);
         })
       );
   }

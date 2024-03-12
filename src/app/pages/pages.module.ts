@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 // Rutas
 import { PAGES_ROUTES } from "./pages.routes";
@@ -19,17 +20,17 @@ import { GraficoDonaComponent } from "../components/grafico-dona/grafico-dona.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { UsuarioComponent } from './usuarios/usuario.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { CambiarComponent } from './perfil/cambiar.component';
 
 // Pipe Modulo
 import { PipesModule } from "../pipes/pipes.module";
-import { PerfilComponent } from './perfil/perfil.component';
-import { CommonModule } from "@angular/common";
 
 // Modulos
 import { ModalUploadComponent } from "../components/modal-upload/modal-upload.component";
 //Paginacion
 import {NgxPaginationModule} from 'ngx-pagination';
-import { UsuarioComponent } from './usuarios/usuario.component';
 
 
 
@@ -46,7 +47,8 @@ import { UsuarioComponent } from './usuarios/usuario.component';
         UsuariosComponent,
         PerfilComponent,
         ModalUploadComponent,
-        UsuarioComponent
+        UsuarioComponent,
+        CambiarComponent
     ],
     exports: [
         DashboardComponent,

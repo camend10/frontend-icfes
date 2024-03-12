@@ -101,6 +101,32 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  
+  resetearClave(usuario: Usuario) {
+    let mensaje = 'Está a punto de resetear la clave a: ' + usuario.name;
+
+    Swal.fire({
+      title: "¿Está seguro?",
+      text: mensaje,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si!",
+      cancelButtonText: "Cancelar!",
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        this._usuarioService.resetearClave(usuario)
+          .subscribe((user: Usuario) => {
+            usuario.password = user.password;
+            if (usuario.id === this._usuarioService.usuario.id) {
+              setTimeout(() => {
+                this._usuarioService.logout();
+              }, 3000);
+            }
+          });
+      }
+    });
+  }
 
 }
