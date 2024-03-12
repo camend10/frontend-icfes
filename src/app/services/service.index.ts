@@ -8,4 +8,6 @@ export { GeneralService } from './generales/general.service';
 export { LoginGuardGuard } from './guards/login-guard.guard';
 export { adminGuard } from './guards/admin.guard';
 
+export { verificaTokenGuard } from './guards/verifica-token.guard';
+
 

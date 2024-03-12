@@ -436,7 +436,6 @@ export class UsuarioService {
     return this.http.post(url, data, { headers: headers })
       .pipe(
         map((resp: any) => {
-          console.log(resp);
           this.toastr.success(resp.mensaje, "Cambiar clave", {
             timeOut: 3000,
             positionClass: 'toast-top-right',
@@ -445,7 +444,6 @@ export class UsuarioService {
           return resp.ok;
         }),
         catchError(err => {
-          console.log(err.error.error);
           if (err.error.error) {
             this.mostrarError(err.error.error);
           } else {
@@ -458,6 +456,83 @@ export class UsuarioService {
           return throwError(() => err);
         })
       );
+  }
+
+  renuevaToken() {
+    let url = URL_SERVICIOS + '/users/refresh';
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    let data = {
+      id: 0
+    };
+
+    return this.http.post(url, data, { headers: headers })
+      .pipe(
+        map((resp: any) => {
+          this.token = resp.token;
+          localStorage.setItem('token', this.token);
+          console.log("token renovado");
+          return true;
+        }),
+        catchError(err => {
+
+          Swal.fire({
+            title: "Error!",
+            text: "No fué posible renovar el token",
+            icon: "error"
+          });
+
+          this.router.navigate(['/login']);
+          return throwError(() => err);
+        })
+      );
+  }
+
+  expirado(fechaExp: number) {
+
+    let ahora = new Date().getTime() / 1000;
+
+    if (fechaExp < ahora) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+  verificaRenueva(fechaExp: number): Promise<boolean> {
+
+    return new Promise((resolve, reject) => {
+
+
+      let tokenExp = new Date(fechaExp * 1000);
+      let ahora = new Date();
+
+      ahora.setTime(ahora.getTime() + (1 * 60 * 60 * 1000));
+
+
+      if (tokenExp.getTime() > ahora.getTime()) {
+        resolve(true);
+      } else {
+        this.renuevaToken()
+          .subscribe({
+            next: () => {
+              resolve(true);
+            },
+            error: (err) => {
+              reject(false);
+              this.router.navigate(['/login']);
+            }
+          });
+      }
+
+      resolve(true);
+
+    });
+
   }
 
   mostrarError(errors: any) {

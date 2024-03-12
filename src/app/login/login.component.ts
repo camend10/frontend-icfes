@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     bodyTag.classList.add('app-default');
     bodyTag.classList.remove('kt_app_body');
     BODY_CLASSES.forEach((c) => document.body.classList.add(c));
-    bodyTag.style.backgroundImage = "url('../../assets/media/auth/bg10.jpeg')";
+    bodyTag.style.backgroundImage = "url('assets/media/auth/bg10.jpeg')";
 
     this.email = localStorage.getItem('email') || '';
     if (this.email.length > 1) {
