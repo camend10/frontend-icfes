@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Usuario } from '../../models/usuario.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TipoDocumento } from '../../models/tipodocumento.model';
+import { EMPTY, catchError } from 'rxjs';
 
 declare function funfecha(): any;
 
@@ -216,11 +217,17 @@ export class UsuarioComponent implements OnInit {
       genero: result['genero'],
     };
 
-    // this.cargando = true;
+    this.cargando = true;
     this._usuarioService.guardarUsuario(this.usuario)
+      .pipe(
+        catchError(error => {
+          this.cargando = false;
+          return EMPTY;
+        })
+      )
       .subscribe((usuario: Usuario) => {
         this.usuario.id = usuario.id;
-        // this.cargando = false;
+        this.cargando = false;
         this.router.navigate(['/usuario', usuario.id]);
       });
   }
@@ -276,11 +283,19 @@ export class UsuarioComponent implements OnInit {
   cargarUsuario(id: string) {
     this.cargando = true;
     this._usuarioService.cargarUsuario(id)
-      .subscribe(usuario => {
+      .pipe(
+        catchError(error => {
+          this.cargando = false;
+          this.router.navigate(['/usuarios']);
+          return EMPTY;
+        })
+      )
+      .subscribe((usuario: Usuario) => {
         this.usuario = usuario;
         this.cargarData(this.usuario);
         this.cargando = false;
       });
+    this.cargando = false;
   }
 
   cargarData = (usuario: Usuario) => {

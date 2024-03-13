@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/usuario.model';
 import { ToastrService } from 'ngx-toastr';
+import { EMPTY, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-perfil',
@@ -15,6 +16,8 @@ export class PerfilComponent {
   imagenSubir!: File | null;
   imagenTemp!: string;
 
+  cargando: boolean = true;
+
   constructor(
     public _usuarioService: UsuarioService,
     private toastr: ToastrService,
@@ -25,7 +28,7 @@ export class PerfilComponent {
   }
 
   ngOnInit(): void {
-
+    this.cargando = false;
   }
 
   guardar(usuario: Usuario) {
@@ -37,8 +40,16 @@ export class PerfilComponent {
     this.usuario.telefono = usuario.telefono;
     this.usuario.direccion = usuario.direccion;
 
+    this.cargando = true;
     this._usuarioService.actualizarUsuario(this.usuario)
+      .pipe(
+        catchError(error => {
+          this.cargando = false;
+          return EMPTY;
+        })
+      )
       .subscribe(resp => {
+        this.cargando = false;
         console.log(resp);
       })
   }

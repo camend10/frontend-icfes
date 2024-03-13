@@ -239,7 +239,7 @@ export class UsuarioService {
         });
         window.location.reload();
       })
-      .catch(err => {
+      .catch((err: any) => {
         if (err.error.errors) {
           this.mostrarError(err.error.errors);
         } else {
@@ -405,15 +405,11 @@ export class UsuarioService {
           return resp.user;
         }),
         catchError(err => {
-          if (err.error.errors) {
-            this.mostrarError(err.error.errors);
-          } else {
-            Swal.fire({
-              title: "Error!",
-              text: "Ocurrió un error en la operación",
-              icon: "error"
-            });
-          }
+          Swal.fire({
+            title: "Error!",
+            text: err.error.errors,
+            icon: "error"
+          });
           return throwError(() => err);
         })
       );

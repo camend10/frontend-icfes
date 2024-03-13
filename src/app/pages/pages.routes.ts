@@ -17,24 +17,57 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         canActivate: [verificaTokenGuard],
-        data: { titulo: 'Dashboard' }
+        data: {
+            titulo: 'Dashboard',
+            subtitulo: '',
+            volver: ''
+        }
 
     },
     { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress' } },
     { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Graficas' } },
     { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
     { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' } },
-    { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de usuario' } },
-    { path: 'cambiar-clave', component: CambiarComponent, data: { titulo: 'Cambiar Clave' } },
 
     //Usuarios
+    {
+        path: 'perfil',
+        component: PerfilComponent,    
+        data: {
+            titulo: 'Perfil de usuario',
+            subtitulo: 'Perfil',
+            volver: 'dashboard'
+        }
+    },
+    {
+        path: 'cambiar-clave',
+        component: CambiarComponent,
+        data: {
+            titulo: 'Cambiar Clave',
+            subtitulo: 'Cambiar clave',
+            volver: 'dashboard'
+        }
+    },
     {
         path: 'usuarios',
         component: UsuariosComponent,
         canActivate: [adminGuard],
-        data: { titulo: 'Gestión de Usuarios' }
+        data: {
+            titulo: 'Gestión de Usuarios',
+            subtitulo: 'Usuarios',
+            volver: 'dashboard'
+        }
     },
-    { path: 'usuario/:id', component: UsuarioComponent, data: { titulo: 'Gestión de Usuario' } },
+    {
+        path: 'usuario/:id',
+        component: UsuarioComponent,
+        canActivate: [adminGuard],
+        data: {
+            titulo: 'Gestión de Usuario',
+            subtitulo: 'Usuario',
+            volver: 'usuarios'
+        }
+    },
 
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 

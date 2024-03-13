@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../../models/usuario.model';
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from '../../services/service.index';
+import { EMPTY, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-cambiar',
@@ -92,14 +93,21 @@ export class CambiarComponent implements OnInit {
       return;
     }
 
-    // this.cargando = true;
+    this.cargando = true;
     this._usuarioService.cambiarClave(this._usuarioService.usuario.id.toString(),
       this.f['passwordAct'].value,
       this.f['passwordNue'].value,
       this.f['passwordRep'].value)
+
+      .pipe(
+        catchError(error => {
+          this.cargando = false;
+          return EMPTY;
+        })
+      )
       .subscribe((resp: boolean) => {
 
-        // this.cargando = false;
+        this.cargando = false;
         if (resp) {
           setTimeout(() => {
             this._usuarioService.logout();

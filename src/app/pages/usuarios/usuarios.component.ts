@@ -23,7 +23,6 @@ export class UsuariosComponent implements OnInit {
   constructor(public _usuarioService: UsuarioService,
     private toastr: ToastrService,
     public _modalUploadService: ModalUploadService) {
-
   }
 
   ngOnInit(): void {
@@ -47,7 +46,6 @@ export class UsuariosComponent implements OnInit {
         this.usuarios = resp.users;
         this.cargando = false;
       })
-
   }
 
   buscarUsuario(termino: string) {

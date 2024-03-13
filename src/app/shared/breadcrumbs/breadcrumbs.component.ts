@@ -11,6 +11,8 @@ import { filter, map } from 'rxjs/operators';
 export class BreadcrumbsComponent implements OnInit {
 
   titulo: string = '';
+  subtitulo: string = '';
+  volver: string = '';
 
   constructor(private router: Router,
     private title: Title,
@@ -19,7 +21,8 @@ export class BreadcrumbsComponent implements OnInit {
     this.getDataRoute()
       .subscribe(data => {
         this.titulo = data['titulo'];
-
+        this.subtitulo = data['subtitulo'];
+        this.volver = data['volver'];
         this.title.setTitle(this.titulo);
 
         const metaTag: MetaDefinition = {

@@ -1,6 +1,18 @@
- <!--begin::Navbar-->
-<div class="card mb-5 mb-xl-10">
-    <div class="card-body pt-9 pb-0">
+<div class="row" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-dismissible bg-info text-center ">
+            <strong class="text-light">Cargando</strong>
+            <br>
+            <i class="fas fa-refresh fa-spin fa-2x" aria-hidden="true"></i>
+            <br>
+            <span class="text-light">Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<!--begin::Navbar-->
+<div class="card mb-5 mb-xl-10" *ngIf="!cargando">
+    <div class="card-body pt-9 pb-0 shadow-sm card-flush">
         <!--begin::Details-->
         <div class="d-flex flex-wrap flex-sm-nowrap">
             <!--begin: Pic-->
@@ -212,6 +224,7 @@
                                 <button type="button"
                                     class="btn btn-success"
                                     (click)="cambiarImagen()"
+                                    [disabled]="!imagenTemp"
                                     id="kt_account_profile_details_submit">
                                     <i class="ki-duotone ki-folder-up fs-2">
                                         <span class="path1"></span>
