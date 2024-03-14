@@ -3,6 +3,7 @@ import { UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/usuario.model';
 import { ToastrService } from 'ngx-toastr';
 import { EMPTY, catchError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil',
@@ -45,6 +46,15 @@ export class PerfilComponent {
       .pipe(
         catchError(error => {
           this.cargando = false;
+          if (error.error.errors) {
+            this.mostrarError(error.error.errors);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: error.error.error,
+              icon: "error"
+            });
+          }
           return EMPTY;
         })
       )
@@ -86,5 +96,19 @@ export class PerfilComponent {
 
     this._usuarioService.cambiarImagen(this.imagenSubir!, this.usuario.id);
 
+  }
+
+  mostrarError(errors: any) {
+    let errorMessage = '';
+    for (const key in errors) {
+      if (errors.hasOwnProperty(key)) {
+        errorMessage += `${key}: ${errors[key]}<br>`;
+      }
+    }
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      html: errorMessage
+    });
   }
 }

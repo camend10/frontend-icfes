@@ -25,11 +25,7 @@ export class GeneralService implements OnInit {
       txtbusqueda: ''
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this._usuarioService.token
-    });
-
-    return this.http.post(url, data, { headers: headers })
+    return this.http.post(url, data)
       .pipe(
         map((resp: any) => resp.departamentos)
       );
@@ -43,11 +39,7 @@ export class GeneralService implements OnInit {
       txtbusqueda: ''
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this._usuarioService.token
-    });
-
-    return this.http.post(url, data, { headers: headers })
+    return this.http.post(url, data)
       .pipe(
         map((resp: any) => resp.municipios)
       );
@@ -61,11 +53,7 @@ export class GeneralService implements OnInit {
       txtbusqueda: ''
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this._usuarioService.token
-    });
-
-    return this.http.post(url, data, { headers: headers })
+    return this.http.post(url, data)
       .pipe(
         map((resp: any) => resp.tipodocumentos)
       );

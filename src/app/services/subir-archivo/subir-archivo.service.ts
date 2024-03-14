@@ -32,9 +32,9 @@ export class SubirArchivoService {
       let url = "";
 
       if (tipo === "foto") {
-        url = URL_SERVICIOS + "/users/upload?token=" + token;
+        url = URL_SERVICIOS + "/users/upload?token=" + token;        
       } else {
-        url = URL_SERVICIOS + "/subir";
+        url = URL_SERVICIOS + "/instituciones/upload?token=" + token;
       }
 
       xhr.open('POST', url, true);

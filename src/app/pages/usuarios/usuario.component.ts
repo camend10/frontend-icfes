@@ -9,6 +9,7 @@ import { Usuario } from '../../models/usuario.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TipoDocumento } from '../../models/tipodocumento.model';
 import { EMPTY, catchError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 declare function funfecha(): any;
 
@@ -38,6 +39,7 @@ export class UsuarioComponent implements OnInit {
     public router: Router,
     public activateRoute: ActivatedRoute
   ) {
+    
     activateRoute.params.subscribe(params => {
       let id = params['id'];
       this.cargando = false;
@@ -48,7 +50,6 @@ export class UsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     funfecha();
     this.initForm();
     this.cargarTipoDocumentos();
@@ -222,6 +223,15 @@ export class UsuarioComponent implements OnInit {
       .pipe(
         catchError(error => {
           this.cargando = false;
+          if (error.error.errors) {
+            this.mostrarError(error.error.errors);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: error.error.error,
+              icon: "error"
+            });
+          }
           return EMPTY;
         })
       )
@@ -234,6 +244,18 @@ export class UsuarioComponent implements OnInit {
 
   cargarRoles() {
     this._roleService.cargarRoles()
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          this.router.navigate(['/usuarios']);
+          return EMPTY;
+        })
+      )
       .subscribe((roles: Role[]) => {
         this.roles = roles;
       })
@@ -241,6 +263,18 @@ export class UsuarioComponent implements OnInit {
 
   cargarDepartamentos() {
     this._generalService.cargarDepartamentos()
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          this.router.navigate(['/usuarios']);
+          return EMPTY;
+        })
+      )
       .subscribe((departamentos: Departamento[]) => {
         this.departamentos = departamentos;
       })
@@ -249,6 +283,18 @@ export class UsuarioComponent implements OnInit {
 
   cargarMunicipios() {
     this._generalService.cargarMunicipios()
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          this.router.navigate(['/usuarios']);
+          return EMPTY;
+        })
+      )
       .subscribe((municipios: Municipio[]) => {
         this.municipios = municipios;
       })
@@ -256,6 +302,18 @@ export class UsuarioComponent implements OnInit {
 
   cargarTipoDocumentos() {
     this._generalService.cargarTipoDocumentos()
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          this.router.navigate(['/usuarios']);
+          return EMPTY;
+        })
+      )
       .subscribe((tipodocumentos: TipoDocumento[]) => {
         this.tipodocumentos = tipodocumentos;
       })
@@ -285,6 +343,11 @@ export class UsuarioComponent implements OnInit {
     this._usuarioService.cargarUsuario(id)
       .pipe(
         catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
           this.cargando = false;
           this.router.navigate(['/usuarios']);
           return EMPTY;
@@ -295,7 +358,6 @@ export class UsuarioComponent implements OnInit {
         this.cargarData(this.usuario);
         this.cargando = false;
       });
-    this.cargando = false;
   }
 
   cargarData = (usuario: Usuario) => {
@@ -334,5 +396,18 @@ export class UsuarioComponent implements OnInit {
     // console.log(evento.target.value);
   }
 
+  mostrarError(errors: any) {
+    let errorMessage = '';
+    for (const key in errors) {
+      if (errors.hasOwnProperty(key)) {
+        errorMessage += `${key}: ${errors[key]}<br>`;
+      }
+    }
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      html: errorMessage
+    });
+  }
 
 }

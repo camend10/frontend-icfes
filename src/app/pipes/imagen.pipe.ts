@@ -9,6 +9,15 @@ export class ImagenPipe implements PipeTransform {
 
   transform(imagen: string, id: string, tipo: string): any {
 
+    if (tipo === 'instituciones') {
+      let url = URL_IMAGENES + "/imagenes/instituciones";
+      if (imagen == 'xxxxx' || imagen == null || imagen == '') {
+        return URL_IMAGENES + "/imagenes/instituciones/default.png";
+      }
+      return url += `/${id}/` + imagen;
+
+    }
+
     let url = URL_IMAGENES + "/imagenes/foto";
 
     if (imagen == 'xxxxx' || imagen == null || imagen == '') {

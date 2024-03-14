@@ -3,6 +3,8 @@ import { ToastrService } from 'ngx-toastr';
 import { SubirArchivoService, UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/usuario.model';
 import { ModalUploadService } from './modal-upload.service';
+import Swal from 'sweetalert2';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-modal-upload',
@@ -68,10 +70,15 @@ export class ModalUploadComponent implements OnInit {
       .then(resp => {
         this._modalUploadService.notificacion.emit(resp);
         this.cerrarModal();
-
       })
-      .catch(err => {
-        console.log("error en la carga");
+      .catch(error => {
+        this.cerrarModal();
+        Swal.fire({
+          title: "Error!",
+          text: error.error,
+          icon: "error"
+        });
+        return EMPTY;
       })
   }
 
@@ -79,6 +86,21 @@ export class ModalUploadComponent implements OnInit {
     this.imagenTemp = '';
     this.imagenSubir = null;
     this._modalUploadService.ocultarModal();
+  }
+
+
+  mostrarError(errors: any) {
+    let errorMessage = '';
+    for (const key in errors) {
+      if (errors.hasOwnProperty(key)) {
+        errorMessage += `${key}: ${errors[key]}<br>`;
+      }
+    }
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      html: errorMessage
+    });
   }
 
 }

@@ -4,6 +4,7 @@ import { UsuarioService } from '../../services/service.index';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2'
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+import { EMPTY, catchError } from 'rxjs';
 
 
 @Component({
@@ -41,6 +42,17 @@ export class UsuariosComponent implements OnInit {
     this.cargando = true;
 
     this._usuarioService.cargarUsuarios(this.desde)
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          return EMPTY;
+        })
+      )
       .subscribe((resp: any) => {
         this.totalRegistros = resp.total;
         this.usuarios = resp.users;
@@ -51,6 +63,17 @@ export class UsuariosComponent implements OnInit {
   buscarUsuario(termino: string) {
     this.cargando = true;
     this._usuarioService.buscarUsuario(termino)
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          return EMPTY;
+        })
+      )
       .subscribe((usuarios: Usuario[]) => {
         this.usuarios = usuarios;
         this.cargando = false;
@@ -90,6 +113,17 @@ export class UsuariosComponent implements OnInit {
 
       if (result.isConfirmed) {
         this._usuarioService.borrarUsuario(usuario.id.toString(), usuario.estado!, mensaje2)
+          .pipe(
+            catchError(error => {
+              Swal.fire({
+                title: "Error!",
+                text: error.error.error,
+                icon: "error"
+              });
+              this.cargando = false;
+              return EMPTY;
+            })
+          )
           .subscribe(
             (user: Usuario) => {
               usuario.estado = user.estado;
@@ -115,6 +149,17 @@ export class UsuariosComponent implements OnInit {
 
       if (result.isConfirmed) {
         this._usuarioService.resetearClave(usuario)
+          .pipe(
+            catchError(error => {
+              Swal.fire({
+                title: "Error!",
+                text: error.error.error,
+                icon: "error"
+              });
+              this.cargando = false;
+              return EMPTY;
+            })
+          )
           .subscribe((user: Usuario) => {
             usuario.password = user.password;
             if (usuario.id === this._usuarioService.usuario.id) {

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { URL_SERVICIOS } from '../../config/config';
@@ -121,7 +121,6 @@ export class UsuarioService {
       .pipe(
         map((resp: any) => {
           this.guardarStorage(resp.id, resp.token, resp.user, resp.edad, resp.menu);
-
           this.toastr.success('Inicio de sesión exitoso', 'Iniciando sesión', {
             timeOut: 3000,
             positionClass: 'toast-top-right',
@@ -129,18 +128,8 @@ export class UsuarioService {
           });
         }),
         catchError(err => {
-          if (err.error.errors) {
-            this.mostrarError(err.error.errors);
-          } else {
-            Swal.fire({
-              title: "Error!",
-              text: err.error.error,
-              icon: "error"
-            });
-          }
           return throwError(() => err);
         })
-
       );
   }
 
@@ -149,11 +138,8 @@ export class UsuarioService {
     if (usuario.id) {
       // actualizando
       let url = URL_SERVICIOS + '/users/modify/' + usuario.id;
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${this.token}`
-      });
 
-      return this.http.put(url, usuario, { headers })
+      return this.http.put(url, usuario)
         .pipe(
           map((resp: any) => {
 
@@ -163,10 +149,6 @@ export class UsuarioService {
               closeButton: true
             });
             return resp.user;
-          }),
-          catchError(err => {
-            this.mostrarError(err.error.errors);
-            return throwError(() => err);
           })
         )
 
@@ -174,11 +156,8 @@ export class UsuarioService {
 
       // creando
       let url = URL_SERVICIOS + '/users/create';
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${this.token}`
-      });
 
-      return this.http.post(url, usuario, { headers })
+      return this.http.post(url, usuario)
         .pipe(
           map((resp: any) => {
 
@@ -188,10 +167,6 @@ export class UsuarioService {
               closeButton: true
             });
             return resp.user;
-          }),
-          catchError(err => {
-            this.mostrarError(err.error.errors);
-            return throwError(() => err);
           })
         )
     }
@@ -201,10 +176,8 @@ export class UsuarioService {
   actualizarUsuario(usuario: Usuario) {
 
     let url = URL_SERVICIOS + '/users/update/' + usuario.id;
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`
-    });
-    return this.http.put(url, usuario, { headers })
+
+    return this.http.put(url, usuario)
       .pipe(
         map((resp: any) => {
           this.guardarStorage(resp.user.id, this.token, resp.user, resp.edad, this.menu);
@@ -217,10 +190,6 @@ export class UsuarioService {
 
           return true;
 
-        }),
-        catchError(err => {
-          this.mostrarError(err.error.errors);
-          return throwError(() => err);
         })
       )
   }
@@ -263,25 +232,7 @@ export class UsuarioService {
       txtbusqueda: ''
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-
-    return this.http.post(url, data, { headers: headers })
-      .pipe(
-        catchError(err => {
-          if (err.error.errors) {
-            this.mostrarError(err.error.errors);
-          } else {
-            Swal.fire({
-              title: "Error!",
-              text: "Ocurrió un error en la operación",
-              icon: "error"
-            });
-          }
-          return throwError(() => err);
-        })
-      );
+    return this.http.post(url, data);
   }
 
   buscarUsuario(termino: string) {
@@ -291,25 +242,9 @@ export class UsuarioService {
       txtbusqueda: termino
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-
-    return this.http.post(url, data, { headers: headers })
+    return this.http.post(url, data)
       .pipe(
-        map((resp: any) => resp.users),
-        catchError(err => {
-          if (err.error.errors) {
-            this.mostrarError(err.error.errors);
-          } else {
-            Swal.fire({
-              title: "Error!",
-              text: "Ocurrió un error en la operación",
-              icon: "error"
-            });
-          }
-          return throwError(() => err);
-        })
+        map((resp: any) => resp.users)
       );
   }
 
@@ -321,32 +256,16 @@ export class UsuarioService {
       estado: estado
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-
-    return this.http.post(url, data, { headers: headers })
+    return this.http.post(url, data)
       .pipe(
         map((resp: any) => {
 
-          this.toastr.success(mensaje, this.usuario.name, {
+          this.toastr.success(mensaje, 'Notificación', {
             timeOut: 3000,
             positionClass: 'toast-top-right',
             closeButton: true
           });
           return resp.user;
-        }),
-        catchError(err => {
-          if (err.error.errors) {
-            this.mostrarError(err.error.errors);
-          } else {
-            Swal.fire({
-              title: "Error!",
-              text: "Ocurrió un error en la operación",
-              icon: "error"
-            });
-          }
-          return throwError(() => err);
         })
       );
   }
@@ -358,11 +277,7 @@ export class UsuarioService {
       id: usuario.id
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-
-    return this.http.post(url, data, { headers: headers })
+    return this.http.post(url, data)
       .pipe(
         map((resp: any) => {
 
@@ -372,18 +287,6 @@ export class UsuarioService {
             closeButton: true
           });
           return resp.user;
-        }),
-        catchError(err => {
-          if (err.error.errors) {
-            this.mostrarError(err.error.errors);
-          } else {
-            Swal.fire({
-              title: "Error!",
-              text: "Ocurrió un error en la operación",
-              icon: "error"
-            });
-          }
-          return throwError(() => err);
         })
       );
   }
@@ -395,22 +298,10 @@ export class UsuarioService {
       id: id
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-
-    return this.http.post(url, data, { headers: headers })
+    return this.http.post(url, data)
       .pipe(
         map((resp: any) => {
           return resp.user;
-        }),
-        catchError(err => {
-          Swal.fire({
-            title: "Error!",
-            text: err.error.errors,
-            icon: "error"
-          });
-          return throwError(() => err);
         })
       );
   }
@@ -425,11 +316,7 @@ export class UsuarioService {
       confirmpassword: confirmpassword
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-
-    return this.http.post(url, data, { headers: headers })
+    return this.http.post(url, data)
       .pipe(
         map((resp: any) => {
           this.toastr.success(resp.mensaje, "Cambiar clave", {
@@ -438,18 +325,6 @@ export class UsuarioService {
             closeButton: true
           });
           return resp.ok;
-        }),
-        catchError(err => {
-          if (err.error.error) {
-            this.mostrarError(err.error.error);
-          } else {
-            Swal.fire({
-              title: "Error!",
-              text: err.error.error,
-              icon: "error"
-            });
-          }
-          return throwError(() => err);
         })
       );
   }
@@ -457,15 +332,11 @@ export class UsuarioService {
   renuevaToken() {
     let url = URL_SERVICIOS + '/users/refresh';
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-
     let data = {
       id: 0
     };
 
-    return this.http.post(url, data, { headers: headers })
+    return this.http.post(url, data)
       .pipe(
         map((resp: any) => {
           this.token = resp.token;

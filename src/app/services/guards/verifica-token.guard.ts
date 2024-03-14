@@ -3,8 +3,7 @@ import { UsuarioService } from '../service.index';
 import { inject } from '@angular/core';
 
 export const verificaTokenGuard: CanActivateFn = (route, state) => {
-  console.log("inicio de verifica token guards");
-
+  
   const _usuarioService = inject(UsuarioService);
   const router = inject(Router);
 
@@ -19,9 +18,9 @@ export const verificaTokenGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  // return true;
   return _usuarioService.verificaRenueva(payload.exp);
 
 };
+
 
 

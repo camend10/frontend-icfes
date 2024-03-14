@@ -4,6 +4,7 @@ import { Usuario } from '../../models/usuario.model';
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from '../../services/service.index';
 import { EMPTY, catchError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cambiar',
@@ -102,6 +103,15 @@ export class CambiarComponent implements OnInit {
       .pipe(
         catchError(error => {
           this.cargando = false;
+          if (error.error.ok === false) {
+            Swal.fire({
+              title: "Error!",
+              text: error.error.error,
+              icon: "error"
+            });
+          } else {
+            this.mostrarError(error.error.error);
+          }
           return EMPTY;
         })
       )
@@ -122,5 +132,19 @@ export class CambiarComponent implements OnInit {
       passwordNue: '',
       passwordRep: '',
     })
+  }
+
+  mostrarError(errors: any) {
+    let errorMessage = '';
+    for (const key in errors) {
+      if (errors.hasOwnProperty(key)) {
+        errorMessage += `${key}: ${errors[key]}<br>`;
+      }
+    }
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      html: errorMessage
+    });
   }
 }

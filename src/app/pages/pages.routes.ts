@@ -10,6 +10,8 @@ import { LoginGuardGuard, adminGuard, verificaTokenGuard } from "../services/ser
 import { PerfilComponent } from "./perfil/perfil.component";
 import { UsuarioComponent } from "./usuarios/usuario.component";
 import { CambiarComponent } from "./perfil/cambiar.component";
+import { InstitucionesComponent } from "./institucion/instituciones.component";
+import { InstitucionComponent } from "./institucion/institucion.component";
 
 const routes: Routes = [
 
@@ -32,7 +34,8 @@ const routes: Routes = [
     //Usuarios
     {
         path: 'perfil',
-        component: PerfilComponent,    
+        component: PerfilComponent,
+        canActivate: [verificaTokenGuard],
         data: {
             titulo: 'Perfil de usuario',
             subtitulo: 'Perfil',
@@ -42,6 +45,7 @@ const routes: Routes = [
     {
         path: 'cambiar-clave',
         component: CambiarComponent,
+        canActivate: [verificaTokenGuard],
         data: {
             titulo: 'Cambiar Clave',
             subtitulo: 'Cambiar clave',
@@ -51,7 +55,7 @@ const routes: Routes = [
     {
         path: 'usuarios',
         component: UsuariosComponent,
-        canActivate: [adminGuard],
+        canActivate: [adminGuard, verificaTokenGuard],
         data: {
             titulo: 'Gestión de Usuarios',
             subtitulo: 'Usuarios',
@@ -61,11 +65,33 @@ const routes: Routes = [
     {
         path: 'usuario/:id',
         component: UsuarioComponent,
-        canActivate: [adminGuard],
+        canActivate: [adminGuard, verificaTokenGuard],
         data: {
             titulo: 'Gestión de Usuario',
             subtitulo: 'Usuario',
             volver: 'usuarios'
+        }
+    },
+
+    // Instituciones
+    {
+        path: 'instituciones',
+        component: InstitucionesComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Gestión de Instituciones',
+            subtitulo: 'Instituciones',
+            volver: 'dashboard'
+        }
+    },
+    {
+        path: 'institucion/:id',
+        component: InstitucionComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Gestión de Institución',
+            subtitulo: 'Institución',
+            volver: 'instituciones'
         }
     },
 

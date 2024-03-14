@@ -14,7 +14,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { Graficas1Component } from "./graficas1/graficas1.component";
 import { ProgressComponent } from "./progress/progress.component";
 import { SharedModule } from "../shared/shared.module";
-import { FormsModule,ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GraficoDonaComponent } from "../components/grafico-dona/grafico-dona.component";
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
@@ -27,9 +27,12 @@ import { CambiarComponent } from './perfil/cambiar.component';
 import { PipesModule } from "../pipes/pipes.module";
 
 //Paginacion
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { InstitucionesComponent } from './institucion/instituciones.component';
+import { InstitucionComponent } from './institucion/institucion.component';
 
-
+import { FlatpickrModule } from 'angularx-flatpickr';
+import {Spanish} from 'flatpickr/dist/l10n/es';
 
 @NgModule({
     declarations: [
@@ -43,7 +46,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
         UsuariosComponent,
         PerfilComponent,
         UsuarioComponent,
-        CambiarComponent
+        CambiarComponent,
+        InstitucionesComponent,
+        InstitucionComponent
     ],
     exports: [
         DashboardComponent,
@@ -58,8 +63,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
         NgChartsModule,
         PipesModule,
         CommonModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        FlatpickrModule.forRoot({ locale: Spanish })
     ]
 })
+
 
 export class PagesModule { }

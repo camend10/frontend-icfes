@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
+import { EMPTY, catchError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 declare function init_plugins(): any;
 
@@ -68,6 +70,16 @@ export class LoginComponent implements OnInit, OnDestroy {
       'tipo_admin'
     );
     this._usuarioService.login(usuario, forma.value.recuerdame)
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          return EMPTY;
+        })
+      )
       .subscribe(resp => {
         setTimeout(() => {
           this.router.navigate(['/dashboard'])

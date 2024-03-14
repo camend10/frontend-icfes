@@ -18,6 +18,8 @@ import { ServiceModule } from './services/service.module';
 import { ToastrModule } from 'ngx-toastr';
 import { PagesComponent } from './pages/pages.component';
 import { SharedModule } from './shared/shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './services/service.index';
 
 
 @NgModule({
@@ -35,7 +37,13 @@ import { SharedModule } from './shared/shared.module';
     ToastrModule.forRoot(),
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

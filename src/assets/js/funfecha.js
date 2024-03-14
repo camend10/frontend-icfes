@@ -48,8 +48,8 @@ function funfecha() {
     },
   });
 
-  $(".buscar").select2({
-    placeholder: "Select",
-    allowClear: true,
-  });
+  // $(".buscar").select2({
+  //   placeholder: "Select",
+  //   allowClear: true,
+  // });
 }
