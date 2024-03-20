@@ -129,7 +129,9 @@
                                 <button
                                     type="submit"
                                     id="kt_sign_in_submit"
-                                    class="btn btn-primary">
+                                    class="btn btn-primary"
+                                    [disabled]="cargando"
+                                    >
                                     <!--begin::Indicator label-->
                                     <span class="indicator-label">Iniciar
                                         Sesión</span>

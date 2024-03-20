@@ -378,7 +378,7 @@ export class UsuarioService {
       let tokenExp = new Date(fechaExp * 1000);
       let ahora = new Date();
 
-      ahora.setTime(ahora.getTime() + (1 * 60 * 60 * 1000));
+      ahora.setTime(ahora.getTime() + (4 * 60 * 60 * 1000));
 
 
       if (tokenExp.getTime() > ahora.getTime()) {

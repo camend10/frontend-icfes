@@ -173,7 +173,8 @@
                                                 [class.is-valid]="f['name'].valid"
                                                 autocomplete="off"
                                                 value
-                                                required>
+                                                required
+                                                [ngStyle]="{ 'text-transform': 'capitalize' }">
 
                                             <ng-container
                                                 [ngTemplateOutlet]="formError"
@@ -309,8 +310,7 @@
                                                 formControlName="fecha_nacimiento"
                                                 mwlFlatpickr
                                                 [convertModelValue]="true"
-                                                altFormat="Y-m-d"
-                                                >
+                                                altFormat="Y-m-d">
 
                                             <ng-container
                                                 [ngTemplateOutlet]="formError"
@@ -415,8 +415,8 @@
                                                 <span
                                                     class="required">Departamento</span>
                                             </label>
-                                            <!--end::Label-->   
-                                                                                     
+                                            <!--end::Label-->
+
                                             <select
                                                 class="form-select"
                                                 data-placeholder="Seleccione"
@@ -426,7 +426,8 @@
                                                 [ngClass]="{'is-invalid': f['departamento_id'].invalid && f['departamento_id'].touched }"
                                                 [class.is-valid]="f['departamento_id'].valid"
                                                 required
-                                                formControlName="departamento_id">
+                                                formControlName="departamento_id"
+                                                (change)="cambioMuni($event)">
                                                 <option
                                                     value>Departamento</option>
                                                 <option
@@ -465,8 +466,7 @@
                                                 name="municipio_id"
                                                 [ngClass]="{'is-invalid': f['municipio_id'].invalid && f['municipio_id'].touched }"
                                                 [class.is-valid]="f['municipio_id'].valid"
-                                                formControlName="municipio_id"
-                                                (change)="cambioMuni($event)">
+                                                formControlName="municipio_id">
                                                 <option value>Municipio</option>
                                                 <option
                                                     *ngFor="let municipio of $any(municipios[f['departamento_id'].value])"
@@ -519,7 +519,38 @@
                             <!-- datos del estudiante -->
                             <div class="tab-pane fade"
                                 id="kt_tab_datosestudiante" role="tabpanel">
-
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!--begin::Input group-->
+                                        <div
+                                            class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label
+                                                class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                <span
+                                                    class="required">Institución</span>
+                                            </label>
+                                            <!--end::Label-->
+                                            <select
+                                                class="form-select"
+                                                data-placeholder="Seleccione"
+                                                data-control="select2"
+                                                data-hide-search="false"
+                                                name="institucion_id"
+                                                [class]="f['institucion_id'].valid && f['institucion_id'].touched && f['institucion_id'].value != ''  ? 'is-valid': ''"
+                                                formControlName="institucion_id">
+                                                <option
+                                                    value>Institución</option>
+                                                <option
+                                                    *ngFor="let institucion of instituciones"
+                                                    [value]="institucion.id">{{
+                                                    institucion.nombre
+                                                    }}</option>
+                                            </select>
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-2">
                                         <!--begin::Input group-->
@@ -594,9 +625,10 @@
                                                 formControlName="grado_id">
                                                 <option value>Grado</option>
                                                 <option
-                                                    value="1">11</option>
-                                                <option
-                                                    value="2">10</option>
+                                                    *ngFor="let grado of grados"
+                                                    [value]="grado.id">{{
+                                                    grado.sigla
+                                                    }}</option>
 
                                             </select>
                                         </div>
@@ -624,9 +656,10 @@
                                                 formControlName="curso_id">
                                                 <option value>Curso</option>
                                                 <option
-                                                    value="1">11 - 01</option>
-                                                <option
-                                                    value="2">10 - 01</option>
+                                                    *ngFor="let curso of cursos"
+                                                    [value]="curso.id">{{
+                                                    curso.sigla
+                                                    }}</option>
 
                                             </select>
                                         </div>

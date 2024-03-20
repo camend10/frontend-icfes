@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   recuerdame: boolean = false;
   email: string = '';
+  cargando: boolean = false;
 
   constructor(
     public router: Router,
@@ -69,6 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       0,
       'tipo_admin'
     );
+    this.cargando = true;
     this._usuarioService.login(usuario, forma.value.recuerdame)
       .pipe(
         catchError(error => {
@@ -77,11 +79,13 @@ export class LoginComponent implements OnInit, OnDestroy {
             text: error.error.error,
             icon: "error"
           });
+          this.cargando = false;
           return EMPTY;
         })
       )
       .subscribe(resp => {
         setTimeout(() => {
+          this.cargando = false;
           this.router.navigate(['/dashboard'])
         }, 3000);
       });

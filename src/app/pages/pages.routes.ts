@@ -12,6 +12,9 @@ import { UsuarioComponent } from "./usuarios/usuario.component";
 import { CambiarComponent } from "./perfil/cambiar.component";
 import { InstitucionesComponent } from "./institucion/instituciones.component";
 import { InstitucionComponent } from "./institucion/institucion.component";
+import { ListadoMateriasComponent } from "./preguntas/listado-materias.component";
+import { PreguntasMateriaComponent } from "./preguntas/preguntas-materia/preguntas-materia.component";
+import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
 
 const routes: Routes = [
 
@@ -94,6 +97,38 @@ const routes: Routes = [
             volver: 'instituciones'
         }
     },
+
+        // Preguntas
+        {
+            path: 'preguntas',
+            component: ListadoMateriasComponent,
+            canActivate: [adminGuard, verificaTokenGuard],
+            data: {
+                titulo: 'Materias',
+                subtitulo: 'materias',
+                volver: 'dashboard'
+            }
+        },
+        {
+            path: 'preguntas-materias/:id',
+            component: PreguntasMateriaComponent,
+            canActivate: [adminGuard, verificaTokenGuard],
+            data: {
+                titulo: 'Preguntas por materia',
+                subtitulo: 'preguntas por materia',
+                volver: 'preguntas'
+            }
+        },
+        {
+            path: 'pregunta/:id/:materia_id',
+            component: PreguntaComponent,
+            canActivate: [adminGuard, verificaTokenGuard],
+            data: {
+                titulo: 'Pregunta',
+                subtitulo: 'pregunta',
+                volver: 'preguntas'
+            }
+        },
 
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 

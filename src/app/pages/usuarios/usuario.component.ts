@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Role } from '../../models/role.model';
-import { GeneralService, RoleService, UsuarioService } from '../../services/service.index';
+import { GeneralService, InstitucionService, RoleService, UsuarioService } from '../../services/service.index';
 import { Departamento } from '../../models/departamento.model';
 import { Municipio } from '../../models/municipio.model';
 import { ToastrService } from 'ngx-toastr';
@@ -10,6 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TipoDocumento } from '../../models/tipodocumento.model';
 import { EMPTY, catchError } from 'rxjs';
 import Swal from 'sweetalert2';
+import { Institucion } from '../../models/institucion.model';
+import { Curso } from '../../models/curso.model';
+import { Grado } from '../../models/grado.model';
 
 declare function funfecha(): any;
 
@@ -27,6 +30,9 @@ export class UsuarioComponent implements OnInit {
   departamentos: Departamento[] = [];
   municipios: Municipio[] = [];
   tipodocumentos: TipoDocumento[] = [];
+  instituciones: Institucion[] = [];
+  cursos: Curso[] = [];
+  grados: Grado[] = [];
 
   cargando: boolean = true;
 
@@ -37,9 +43,10 @@ export class UsuarioComponent implements OnInit {
     public _generalService: GeneralService,
     public _usuarioService: UsuarioService,
     public router: Router,
-    public activateRoute: ActivatedRoute
+    public activateRoute: ActivatedRoute,
+    public _institucionService: InstitucionService
   ) {
-    
+
     activateRoute.params.subscribe(params => {
       let id = params['id'];
       this.cargando = false;
@@ -56,6 +63,9 @@ export class UsuarioComponent implements OnInit {
     this.cargarRoles();
     this.cargarDepartamentos();
     this.cargarMunicipios();
+    this.cargarInstituciones();
+    this.cargarCursos();
+    this.cargarGrados();
     this.crearListeners();
   }
 
@@ -149,7 +159,10 @@ export class UsuarioComponent implements OnInit {
       ],
       foto: [
         ''
-      ]
+      ],
+      institucion_id: [
+        ''
+      ],
     });
   }
 
@@ -170,6 +183,10 @@ export class UsuarioComponent implements OnInit {
     }
 
     if (this.f['role_id'].value == 3) {
+      if (this.f['institucion_id'].value == '' || this.f['institucion_id'].value == null) {
+        this.mostrarMensaje('Por favor seleccione la institución');
+        return;
+      }
       if (this.f['jornada'].value == '' || this.f['jornada'].value == null) {
         this.mostrarMensaje('Por favor seleccione la jornada');
         return;
@@ -216,6 +233,7 @@ export class UsuarioComponent implements OnInit {
       user_id: 0,
       foto: result['foto'],
       genero: result['genero'],
+      institucion_id: result['institucion_id']
     };
 
     this.cargando = true;
@@ -300,6 +318,63 @@ export class UsuarioComponent implements OnInit {
       })
   }
 
+  cargarInstituciones() {
+    this._institucionService.cargarInstitucionesActivas()
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          this.router.navigate(['/usuarios']);
+          return EMPTY;
+        })
+      )
+      .subscribe((instituciones: Institucion[]) => {
+        this.instituciones = instituciones;
+      })
+  }
+
+  cargarCursos() {
+    this._generalService.cargarCursos()
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          this.router.navigate(['/usuarios']);
+          return EMPTY;
+        })
+      )
+      .subscribe((cursos: Curso[]) => {
+        this.cursos = cursos;
+      })
+  }
+
+  cargarGrados() {
+    this._generalService.cargarGrados()
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          this.router.navigate(['/usuarios']);
+          return EMPTY;
+        })
+      )
+      .subscribe((grados: Grado[]) => {
+        this.grados = grados;
+      })
+  }
+
   cargarTipoDocumentos() {
     this._generalService.cargarTipoDocumentos()
       .pipe(
@@ -334,6 +409,7 @@ export class UsuarioComponent implements OnInit {
         this.f['codigo'].setValue('');
         this.f['grado_id'].setValue('');
         this.f['curso_id'].setValue('');
+        this.f['institucion_id'].setValue('');
       }
     });
   }
@@ -361,7 +437,6 @@ export class UsuarioComponent implements OnInit {
   }
 
   cargarData = (usuario: Usuario) => {
-    // this.forma.setValue({
     this.forma.reset({
       id: usuario.id,
       tipo_doc_id: usuario.tipo_doc_id,
@@ -379,7 +454,8 @@ export class UsuarioComponent implements OnInit {
       jornada: usuario.jornada,
       fecha_nacimiento: usuario.fecha_nacimiento,
       genero: usuario.genero,
-      foto: usuario.foto
+      foto: usuario.foto,
+      institucion_id: usuario.institucion_id
     });
 
     return Object.values(this.forma.controls).forEach(control => {
@@ -393,7 +469,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   cambioMuni(evento: any) {
-    // console.log(evento.target.value);
+    // console.log("Departamento_id: " + evento.target.value);
   }
 
   mostrarError(errors: any) {

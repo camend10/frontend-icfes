@@ -33,6 +33,9 @@ import { InstitucionComponent } from './institucion/institucion.component';
 
 import { FlatpickrModule } from 'angularx-flatpickr';
 import {Spanish} from 'flatpickr/dist/l10n/es';
+import { ListadoMateriasComponent } from './preguntas/listado-materias.component';
+import { PreguntasMateriaComponent } from './preguntas/preguntas-materia/preguntas-materia.component';
+import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +51,10 @@ import {Spanish} from 'flatpickr/dist/l10n/es';
         UsuarioComponent,
         CambiarComponent,
         InstitucionesComponent,
-        InstitucionComponent
+        InstitucionComponent,
+        ListadoMateriasComponent,
+        PreguntasMateriaComponent,
+        PreguntaComponent
     ],
     exports: [
         DashboardComponent,

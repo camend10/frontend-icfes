@@ -9,6 +9,8 @@ export { adminGuard } from './guards/admin.guard';
 export { verificaTokenGuard } from './guards/verifica-token.guard';
 export { InstitucionService } from './institucion/institucion.service';
 export { InterceptorService } from './interceptors/interceptor.service';
+export { PreguntaService } from './preguntas/pregunta.service';
+export { MateriaService } from './materias/materia.service';
 
 
 

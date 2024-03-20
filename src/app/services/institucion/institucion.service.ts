@@ -123,6 +123,15 @@ export class InstitucionService {
 
   }
 
+  cargarInstitucionesActivas() {
+    let url = URL_SERVICIOS + '/instituciones/activas';
+    let data = {};
+    return this.http.post(url, data)
+      .pipe(
+        map((resp: any) => resp.instituciones)
+      );
+  }
+
   mostrarError(errors: any) {
     let errorMessage = '';
     for (const key in errors) {

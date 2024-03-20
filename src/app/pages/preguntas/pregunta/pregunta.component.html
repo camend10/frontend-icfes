@@ -1,0 +1,829 @@
+<div class="row" *ngIf="cargando">
+  <div class="col-sm-12">
+    <div class="alert alert-dismissible bg-info text-center ">
+      <strong class="text-light">Cargando</strong>
+      <br>
+      <i class="fas fa-refresh fa-spin fa-2x" aria-hidden="true"></i>
+      <br>
+      <span class="text-light">Espere por favor</span>
+    </div>
+  </div>
+</div>
+
+<div class="row g-5 d-flex justify-content-center" *ngIf="!cargando">
+  <div class="col-12">
+    <!--begin::Card-->
+    <div class="card shadow-sm card-flush">
+      <!--begin::Card body-->
+      <div class="card-body pb-0">
+        <!--begin::Heading-->
+        <div class="card-px pt-1 pb-5 ">
+          <form
+            [formGroup]="forma"
+            (ngSubmit)="guardarPregunta()"
+            class="form fv-plugins-bootstrap5 fv-plugins-framework px-lg-20"
+            action method="POST">
+
+            <!--begin::Heading-->
+            <div class="mb-13 text-center">
+              <!--begin::Title-->
+              <h1 class="mb-3" *ngIf="!f['id'].value">Crear
+                Pregunta</h1>
+              <h1 class="mb-3" *ngIf="f['id'].value">Editar
+                Pregunta</h1>
+              <!--end::Title-->
+            </div>
+            <!--end::Heading-->
+
+            <!-- Datos basicos -->
+
+            <div class="row">
+              <div class="col-md-6">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class="required">Componente</span>
+                  </label>
+                  <!--end::Label-->
+                  <select
+                    class="form-select "
+                    data-placeholder="Seleccione"
+                    data-control="select2"
+                    data-hide-search="false"
+                    required
+                    name="componente"
+                    [ngClass]="{'is-invalid': f['componente'].invalid && f['componente'].touched }"
+                    [class.is-valid]="f['componente'].valid"
+                    formControlName="componente">
+                    <option
+                      value>Componente</option>
+                    <option
+                      *ngFor="let componente of componentes"
+                      [value]="componente.id">{{
+                      componente.nombre
+                      }}</option>
+                  </select>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                                                validation: 'required',
+                                                message: 'El componente es requerido',
+                                                control: f['componente']
+                                        }"></ng-container>
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class="required">Pregunta</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <textarea type="text" rows="5"
+                    cols="20"
+                    class="form-control "
+                    placeholder="Pregunta"
+                    style="resize: horizontal"
+                    name="que_desc"
+                    formControlName="que_desc"
+                    [ngClass]="{'is-invalid': f['que_desc'].invalid && f['que_desc'].touched }"
+                    [class.is-valid]="f['que_desc'].valid"
+                    required>
+                  ></textarea>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message: 'La pregunta es requerida',
+                            control: f['que_desc']
+                    }"></ng-container>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-2">
+                <label
+                  class="d-flex align-items-center fs-6 fw-bold mb-2">
+                  <span
+                    class>Tiene imagen</span>
+                </label>
+
+                <select
+                  class="form-select "
+                  data-placeholder="Seleccione"
+                  data-control="select2"
+                  data-hide-search="false"
+                  required
+                  name="ban_img"
+                  formControlName="ban_img"
+                  [ngClass]="{'is-invalid': f['ban_img'].invalid && f['ban_img'].touched }"
+                  [class.is-valid]="f['ban_img'].valid">
+                  <option
+                    value>Respuesta</option>
+                  <option value="1">SI</option>
+                  <option value="0">NO</option>
+                </select>
+
+                <ng-container
+                  [ngTemplateOutlet]="formError"
+                  [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Tiene imagen es requerido',
+                        control: f['ban_img']
+                }"></ng-container>
+              </div>
+
+              <div class="col-md-10">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class>Imagen de la pregunta</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <input type="file"
+                    class="form-control"
+                    accept=".png, .jpg, .jpeg"
+                    name="img_preg"
+                    [class]="f['img_preg'].valid && f['img_preg'].touched && f['img_preg'].value != ''  ? 'is-valid': ''"
+                    (change)="onFileChanged($event, 'img_preg')" />
+                  <!--begin::Hint-->
+                  <div class="form-text">Tipos aceptados: png,
+                    jpg, jpeg.</div>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class>Parrafo 1</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <textarea type="text" rows="5"
+                    cols="20"
+                    class="form-control "
+                    placeholder="Parrafo 1"
+                    style="resize: horizontal"
+                    name="que_desc2"
+                    formControlName="que_desc2"
+                    [class]="f['que_desc2'].valid && f['que_desc2'].touched && f['que_desc2'].value != ''  ? 'is-valid': ''">
+                  ></textarea>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class>Parrafo 2</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <textarea type="text" rows="5"
+                    cols="20"
+                    class="form-control "
+                    placeholder="Parrafo 2"
+                    style="resize: horizontal"
+                    name="que_desc3"
+                    formControlName="que_desc3"
+                    [class]="f['que_desc3'].valid && f['que_desc3'].touched && f['que_desc3'].value != ''  ? 'is-valid': ''">
+                  ></textarea>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class="required">Respuesta 1</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <textarea type="text" rows="5"
+                    cols="20"
+                    class="form-control "
+                    placeholder="Respuesta 1"
+                    name="ans1"
+                    style="resize: horizontal"
+                    formControlName="ans1"
+                    [ngClass]="{'is-invalid': f['ans1'].invalid && f['ans1'].touched }"
+                    [class.is-valid]="f['ans1'].valid"
+                    required>
+                  ></textarea>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message: 'La respuesta 1 es requerida',
+                            control: f['ans1']
+                    }"></ng-container>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-2">
+                <label
+                  class="d-flex align-items-center fs-6 fw-bold mb-2">
+                  <span
+                    class>Tiene imagen</span>
+                </label>
+                <select
+                  class="form-select "
+                  data-placeholder="Seleccione"
+                  data-control="select2"
+                  data-hide-search="false"
+                  required
+                  name="ban_imgr1"
+                  formControlName="ban_imgr1"
+                  [ngClass]="{'is-invalid': f['ban_imgr1'].invalid && f['ban_imgr1'].touched }"
+                  [class.is-valid]="f['ban_imgr1'].valid">
+                  <option
+                    value>Respuesta</option>
+                  <option value="1">SI</option>
+                  <option value="0">NO</option>
+                </select>
+
+                <ng-container
+                  [ngTemplateOutlet]="formError"
+                  [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Tiene imagen es requerido',
+                      control: f['ban_imgr1']
+              }"></ng-container>
+              </div>
+
+              <div class="col-md-10">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class>Imagen de la respuesta 1</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <input type="file"
+                    class="form-control"
+                    accept=".png, .jpg, .jpeg"
+                    name="imgr1"
+                    [class]="f['imgr1'].valid && f['imgr1'].touched && f['imgr1'].value != ''  ? 'is-valid': ''"
+                    (change)="onFileChanged($event, 'imgr1')" />
+                  <!--begin::Hint-->
+                  <div class="form-text">Tipos aceptados: png,
+                    jpg, jpeg.</div>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class="required">Respuesta 2</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <textarea type="text" rows="5"
+                    cols="20"
+                    class="form-control "
+                    placeholder="Respuesta 2"
+                    style="resize: horizontal"
+                    name="ans2"
+                    formControlName="ans2"
+                    [ngClass]="{'is-invalid': f['ans2'].invalid && f['ans2'].touched }"
+                    [class.is-valid]="f['ans2'].valid"
+                    required>
+                  ></textarea>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message: 'La respuesta 2 es requerida',
+                            control: f['ans2']
+                    }"></ng-container>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2">
+                <label
+                  class="d-flex align-items-center fs-6 fw-bold mb-2">
+                  <span
+                    class>Tiene imagen</span>
+                </label>
+                <select
+                  class="form-select "
+                  data-placeholder="Seleccione"
+                  data-control="select2"
+                  data-hide-search="false"
+                  required
+                  name="ban_imgr2"
+                  formControlName="ban_imgr2"
+                  [ngClass]="{'is-invalid': f['ban_imgr2'].invalid && f['ban_imgr2'].touched }"
+                  [class.is-valid]="f['ban_imgr2'].valid">
+                  <option
+                    value>Respuesta</option>
+                  <option value="1">SI</option>
+                  <option value="0">NO</option>
+                </select>
+                <ng-container
+                  [ngTemplateOutlet]="formError"
+                  [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Tiene imagen es requerido',
+                      control: f['ban_imgr2']
+              }"></ng-container>
+              </div>
+
+              <div class="col-md-10">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class>Imagen de la respuesta 2</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <input type="file"
+                    class="form-control"
+                    accept=".png, .jpg, .jpeg"
+                    name="imgr2"
+                    [class]="f['imgr2'].valid && f['imgr2'].touched && f['imgr2'].value != ''  ? 'is-valid': ''"
+                    (change)="onFileChanged($event, 'imgr2')" />
+                  <!--begin::Hint-->
+                  <div class="form-text">Tipos aceptados: png,
+                    jpg, jpeg.</div>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class="required">Respuesta 3</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <textarea type="text" rows="5"
+                    cols="20"
+                    class="form-control "
+                    placeholder="Respuesta 3"
+                    style="resize: horizontal"
+                    name="ans3"
+                    formControlName="ans3"
+                    [ngClass]="{'is-invalid': f['ans3'].invalid && f['ans3'].touched }"
+                    [class.is-valid]="f['ans3'].valid"
+                    required>
+                  ></textarea>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message: 'La respuesta 3 es requerida',
+                            control: f['ans3']
+                    }"></ng-container>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2">
+                <label
+                  class="d-flex align-items-center fs-6 fw-bold mb-2">
+                  <span
+                    class>Tiene imagen</span>
+                </label>
+                <select
+                  class="form-select "
+                  data-placeholder="Seleccione"
+                  data-control="select2"
+                  data-hide-search="false"
+                  required
+                  name="ban_imgr3"
+                  formControlName="ban_imgr3"
+                  [ngClass]="{'is-invalid': f['ban_imgr3'].invalid && f['ban_imgr3'].touched }"
+                  [class.is-valid]="f['ban_imgr3'].valid">
+                  <option
+                    value>Respuesta</option>
+                  <option value="1">SI</option>
+                  <option value="0">NO</option>
+                </select>
+
+                <ng-container
+                  [ngTemplateOutlet]="formError"
+                  [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Tiene imagen es requerido',
+                      control: f['ban_imgr3']
+              }"></ng-container>
+              </div>
+
+              <div class="col-md-10">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class>Imagen de la respuesta 3</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <input type="file"
+                    class="form-control"
+                    accept=".png, .jpg, .jpeg"
+                    name="imgr3"
+                    [class]="f['imgr3'].valid && f['imgr3'].touched && f['imgr3'].value != ''  ? 'is-valid': ''"
+                    (change)="onFileChanged($event, 'imgr3')" />
+                  <!--begin::Hint-->
+                  <div class="form-text">Tipos aceptados: png,
+                    jpg, jpeg.</div>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class="required">Respuesta 4</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <textarea type="text" rows="5"
+                    cols="20"
+                    class="form-control "
+                    placeholder="Respuesta 4"
+                    style="resize: horizontal"
+                    name="ans4"
+                    formControlName="ans4"
+                    [ngClass]="{'is-invalid': f['ans4'].invalid && f['ans4'].touched }"
+                    [class.is-valid]="f['ans4'].valid"
+                    required>
+                  ></textarea>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message: 'La respuesta 4 es requerida',
+                            control: f['ans4']
+                    }"></ng-container>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2">
+                <label
+                  class="d-flex align-items-center fs-6 fw-bold mb-2">
+                  <span
+                    class>Tiene imagen</span>
+                </label>
+                <select
+                  class="form-select "
+                  data-placeholder="Seleccione"
+                  data-control="select2"
+                  data-hide-search="false"
+                  required
+                  name="ban_imgr4"
+                  formControlName="ban_imgr4"
+                  [ngClass]="{'is-invalid': f['ban_imgr4'].invalid && f['ban_imgr4'].touched }"
+                  [class.is-valid]="f['ban_imgr4'].valid">
+                  <option
+                    value>Respuesta</option>
+                  <option value="1">SI</option>
+                  <option value="0">NO</option>
+                </select>
+
+                <ng-container
+                  [ngTemplateOutlet]="formError"
+                  [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Tiene imagen es requerido',
+                      control: f['ban_imgr4']
+              }"></ng-container>
+              </div>
+
+              <div class="col-md-10">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class>Imagen de la respuesta 4</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <input type="file"
+                    class="form-control"
+                    accept=".png, .jpg, .jpeg"
+                    name="imgr4"
+                    [class]="f['imgr4'].valid && f['imgr4'].touched && f['imgr4'].value != ''  ? 'is-valid': ''"
+                    (change)="onFileChanged($event, 'imgr4')" />
+                  <!--begin::Hint-->
+                  <div class="form-text">Tipos aceptados: png,
+                    jpg, jpeg.</div>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class>Respuesta verdadera</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <select
+                    class="form-select "
+                    data-placeholder="Seleccione"
+                    data-control="select2"
+                    data-hide-search="false"
+                    required
+                    name="true_ans"
+                    [ngClass]="{'is-invalid': f['true_ans'].invalid && f['true_ans'].touched }"
+                    [class.is-valid]="f['true_ans'].valid"
+                    formControlName="true_ans">
+                    <option
+                      value>Respuesta</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                                                validation: 'required',
+                                                message: 'La respuesta verdadera es requerida',
+                                                control: f['true_ans']
+                                        }"></ng-container>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+
+              <div class="col-md-3">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class="required">Simulacro</span>
+                  </label>
+                  <!--end::Label-->
+                  <select
+                    class="form-select "
+                    data-placeholder="Seleccione"
+                    data-control="select2"
+                    data-hide-search="false"
+                    required
+                    name="simulacro"
+                    [ngClass]="{'is-invalid': f['simulacro'].invalid && f['simulacro'].touched }"
+                    [class.is-valid]="f['simulacro'].valid"
+                    formControlName="simulacro">
+                    <option
+                      value>Simulacro</option>
+                    <option
+                      *ngFor="let simulacro of simulacros"
+                      [value]="simulacro.id">{{
+                      simulacro.nombre
+                      }}</option>
+                  </select>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                                                validation: 'required',
+                                                message: 'El simulacro es requerido',
+                                                control: f['simulacro']
+                                        }"></ng-container>
+                </div>
+                <!--end::Input group-->
+              </div>
+
+              <div class="col-md-3">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class="required">Sesión</span>
+                  </label>
+                  <!--end::Label-->
+                  <select
+                    class="form-select "
+                    data-placeholder="Seleccione"
+                    data-control="select2"
+                    data-hide-search="false"
+                    required
+                    name="sesion"
+                    [ngClass]="{'is-invalid': f['sesion'].invalid && f['sesion'].touched }"
+                    [class.is-valid]="f['sesion'].valid"
+                    formControlName="sesion">
+                    <option
+                      value>Sesión</option>
+                    <option
+                      *ngFor="let sesion of sesiones"
+                      [value]="sesion.id">{{
+                      sesion.nombre
+                      }}</option>
+                  </select>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                                                validation: 'required',
+                                                message: 'La sesión es requerida',
+                                                control: f['sesion']
+                                        }"></ng-container>
+                </div>
+                <!--end::Input group-->
+              </div>
+
+              <div class="col-md-3">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class>Entrenamiento</span>
+                  </label>
+                  <!--end::Label-->
+
+                  <select
+                    class="form-select "
+                    data-placeholder="Seleccione"
+                    data-control="select2"
+                    data-hide-search="false"
+                    required
+                    name="pre_test"
+                    [ngClass]="{'is-invalid': f['pre_test'].invalid && f['pre_test'].touched }"
+                    [class.is-valid]="f['pre_test'].valid"
+                    formControlName="pre_test">
+                    <option
+                      value>Entrenamiento</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                  </select>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                                                validation: 'required',
+                                                message: 'El entrenamiento es requerido',
+                                                control: f['pre_test']
+                                        }"></ng-container>
+
+                </div>
+                <!--end::Input group-->
+              </div>
+            </div>
+            <!--  Datos basicos -->
+
+            <!--begin::Actions-->
+            <div class="text-center">
+              <a [routerLink]="['/preguntas-materias',materia_id]"
+                class="btn btn-danger btn-sm me-2"><i
+                  class="fas fa-arrow-left fs-4"></i>
+                Volver</a>
+              <button type="submit"
+                class="btn btn-primary btn-sm"><i
+                  class="fas fa-save fs-4 ms-2"></i>
+                Guardar</button>
+            </div>
+            <!--end::Actions-->
+
+          </form>
+        </div>
+        <!--end::Heading-->
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+  </div>
+</div>
+
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation">
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        {{ message }}
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

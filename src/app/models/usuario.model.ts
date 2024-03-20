@@ -28,6 +28,7 @@ export class Usuario {
         public foto?: string,
         public genero?: string,
         public rol?: Role,
+        public institucion_id?: number,
     ) {
 
     }

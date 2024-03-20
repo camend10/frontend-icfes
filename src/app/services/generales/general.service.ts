@@ -58,4 +58,76 @@ export class GeneralService implements OnInit {
         map((resp: any) => resp.tipodocumentos)
       );
   }
+
+  cargarGrados() {
+
+    let url = URL_SERVICIOS + '/generales/grados';
+
+    let data = {
+      txtbusqueda: ''
+    };
+
+    return this.http.post(url, data)
+      .pipe(
+        map((resp: any) => resp.grados)
+      );
+  }
+
+  cargarCursos() {
+
+    let url = URL_SERVICIOS + '/generales/cursos';
+
+    let data = {
+      txtbusqueda: ''
+    };
+
+    return this.http.post(url, data)
+      .pipe(
+        map((resp: any) => resp.cursos)
+      );
+  }
+
+  cargarSimulacros() {
+
+    let url = URL_SERVICIOS + '/generales/simulacros';
+
+    let data = {
+      txtbusqueda: ''
+    };
+
+    return this.http.post(url, data)
+      .pipe(
+        map((resp: any) => resp.simulacros)
+      );
+  }
+
+  cargarSesiones() {
+
+    let url = URL_SERVICIOS + '/generales/sesiones';
+
+    let data = {
+      txtbusqueda: ''
+    };
+
+    return this.http.post(url, data)
+      .pipe(
+        map((resp: any) => resp.sesiones)
+      );
+  }
+
+  cargarComponentes(materia_id: number) {
+
+    let url = URL_SERVICIOS + '/generales/componentes';
+
+    let data = {
+      materia_id: materia_id,
+      txtbusqueda: ''
+    };
+
+    return this.http.post(url, data)
+      .pipe(
+        map((resp: any) => resp.componentes)
+      );
+  }
+
 }

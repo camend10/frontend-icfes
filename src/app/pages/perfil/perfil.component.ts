@@ -87,7 +87,7 @@ export class PerfilComponent {
     let reader = new FileReader();
     let urlImagenTemp = reader.readAsDataURL(archivo);
     reader.onloadend = () => {
-      this.imagenTemp = reader.result as string;;
+      this.imagenTemp = reader.result as string;
     }
 
   }

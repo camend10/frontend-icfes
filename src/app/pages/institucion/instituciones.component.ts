@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Institucion } from '../../models/institucion.model';
 import { InstitucionService } from '../../services/service.index';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   templateUrl: './instituciones.component.html',
   styles: ``
 })
-export class InstitucionesComponent {
+export class InstitucionesComponent implements OnInit{
   instituciones: Institucion[] = [];
   totalRegistros: number = 0;
   p: number = 1;
@@ -104,7 +104,6 @@ export class InstitucionesComponent {
         this._institucionService.borrarInstitucion(institucion.id.toString(), institucion.estado!, mensaje2)
           .pipe(
             catchError(error => {
-              console.log(error);
               Swal.fire({
                 title: "Error!",
                 text: error.error.error,

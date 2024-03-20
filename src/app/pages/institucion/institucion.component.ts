@@ -51,7 +51,6 @@ export class InstitucionComponent implements OnInit {
 
     this._modalUploadService.notificacion
       .subscribe(resp => {
-        console.log(resp);
         this.institucion.foto = resp.institucion.foto;
         this.f['foto'].setValue(resp.institucion.foto);
       });
