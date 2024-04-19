@@ -74,12 +74,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     this._usuarioService.login(usuario, forma.value.recuerdame)
       .pipe(
         catchError(error => {
-          Swal.fire({
-            title: "Error!",
-            text: error.error.error,
-            icon: "error"
-          });
           this.cargando = false;
+          if (error.error.errors) {
+            this.mostrarError(error.error.errors);
+          } else {            
+            Swal.fire({
+              title: "Error!",
+              text: error.error.error,
+              icon: "error"
+            });
+          }
           return EMPTY;
         })
       )
@@ -90,5 +94,19 @@ export class LoginComponent implements OnInit, OnDestroy {
         }, 3000);
       });
 
+  }
+
+  mostrarError(errors: any) {
+    let errorMessage = '';
+    for (const key in errors) {
+      if (errors.hasOwnProperty(key)) {
+        errorMessage += `${key}: ${errors[key]}<br>`;
+      }
+    }
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      html: errorMessage
+    });
   }
 }

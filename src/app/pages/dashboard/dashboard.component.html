@@ -1,1 +1,191 @@
-<p>dashboard works!</p>
+<div class="row" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-dismissible bg-info text-center ">
+            <strong class="text-light">Cargando</strong>
+            <br>
+            <i class="fas fa-refresh fa-spin fa-2x" aria-hidden="true"></i>
+            <br>
+            <span class="text-light">Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="!cargando">
+    <div class="row">
+        <div class="col-xl-6 col-lg-6">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Symbol-->
+                            <div class="symbol symbol-40px me-4">
+                                <div
+                                    class="symbol-label fs-2 fw-semibold bg-danger text-inverse-danger">E</div>
+                            </div>
+                            <!--end::Symbol-->
+                            <!--begin::Section-->
+                            <div
+                                class="d-flex align-items-center flex-row-fluid flex-wrap">
+                                <!--begin:Author-->
+                                <div class="flex-grow-1 me-2">
+                                    <a href="pages/user-profile/overview.html"
+                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">80
+                                        Estudiantes</a>
+                                    <span
+                                        class="text-muted fw-semibold d-block fs-7">Total
+                                        de estudiantes</span>
+                                </div>
+                                <!--end:Author-->
+                                <!--begin::Actions-->
+                                <a href="#"
+                                    class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-30px h-30px">
+                                    <i class="ki-duotone ki-arrow-right fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </a>
+                                <!--begin::Actions-->
+                            </div>
+                            <!--end::Section-->
+                        </div>
+                        <!--end::Item-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Symbol-->
+                            <div class="symbol symbol-40px me-4">
+                                <div
+                                    class="symbol-label fs-2 fw-semibold bg-success text-inverse-success">D</div>
+                            </div>
+                            <!--end::Symbol-->
+                            <!--begin::Section-->
+                            <div
+                                class="d-flex align-items-center flex-row-fluid flex-wrap">
+                                <!--begin:Author-->
+                                <div class="flex-grow-1 me-2">
+                                    <a href="pages/user-profile/overview.html"
+                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">5
+                                        Docentes</a>
+                                    <span
+                                        class="text-muted fw-semibold d-block fs-7">Total
+                                        de docentes</span>
+                                </div>
+                                <!--end:Author-->
+                                <!--begin::Actions-->
+                                <a href="#"
+                                    class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-30px h-30px">
+                                    <i class="ki-duotone ki-arrow-right fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </a>
+                                <!--begin::Actions-->
+                            </div>
+                            <!--end::Section-->
+                        </div>
+                        <!--end::Item-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6 col-lg-6">
+
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Symbol-->
+                            <div class="symbol symbol-40px me-4">
+                                <div
+                                    class="symbol-label fs-2 fw-semibold bg-info text-inverse-info">U</div>
+                            </div>
+                            <!--end::Symbol-->
+                            <!--begin::Section-->
+                            <div
+                                class="d-flex align-items-center flex-row-fluid flex-wrap">
+                                <!--begin:Author-->
+                                <div class="flex-grow-1 me-2">
+                                    <a href="pages/user-profile/overview.html"
+                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">7
+                                        Usuarios</a>
+                                    <span
+                                        class="text-muted fw-semibold d-block fs-7">Total
+                                        de usuarios</span>
+                                </div>
+                                <!--end:Author-->
+                                <!--begin::Actions-->
+                                <a href="#"
+                                    class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-30px h-30px">
+                                    <i class="ki-duotone ki-arrow-right fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </a>
+                                <!--begin::Actions-->
+                            </div>
+                            <!--end::Section-->
+                        </div>
+                        <!--end::Item-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Symbol-->
+                            <div class="symbol symbol-40px me-4">
+                                <div
+                                    class="symbol-label fs-2 fw-semibold bg-primary text-inverse-primary">P</div>
+                            </div>
+                            <!--end::Symbol-->
+                            <!--begin::Section-->
+                            <div
+                                class="d-flex align-items-center flex-row-fluid flex-wrap">
+                                <!--begin:Author-->
+                                <div class="flex-grow-1 me-2">
+                                    <a href="pages/user-profile/overview.html"
+                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">533
+                                        preguntas</a>
+                                    <span
+                                        class="text-muted fw-semibold d-block fs-7">Total
+                                        de preguntas</span>
+                                </div>
+                                <!--end:Author-->
+                                <!--begin::Actions-->
+                                <a href="#"
+                                    class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-30px h-30px">
+                                    <i class="ki-duotone ki-arrow-right fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </a>
+                                <!--begin::Actions-->
+                            </div>
+                            <!--end::Section-->
+                        </div>
+                        <!--end::Item-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

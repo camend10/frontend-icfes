@@ -36,6 +36,7 @@ import {Spanish} from 'flatpickr/dist/l10n/es';
 import { ListadoMateriasComponent } from './preguntas/listado-materias.component';
 import { PreguntasMateriaComponent } from './preguntas/preguntas-materia/preguntas-materia.component';
 import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
+import { SimulacrosComponent } from './simulacros/simulacros/simulacros.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
         InstitucionComponent,
         ListadoMateriasComponent,
         PreguntasMateriaComponent,
-        PreguntaComponent
+        PreguntaComponent,
+        SimulacrosComponent
     ],
     exports: [
         DashboardComponent,

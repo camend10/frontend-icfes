@@ -6,7 +6,9 @@ export class Sesion {
 
         public id: number,
         public nombre: string,
-        public estado?: number
+        public estado?: number,
+        public imagen?: string
+        
     ) {
 
     }

@@ -11,10 +11,16 @@ const routes: Routes = [
     path: '',
     component: PagesComponent,
     canActivate: [LoginGuardGuard],
-    loadChildren: () => import("./pages/pages.module").then((m) => m.PagesModule) 
+    loadChildren: () => import("./pages/pages.module").then((m) => m.PagesModule)
   },
 
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login', component: LoginComponent, data: {
+      titulo: 'Login',
+      subtitulo: '',
+      volver: ''
+    }
+  },
   { path: '**', component: NopagefoundComponent }
 
 ];

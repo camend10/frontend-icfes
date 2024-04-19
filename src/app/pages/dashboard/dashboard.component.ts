@@ -3,8 +3,17 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styles: ``
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
 
+  cargando: boolean = true;
+
+  constructor() {
+    this.cargarDashboard();
+  }
+
+  cargarDashboard() {
+    this.cargando = false;
+  }
 }
