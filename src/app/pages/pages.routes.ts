@@ -15,6 +15,7 @@ import { InstitucionComponent } from "./institucion/institucion.component";
 import { ListadoMateriasComponent } from "./preguntas/listado-materias.component";
 import { PreguntasMateriaComponent } from "./preguntas/preguntas-materia/preguntas-materia.component";
 import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
+import { VerPreguntaComponent } from "./preguntas/ver-pregunta/ver-pregunta.component";
 
 const routes: Routes = [
 
@@ -126,6 +127,16 @@ const routes: Routes = [
             data: {
                 titulo: 'Pregunta',
                 subtitulo: 'pregunta',
+                volver: 'preguntas'
+            }
+        },
+        {
+            path: 'ver-pregunta/:id/:materia_id',
+            component: VerPreguntaComponent,
+            canActivate: [adminGuard, verificaTokenGuard],
+            data: {
+                titulo: 'Ver pregunta',
+                subtitulo: 'Ver pregunta',
                 volver: 'preguntas'
             }
         },

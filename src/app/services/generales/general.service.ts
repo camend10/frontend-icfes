@@ -130,4 +130,28 @@ export class GeneralService implements OnInit {
       );
   }
 
+  cargarCompetencias(materia_id: number) {
+
+    let url = URL_SERVICIOS + '/generales/competencias';
+
+    let data = {
+      materia_id: materia_id,
+      txtbusqueda: ''
+    };
+
+    return this.http.post(url, data)
+      .pipe(
+        map((resp: any) => resp.competencias)
+      );
+  }
+  
+  cargarDashboard = () => {
+    let url = URL_SERVICIOS + '/generales/cargar-dashboard';
+
+    let data = {
+      txtbusqueda: ''
+    };
+
+    return this.http.post(url, data);
+  }
 }

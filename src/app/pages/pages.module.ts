@@ -37,6 +37,7 @@ import { ListadoMateriasComponent } from './preguntas/listado-materias.component
 import { PreguntasMateriaComponent } from './preguntas/preguntas-materia/preguntas-materia.component';
 import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
 import { SimulacrosComponent } from './simulacros/simulacros/simulacros.component';
+import { VerPreguntaComponent } from './preguntas/ver-pregunta/ver-pregunta.component';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { SimulacrosComponent } from './simulacros/simulacros/simulacros.componen
         ListadoMateriasComponent,
         PreguntasMateriaComponent,
         PreguntaComponent,
-        SimulacrosComponent
+        SimulacrosComponent,
+        VerPreguntaComponent
     ],
     exports: [
         DashboardComponent,

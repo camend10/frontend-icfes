@@ -44,7 +44,9 @@
                                 id="txtbusqueda"
                                 value
                                 class="form-control form-control-solid w-600px ps-14 me-3"
-                                placeholder="Enter para buscar Usuarios" />
+                                placeholder="Enter para buscar Usuarios" 
+                                [(ngModel)]="busqueda"
+                                />
                         </form>
                         <button
                             (click)="buscarUsuario( input.value )"
@@ -147,7 +149,7 @@
                                     <td class="text-end">
                                         <a
                                         (click)="resetearClave(usuario)"
-                                            title="Resetear clave"
+                                            title="Restablecer clave"
                                             class="btn btn-icon btn-primary btn-sm me-1">
                                             <i
                                                 class="fas fa-sync-alt fs-4 "></i>

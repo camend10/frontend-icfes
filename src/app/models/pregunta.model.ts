@@ -12,10 +12,8 @@ export class Pregunta {
         public ans3: string,
         public ans4: string,
         public true_ans: number,
-        public sesion: number,
-        public simulacro: number,
         public componente: number,
-        public competencia: string,
+        public competencia: number,
         public ban_img?: number,
         public ban_imgr1?: number,
         public ban_imgr2?: number,
@@ -31,6 +29,11 @@ export class Pregunta {
         public pre_test?: number,
         public estado?: number,
         public user_id?: number,
+        public g11?: number,
+        public g9?: number,
+        public g7?: number,
+        public g5?: number,
+        public g3?: number,
     ) {
 
     }

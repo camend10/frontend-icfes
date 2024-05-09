@@ -17,7 +17,7 @@
                 <div class="card-content">
                     <div class="card-body">
                         <!--begin::Item-->
-                        <div class="d-flex flex-stack">
+                        <div class="d-flex flex-stack" [routerLink]="['/usuarios']" style="cursor: pointer;">
                             <!--begin::Symbol-->
                             <div class="symbol symbol-40px me-4">
                                 <div
@@ -29,9 +29,10 @@
                                 class="d-flex align-items-center flex-row-fluid flex-wrap">
                                 <!--begin:Author-->
                                 <div class="flex-grow-1 me-2">
-                                    <a href="pages/user-profile/overview.html"
-                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">80
-                                        Estudiantes</a>
+                                    <a href="javascript:;"
+                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">
+                                        {{ estudiantes }}
+                                        Estudiante(s)</a>
                                     <span
                                         class="text-muted fw-semibold d-block fs-7">Total
                                         de estudiantes</span>
@@ -60,7 +61,7 @@
                 <div class="card-content">
                     <div class="card-body">
                         <!--begin::Item-->
-                        <div class="d-flex flex-stack">
+                        <div class="d-flex flex-stack" [routerLink]="['/usuarios']" style="cursor: pointer;">
                             <!--begin::Symbol-->
                             <div class="symbol symbol-40px me-4">
                                 <div
@@ -72,9 +73,10 @@
                                 class="d-flex align-items-center flex-row-fluid flex-wrap">
                                 <!--begin:Author-->
                                 <div class="flex-grow-1 me-2">
-                                    <a href="pages/user-profile/overview.html"
-                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">5
-                                        Docentes</a>
+                                    <a href="javascript:;"
+                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">{{
+                                        docentes }}
+                                        Docente(s)</a>
                                     <span
                                         class="text-muted fw-semibold d-block fs-7">Total
                                         de docentes</span>
@@ -106,7 +108,7 @@
                 <div class="card-content">
                     <div class="card-body">
                         <!--begin::Item-->
-                        <div class="d-flex flex-stack">
+                        <div class="d-flex flex-stack" [routerLink]="['/usuarios']" style="cursor: pointer;">
                             <!--begin::Symbol-->
                             <div class="symbol symbol-40px me-4">
                                 <div
@@ -118,12 +120,13 @@
                                 class="d-flex align-items-center flex-row-fluid flex-wrap">
                                 <!--begin:Author-->
                                 <div class="flex-grow-1 me-2">
-                                    <a href="pages/user-profile/overview.html"
-                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">7
-                                        Usuarios</a>
+                                    <a href="javascript:;"
+                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">{{
+                                        usuarios }}
+                                        Administrador(es)</a>
                                     <span
                                         class="text-muted fw-semibold d-block fs-7">Total
-                                        de usuarios</span>
+                                        de administradores</span>
                                 </div>
                                 <!--end:Author-->
                                 <!--begin::Actions-->
@@ -150,7 +153,7 @@
                 <div class="card-content">
                     <div class="card-body">
                         <!--begin::Item-->
-                        <div class="d-flex flex-stack">
+                        <div class="d-flex flex-stack" [routerLink]="['/preguntas']" style="cursor: pointer;">
                             <!--begin::Symbol-->
                             <div class="symbol symbol-40px me-4">
                                 <div
@@ -162,9 +165,10 @@
                                 class="d-flex align-items-center flex-row-fluid flex-wrap">
                                 <!--begin:Author-->
                                 <div class="flex-grow-1 me-2">
-                                    <a href="pages/user-profile/overview.html"
-                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">533
-                                        preguntas</a>
+                                    <a href="javascript:;" 
+                                        class="text-gray-800 text-hover-primary fs-6 fw-bold">{{
+                                        preguntas }}
+                                        pregunta(s)</a>
                                     <span
                                         class="text-muted fw-semibold d-block fs-7">Total
                                         de preguntas</span>

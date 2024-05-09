@@ -6,5 +6,5 @@ export const URL_IMAGENES = 'http://localhost:8000';
 // export const URL_IMAGENES = 'http://localhost/backend-icfes/public/';
 // export const URL_SERVICIOS = 'https://saber.inversionesjl.com/backend-icfes/api';
 // export const URL_IMAGENES = 'https://saber.inversionesjl.com/backend-icfes/proyecto/public/';
-// export const URL_SERVICIOS = 'http://rvzingenieria.com/backend-icfes/api';
-// export const URL_IMAGENES = 'http://rvzingenieria.com/backend-icfes/proyecto/public/';
+// export const URL_SERVICIOS = 'http://ingenieriarvz.com/backend-icfes/public/api';
+// export const URL_IMAGENES = 'http://ingenieriarvz.com/backend-icfes/public/';

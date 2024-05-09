@@ -78,6 +78,47 @@
                 </div>
                 <!--end::Input group-->
               </div>
+
+              <div class="col-md-6">
+                <!--begin::Input group-->
+                <div
+                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label
+                    class="d-flex align-items-center fs-6 fw-bold mb-2">
+                    <span
+                      class="required">Competencias</span>
+                  </label>
+                  <!--end::Label-->
+                  <select
+                    class="form-select "
+                    data-placeholder="Seleccione"
+                    data-control="select2"
+                    data-hide-search="false"
+                    required
+                    name="competencia"
+                    [ngClass]="{'is-invalid': f['competencia'].invalid && f['competencia'].touched }"
+                    [class.is-valid]="f['competencia'].valid"
+                    formControlName="competencia">
+                    <option
+                      value>Competencia</option>
+                    <option
+                      *ngFor="let competencia of competencias"
+                      [value]="competencia.id">{{
+                        competencia.nombre
+                      }}</option>
+                  </select>
+
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                                                validation: 'required',
+                                                message: 'La competencia es requerida',
+                                                control: f['competencia']
+                                        }"></ng-container>
+                </div>
+                <!--end::Input group-->
+              </div>
             </div>
 
             <div class="row">
@@ -674,88 +715,6 @@
                   <label
                     class="d-flex align-items-center fs-6 fw-bold mb-2">
                     <span
-                      class="required">Simulacro</span>
-                  </label>
-                  <!--end::Label-->
-                  <select
-                    class="form-select "
-                    data-placeholder="Seleccione"
-                    data-control="select2"
-                    data-hide-search="false"
-                    required
-                    name="simulacro"
-                    [ngClass]="{'is-invalid': f['simulacro'].invalid && f['simulacro'].touched }"
-                    [class.is-valid]="f['simulacro'].valid"
-                    formControlName="simulacro">
-                    <option
-                      value>Simulacro</option>
-                    <option
-                      *ngFor="let simulacro of simulacros"
-                      [value]="simulacro.id">{{
-                      simulacro.nombre
-                      }}</option>
-                  </select>
-
-                  <ng-container
-                    [ngTemplateOutlet]="formError"
-                    [ngTemplateOutletContext]="{
-                                                validation: 'required',
-                                                message: 'El simulacro es requerido',
-                                                control: f['simulacro']
-                                        }"></ng-container>
-                </div>
-                <!--end::Input group-->
-              </div>
-
-              <div class="col-md-3">
-                <!--begin::Input group-->
-                <div
-                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
-                  <!--begin::Label-->
-                  <label
-                    class="d-flex align-items-center fs-6 fw-bold mb-2">
-                    <span
-                      class="required">Sesión</span>
-                  </label>
-                  <!--end::Label-->
-                  <select
-                    class="form-select "
-                    data-placeholder="Seleccione"
-                    data-control="select2"
-                    data-hide-search="false"
-                    required
-                    name="sesion"
-                    [ngClass]="{'is-invalid': f['sesion'].invalid && f['sesion'].touched }"
-                    [class.is-valid]="f['sesion'].valid"
-                    formControlName="sesion">
-                    <option
-                      value>Sesión</option>
-                    <option
-                      *ngFor="let sesion of sesiones"
-                      [value]="sesion.id">{{
-                      sesion.nombre
-                      }}</option>
-                  </select>
-
-                  <ng-container
-                    [ngTemplateOutlet]="formError"
-                    [ngTemplateOutletContext]="{
-                                                validation: 'required',
-                                                message: 'La sesión es requerida',
-                                                control: f['sesion']
-                                        }"></ng-container>
-                </div>
-                <!--end::Input group-->
-              </div>
-
-              <div class="col-md-3">
-                <!--begin::Input group-->
-                <div
-                  class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
-                  <!--begin::Label-->
-                  <label
-                    class="d-flex align-items-center fs-6 fw-bold mb-2">
-                    <span
                       class>Entrenamiento</span>
                   </label>
                   <!--end::Label-->
@@ -786,6 +745,70 @@
 
                 </div>
                 <!--end::Input group-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value
+                    id="1" name="g11" formControlName="g11" />
+                  <label
+                    class="form-check-label d-flex align-items-center fs-6 fw-bold mb-2"
+                    for="1">
+                    Undecimo
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-2 mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" 
+                    value="1"
+                    id="3" name="g9"
+                    formControlName="g9" />
+                  <label
+                    class="form-check-label d-flex align-items-center fs-6 fw-bold mb-2"
+                    for="3">
+                    Noveno
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-2 mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="1"
+                    id="4" name="g7" formControlName="g7" />
+                  <label
+                    class="form-check-label d-flex align-items-center fs-6 fw-bold mb-2"
+                    for="4">
+                    Septimo
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-2 mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="1"
+                    id="5" name="g5" formControlName="g5" />
+                  <label
+                    class="form-check-label d-flex align-items-center fs-6 fw-bold mb-2"
+                    for="5">
+                    Quinto
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-2 mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="1"
+                    id="6" name="g3" formControlName="g3" />
+                  <label
+                    class="form-check-label d-flex align-items-center fs-6 fw-bold mb-2"
+                    for="6">
+                    Tercero
+                  </label>
+                </div>
               </div>
             </div>
             <!--  Datos basicos -->

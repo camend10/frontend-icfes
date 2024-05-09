@@ -6,9 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { EMPTY, catchError } from 'rxjs';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Sesion } from '../../../models/sesion.model';
-import { Simulacro } from '../../../models/simulacro.model';
 import { Componente } from '../../../models/componente.model';
+import { Grado } from '../../../models/grado.model';
+import { Competencia } from '../../../models/competencia.model';
 
 @Component({
   selector: 'app-pregunta',
@@ -18,15 +18,15 @@ import { Componente } from '../../../models/componente.model';
 export class PreguntaComponent implements OnInit {
 
   forma!: FormGroup;
-  pregunta: Pregunta = new Pregunta(0, 0, '', '', '', '', '', 0, 0, 0, 0, '');
+  pregunta: Pregunta = new Pregunta(0, 0, '', '', '', '', '', 0, 0, 0);
   cargando: boolean = true;
 
   materia_id: number = 0;
   pregunta_id: number = 0;
 
-  sesiones: Sesion[] = [];
-  simulacros: Simulacro[] = [];
   componentes: Componente[] = [];
+  competencias: Competencia[] = [];
+  grados: Grado[] = [];
 
   constructor(
     public activateRoute: ActivatedRoute,
@@ -52,9 +52,8 @@ export class PreguntaComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.cargarSesiones();
-    this.cargarSimulacros();
     this.cargarComponentes();
+    this.cargarCompetencias();
   }
 
   get f() {
@@ -120,18 +119,6 @@ export class PreguntaComponent implements OnInit {
       imgr4: [
         ''
       ],
-      sesion: [
-        '',
-        Validators.compose([
-          Validators.required
-        ])
-      ],
-      simulacro: [
-        '',
-        Validators.compose([
-          Validators.required
-        ])
-      ],
       componente: [
         '',
         Validators.compose([
@@ -139,7 +126,10 @@ export class PreguntaComponent implements OnInit {
         ])
       ],
       competencia: [
-        ''
+        '',
+        Validators.compose([
+          Validators.required
+        ])
       ],
       que_desc2: [
         ''
@@ -183,6 +173,21 @@ export class PreguntaComponent implements OnInit {
           Validators.required
         ])
       ],
+      g11: [
+        ''
+      ],
+      g9: [
+        ''
+      ],
+      g7: [
+        ''
+      ],
+      g5: [
+        ''
+      ],
+      g3: [
+        ''
+      ],
     });
   }
 
@@ -217,6 +222,12 @@ export class PreguntaComponent implements OnInit {
 
   cargarData = (pregunta: Pregunta) => {
 
+    let g11 = (pregunta.g11 == 1) ? true : false;
+    let g9 = (pregunta.g9 == 1) ? true : false;
+    let g7 = (pregunta.g7 == 1) ? true : false;
+    let g5 = (pregunta.g5 == 1) ? true : false;
+    let g3 = (pregunta.g3 == 1) ? true : false;
+
     this.forma.reset({
       id: pregunta.id,
       test_id: pregunta.test_id,
@@ -231,8 +242,6 @@ export class PreguntaComponent implements OnInit {
       imgr2: pregunta.imgr2,
       imgr3: pregunta.imgr3,
       imgr4: pregunta.imgr4,
-      sesion: pregunta.sesion,
-      simulacro: pregunta.simulacro,
       componente: pregunta.componente,
       competencia: pregunta.competencia,
       que_desc2: pregunta.que_desc2,
@@ -243,6 +252,11 @@ export class PreguntaComponent implements OnInit {
       ban_imgr2: pregunta.ban_imgr2,
       ban_imgr3: pregunta.ban_imgr3,
       ban_imgr4: pregunta.ban_imgr4,
+      g11: g11,
+      g9: g9,
+      g7: g7,
+      g5: g5,
+      g3: g3,
     });
 
     return Object.values(this.forma.controls).forEach(control => {
@@ -253,44 +267,6 @@ export class PreguntaComponent implements OnInit {
       }
     })
 
-  }
-
-  cargarSesiones() {
-    this._generalService.cargarSesiones()
-      .pipe(
-        catchError(error => {
-          Swal.fire({
-            title: "Error!",
-            text: error.error.error,
-            icon: "error"
-          });
-          this.cargando = false;
-          this.router.navigate(['/preguntas-materias', this.pregunta_id]);
-          return EMPTY;
-        })
-      )
-      .subscribe((sesiones: Sesion[]) => {
-        this.sesiones = sesiones;
-      })
-  }
-
-  cargarSimulacros() {
-    this._generalService.cargarSimulacros()
-      .pipe(
-        catchError(error => {
-          Swal.fire({
-            title: "Error!",
-            text: error.error.error,
-            icon: "error"
-          });
-          this.cargando = false;
-          this.router.navigate(['/preguntas-materias', this.pregunta_id]);
-          return EMPTY;
-        })
-      )
-      .subscribe((simulacros: Simulacro[]) => {
-        this.simulacros = simulacros;
-      })
   }
 
   cargarComponentes() {
@@ -312,6 +288,45 @@ export class PreguntaComponent implements OnInit {
       })
   }
 
+  cargarCompetencias() {
+    this._generalService.cargarCompetencias(this.materia_id)
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          this.router.navigate(['/preguntas-materias', this.pregunta_id]);
+          return EMPTY;
+        })
+      )
+      .subscribe((competencias: Competencia[]) => {
+        this.competencias = competencias;
+      })
+  }
+
+  cargarGrados() {
+    this._generalService.cargarGrados()
+      .pipe(
+        catchError(error => {
+          Swal.fire({
+            title: "Error!",
+            text: error.error.error,
+            icon: "error"
+          });
+          this.cargando = false;
+          this.router.navigate(['/preguntas-materias', this.pregunta_id]);
+          return EMPTY;
+        })
+      )
+      .subscribe((grados: Grado[]) => {
+        this.grados = grados;
+        console.log(this.grados);
+      })
+  }
+
   guardarPregunta() {
     if (this.forma.invalid) {
       return Object.values(this.forma.controls).forEach(control => {
@@ -328,7 +343,7 @@ export class PreguntaComponent implements OnInit {
     Object.keys(this.f).forEach(key => {
       result[key] = this.f[key].value;
     });
-    
+
     let formData = new FormData();
     result['test_id'] = this.materia_id;
 
@@ -345,8 +360,6 @@ export class PreguntaComponent implements OnInit {
     formData.append('imgr2', result['imgr2']);
     formData.append('imgr3', result['imgr3']);
     formData.append('imgr4', result['imgr4']);
-    formData.append('sesion', result['sesion']);
-    formData.append('simulacro', result['simulacro']);
     formData.append('componente', result['componente']);
     formData.append('competencia', result['competencia']);
     formData.append('que_desc2', result['que_desc2']);
@@ -359,6 +372,11 @@ export class PreguntaComponent implements OnInit {
     formData.append('ban_imgr2', result['ban_imgr2']);
     formData.append('ban_imgr3', result['ban_imgr3']);
     formData.append('ban_imgr4', result['ban_imgr4']);
+    if (result['g11']) { formData.append('g11', "1"); } else { formData.append('g11', "0"); }
+    if (result['g9']) { formData.append('g9', "1"); } else { formData.append('g9', "0"); }
+    if (result['g7']) { formData.append('g7', "1"); } else { formData.append('g7', "0"); }
+    if (result['g5']) { formData.append('g5', "1"); } else { formData.append('g5', "0"); }
+    if (result['g3']) { formData.append('g3', "1"); } else { formData.append('g3', "0"); }
 
     this.cargando = true;
     this._preguntaService.guardarPregunta(formData, parseInt(result['id']))

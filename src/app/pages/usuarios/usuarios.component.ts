@@ -20,6 +20,7 @@ export class UsuariosComponent implements OnInit {
   p: number = 1;
 
   cargando: boolean = true;
+  busqueda: string = '';
 
   constructor(public _usuarioService: UsuarioService,
     private toastr: ToastrService,
@@ -77,6 +78,7 @@ export class UsuariosComponent implements OnInit {
       .subscribe((usuarios: Usuario[]) => {
         this.usuarios = usuarios;
         this.cargando = false;
+        this.busqueda = termino;
       })
   }
 
@@ -134,7 +136,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   resetearClave(usuario: Usuario) {
-    let mensaje = 'Está a punto de resetear la clave a: ' + usuario.name;
+    let mensaje = 'Está a punto de restablecer la clave a: ' + usuario.name;
 
     Swal.fire({
       title: "¿Está seguro?",

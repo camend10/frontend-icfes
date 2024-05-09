@@ -67,13 +67,25 @@
                             Agregar Pregunta
                         </a>
                         <!--end::Add user-->
+
+                        <a [routerLink]="['/preguntas']"
+                            class="btn btn-danger ms-2">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                            <i class="ki-duotone ki-arrow-left">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                            <!--end::Svg Icon-->
+                            Volver
+                        </a>
                     </div>
                     <!--end::Toolbar-->
                 </div>
             </div>
             <div class="card-body pb-0">
                 <h3 class="card-title pb-0">Preguntas registradas
-                    (<small>{{ totalRegistros }}</small>) para {{ materia.test_name }}</h3>
+                    (<small>{{ totalRegistros }}</small>) para {{
+                    materia.test_name }}</h3>
                 <div class="card-px pt-1 pb-0">
                     <div class="table-responsive">
                         <!-- <table class="table align-middle table-row-dashed "> -->
@@ -95,7 +107,7 @@
                                     <th
                                         class="min-w-125px text-center">Estado</th>
                                     <th
-                                        class="text-end min-w-100px text-center">Opciones</th>
+                                        class="min-w-150px text-center">Opciones</th>
                                 </tr>
                                 <!--end::Table row-->
                             </thead>
@@ -116,10 +128,10 @@
                                     </td> -->
 
                                     <td class="text-start"
-                                        style='font-weight: bold;vertical-align: middle;text-transform: capitalize'>
+                                        style='font-weight: bold;vertical-align: middle;'>
                                         {{ pregunta.que_desc }}</td>
                                     <td class="text-center"
-                                        style='font-weight: bold;vertical-align: middle;text-transform: capitalize'>
+                                        style='font-weight: bold;vertical-align: middle;'>
                                         {{ pregunta.true_ans }}</td>
                                     <td class="text-center">
                                         <div *ngIf="pregunta.estado == 1"
@@ -132,6 +144,13 @@
                                         </div>
                                     </td>
                                     <td class="text-end">
+                                        <a
+                                            [routerLink]="['/ver-pregunta',pregunta.id,pregunta.test_id]"
+                                            class="btn btn-icon btn-info btn-sm me-1"
+                                            title="Ver">
+                                            <i
+                                                class="fas fa-eye fs-4 "></i>
+                                        </a>
                                         <a
                                             [routerLink]="['/pregunta',pregunta.id,pregunta.test_id]"
                                             class="btn btn-icon btn-warning btn-sm me-1"

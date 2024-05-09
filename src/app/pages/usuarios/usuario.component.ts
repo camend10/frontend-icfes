@@ -486,4 +486,8 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
+  nuevo() {
+    this.initForm();
+  }
+
 }
