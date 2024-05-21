@@ -16,6 +16,9 @@ import { ListadoMateriasComponent } from "./preguntas/listado-materias.component
 import { PreguntasMateriaComponent } from "./preguntas/preguntas-materia/preguntas-materia.component";
 import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
 import { VerPreguntaComponent } from "./preguntas/ver-pregunta/ver-pregunta.component";
+import { ResultadosComponent } from "./informes/resultados/resultados.component";
+import { VerResultadosComponent } from "./informes/resultados/ver-resultados/ver-resultados.component";
+import { EstadisticasComponent } from "./informes/estadisticas/estadisticas.component";
 
 const routes: Routes = [
 
@@ -99,47 +102,80 @@ const routes: Routes = [
         }
     },
 
-        // Preguntas
-        {
-            path: 'preguntas',
-            component: ListadoMateriasComponent,
-            canActivate: [adminGuard, verificaTokenGuard],
-            data: {
-                titulo: 'Materias',
-                subtitulo: 'materias',
-                volver: 'dashboard'
-            }
-        },
-        {
-            path: 'preguntas-materias/:id',
-            component: PreguntasMateriaComponent,
-            canActivate: [adminGuard, verificaTokenGuard],
-            data: {
-                titulo: 'Preguntas por materia',
-                subtitulo: 'preguntas por materia',
-                volver: 'preguntas'
-            }
-        },
-        {
-            path: 'pregunta/:id/:materia_id',
-            component: PreguntaComponent,
-            canActivate: [adminGuard, verificaTokenGuard],
-            data: {
-                titulo: 'Pregunta',
-                subtitulo: 'pregunta',
-                volver: 'preguntas'
-            }
-        },
-        {
-            path: 'ver-pregunta/:id/:materia_id',
-            component: VerPreguntaComponent,
-            canActivate: [adminGuard, verificaTokenGuard],
-            data: {
-                titulo: 'Ver pregunta',
-                subtitulo: 'Ver pregunta',
-                volver: 'preguntas'
-            }
-        },
+    // Preguntas
+    {
+        path: 'preguntas',
+        component: ListadoMateriasComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Materias',
+            subtitulo: 'materias',
+            volver: 'dashboard'
+        }
+    },
+    {
+        path: 'preguntas-materias/:id',
+        component: PreguntasMateriaComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Preguntas por materia',
+            subtitulo: 'preguntas por materia',
+            volver: 'preguntas'
+        }
+    },
+    {
+        path: 'pregunta/:id/:materia_id',
+        component: PreguntaComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Pregunta',
+            subtitulo: 'pregunta',
+            volver: 'preguntas'
+        }
+    },
+    {
+        path: 'ver-pregunta/:id/:materia_id',
+        component: VerPreguntaComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Ver pregunta',
+            subtitulo: 'Ver pregunta',
+            volver: 'preguntas'
+        }
+    },
+
+    // Informes
+
+    {
+        path: 'informe-resultados',
+        component: ResultadosComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Informes',
+            subtitulo: 'Resultados',
+            volver: 'dashboard'
+        }
+    },
+    {
+        path: 'ver-resultado/:simulacro_id/:user_id',
+        component: VerResultadosComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Ver resultado',
+            subtitulo: 'Resultado',
+            volver: 'informe-resultados'
+        }
+    },
+    {
+        path: 'informe-estadisticas',
+        component: EstadisticasComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Estadisticas',
+            subtitulo: 'Resultados estadisticos',
+            volver: 'dashboard'
+        }
+    },
 
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 

@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import {
   SharedService, SidebarService, UsuarioService, SubirArchivoService, RoleService,
-  GeneralService, InstitucionService, InterceptorService, PreguntaService, MateriaService
+  GeneralService, InstitucionService, InterceptorService, PreguntaService, MateriaService,
+  InformeService
 } from './service.index';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
@@ -25,7 +26,8 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
     InstitucionService,
     InterceptorService,
     PreguntaService,
-    MateriaService
+    MateriaService,
+    InformeService
   ]
 })
 export class ServiceModule { }

@@ -38,6 +38,10 @@ import { PreguntasMateriaComponent } from './preguntas/preguntas-materia/pregunt
 import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
 import { SimulacrosComponent } from './simulacros/simulacros/simulacros.component';
 import { VerPreguntaComponent } from './preguntas/ver-pregunta/ver-pregunta.component';
+import { ResultadosComponent } from './informes/resultados/resultados.component';
+import { VerResultadosComponent } from './informes/resultados/ver-resultados/ver-resultados.component';
+import { EstadisticasComponent } from './informes/estadisticas/estadisticas.component';
+
 
 @NgModule({
     declarations: [
@@ -58,7 +62,10 @@ import { VerPreguntaComponent } from './preguntas/ver-pregunta/ver-pregunta.comp
         PreguntasMateriaComponent,
         PreguntaComponent,
         SimulacrosComponent,
-        VerPreguntaComponent
+        VerPreguntaComponent,
+        ResultadosComponent,
+        VerResultadosComponent,
+        EstadisticasComponent
     ],
     exports: [
         DashboardComponent,
