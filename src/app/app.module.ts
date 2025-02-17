@@ -35,7 +35,7 @@ import { InterceptorService } from './services/service.index';
     FormsModule,
     ServiceModule,
     ToastrModule.forRoot(),
-    SharedModule
+    SharedModule,
   ],
   providers: [
     {

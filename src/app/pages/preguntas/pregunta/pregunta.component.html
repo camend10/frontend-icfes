@@ -130,14 +130,14 @@
                   <label
                     class="d-flex align-items-center fs-6 fw-bold mb-2">
                     <span
-                      class="required">Pregunta</span>
+                      class="required">Encabezado</span>
                   </label>
                   <!--end::Label-->
 
                   <textarea type="text" rows="5"
                     cols="20"
                     class="form-control "
-                    placeholder="Pregunta"
+                    placeholder="Encabezado"
                     style="resize: horizontal"
                     name="que_desc"
                     formControlName="que_desc"
@@ -150,7 +150,7 @@
                     [ngTemplateOutlet]="formError"
                     [ngTemplateOutletContext]="{
                             validation: 'required',
-                            message: 'La pregunta es requerida',
+                            message: 'El encabezado es requerido',
                             control: f['que_desc']
                     }"></ng-container>
 
@@ -229,14 +229,14 @@
                   <label
                     class="d-flex align-items-center fs-6 fw-bold mb-2">
                     <span
-                      class>Parrafo 1</span>
+                      class>Enunciado 1</span>
                   </label>
                   <!--end::Label-->
 
                   <textarea type="text" rows="5"
                     cols="20"
                     class="form-control "
-                    placeholder="Parrafo 1"
+                    placeholder="Enunciado 1"
                     style="resize: horizontal"
                     name="que_desc2"
                     formControlName="que_desc2"
@@ -257,14 +257,14 @@
                   <label
                     class="d-flex align-items-center fs-6 fw-bold mb-2">
                     <span
-                      class>Parrafo 2</span>
+                      class>Enunciado 2</span>
                   </label>
                   <!--end::Label-->
 
                   <textarea type="text" rows="5"
                     cols="20"
                     class="form-control "
-                    placeholder="Parrafo 2"
+                    placeholder="Enunciado 2"
                     style="resize: horizontal"
                     name="que_desc3"
                     formControlName="que_desc3"

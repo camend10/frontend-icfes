@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { InformeService, UsuarioService } from '../../../../services/service.index';
 import { EMPTY, catchError } from 'rxjs';
 import Swal from 'sweetalert2';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 interface maxminData {
   name: string,
@@ -273,7 +275,7 @@ export class VerResultadosComponent {
           name: {}
         }
       };
-
+      
       let seriesMaxMin = this.maxminData.map(item => {
         return {
           name: item.name,
@@ -339,6 +341,7 @@ export class VerResultadosComponent {
       });
       var app = {};
 
+      // console.log(this.gradoCursoEstudiante);
       let data = this.gradoCursoEstudiante.map(item => {
         return {
           value: item.value,
@@ -385,6 +388,7 @@ export class VerResultadosComponent {
       var myChart = echarts.init(chartDom);
       var option;
 
+      
       let series = this.cursoEstudiante.map((item, index) => {
         return {
           name: item.name,
@@ -431,14 +435,24 @@ export class VerResultadosComponent {
         yAxis: [
           {
             type: 'value',
-            name: 'Promedio Curso',
+            name: 'Promedio Estudiante',
             min: 0,
-            max: 25,
+            max: 100,
             interval: 5,
             axisLabel: {
               formatter: '{value}'
             }
-          }
+          },
+          {
+            type: 'value',
+            name: 'Promedio Curso',
+            min: 0,
+            max: 100,
+            interval: 5,
+            axisLabel: {
+              formatter: '{value}'
+            }
+          },
         ],
         series: series
       };
@@ -464,6 +478,57 @@ export class VerResultadosComponent {
 
   returnformateado(numero: string) {
     return parseFloat(numero);
+  }
+
+  imprimir() {
+    Swal.fire({
+      title: 'Imprimiendo...',
+      html: 'Espere por favor...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        setTimeout(() => {
+          this.crearPdf();
+        }, 1000);
+      }
+    });
+  }
+
+  async crearPdf() {
+
+    const data = document.getElementById('pdfPreview');
+    if (data) {
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const margin = 10; // Establecer el margen en milímetros
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const contentWidth = pageWidth - margin * 2; // Ajustar ancho del contenido
+      let position = margin;
+
+      const generateSectionPDF = async (section: HTMLElement) => {
+        const canvas = await html2canvas(section);
+        const imgData = canvas.toDataURL('image/png');
+        const imgHeight = canvas.height * contentWidth / canvas.width;
+
+        if (position + imgHeight > pageHeight - margin) {
+          pdf.addPage();
+          position = margin;
+        }
+
+        pdf.addImage(imgData, 'PNG', margin, position, contentWidth, imgHeight);
+        position += imgHeight;
+      };
+
+      const sections = Array.from(data.querySelectorAll('.pdf-section'));
+      for (const section of sections) {
+        await generateSectionPDF(section as HTMLElement);
+      }
+
+      pdf.save('Estudiante.pdf');
+    }
+    Swal.close();
   }
 
 }

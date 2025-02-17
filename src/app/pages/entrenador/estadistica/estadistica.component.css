@@ -1,0 +1,6 @@
+.readonly-select {
+    pointer-events: none;
+    background-color: #fff; /* Mantener el fondo blanco */
+    color: inherit; /* Mantener el color del texto */
+    opacity: 1; /* Eliminar la opacidad reducida */
+  }

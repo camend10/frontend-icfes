@@ -7,7 +7,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
   const _usuarioService = inject(UsuarioService);
   const router = inject(Router);
 
-  if (_usuarioService.usuario.role_id === 1) {
+  if (_usuarioService.usuario.role_id === 1 || _usuarioService.usuario.role_id === 4) {
     return true;
   } else {
     console.log("Bloqueado por el admin guard");

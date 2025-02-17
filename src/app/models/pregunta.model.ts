@@ -34,6 +34,7 @@ export class Pregunta {
         public g7?: number,
         public g5?: number,
         public g3?: number,
+        public seleccionada?: boolean,
     ) {
 
     }

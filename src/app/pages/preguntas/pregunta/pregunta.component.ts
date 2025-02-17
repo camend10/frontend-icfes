@@ -378,6 +378,16 @@ export class PreguntaComponent implements OnInit {
     if (result['g5']) { formData.append('g5', "1"); } else { formData.append('g5', "0"); }
     if (result['g3']) { formData.append('g3', "1"); } else { formData.append('g3', "0"); }
 
+    if(!result['g11'] && !result['g9'] && !result['g7'] && !result['g5'] && !result['g3']){
+      Swal.fire({
+        title: "Validando!",
+        text: 'Por favor seleccione el grado',
+        icon: "warning"
+      });
+
+      return false;
+    }
+
     this.cargando = true;
     this._preguntaService.guardarPregunta(formData, parseInt(result['id']))
       .pipe(

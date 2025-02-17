@@ -19,6 +19,15 @@ import { VerPreguntaComponent } from "./preguntas/ver-pregunta/ver-pregunta.comp
 import { ResultadosComponent } from "./informes/resultados/resultados.component";
 import { VerResultadosComponent } from "./informes/resultados/ver-resultados/ver-resultados.component";
 import { EstadisticasComponent } from "./informes/estadisticas/estadisticas.component";
+import { AyudaComponent } from "./dashboard/ayuda/ayuda.component";
+import { PruebasComponent } from './pruebas/pruebas/pruebas.component';
+import { RankingComponent } from "./entrenador/ranking/ranking.component";
+import { EstadisticaComponent } from "./entrenador/estadistica/estadistica.component";
+import { VerEstadisticasEntrenamientosComponent } from "./entrenador/ver-estadisticas-entrenamientos/ver-estadisticas-entrenamientos.component";
+import { ComparativoComponent } from "./comparativos/comparativo/comparativo.component";
+import { ProgramadoComponent } from "./entrenador/programado/programado.component";
+import { GestionProgramadoComponent } from "./entrenador/programado/gestion-programado/gestion-programado.component";
+import { GuardarProgramadoComponent } from "./entrenador/programado/guardar-programado/guardar-programado.component";
 
 const routes: Routes = [
 
@@ -173,6 +182,115 @@ const routes: Routes = [
         data: {
             titulo: 'Estadisticas',
             subtitulo: 'Resultados estadisticos',
+            volver: 'dashboard'
+        }
+    },
+
+    // Ayuda
+    {
+        path: 'ayuda',
+        component: AyudaComponent,
+        canActivate: [verificaTokenGuard],
+        data: {
+            titulo: 'Ayuda',
+            subtitulo: 'Ayuda',
+            volver: 'dashboard'
+        }
+    },
+
+    // Pruebas
+    {
+        path: 'pruebas',
+        component: PruebasComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Pruebas Diagnósticas',
+            subtitulo: 'pruebas diagnósticas',
+            volver: 'dashboard'
+        }
+    },
+
+    // Ranking
+    {
+        path: 'ranking',
+        component: RankingComponent,
+        canActivate: [verificaTokenGuard],
+        data: {
+            titulo: 'Ranking',
+            subtitulo: 'ranking',
+            volver: 'dashboard'
+        }
+    },
+
+    // Estadistica
+    {
+        path: 'estadisticas-entrenamientos',
+        component: EstadisticaComponent,
+        canActivate: [verificaTokenGuard],
+        data: {
+            titulo: 'Estadisticas de los entrenamientos',
+            subtitulo: 'estadisticas',
+            volver: 'dashboard'
+        }
+    },
+
+
+    // Ver estadisticas entrenamientos
+    {
+        path: 'ver-estadisticas-entrenamientos/:entrenamiento_id/:user_id/:materia_id',
+        component: VerEstadisticasEntrenamientosComponent,
+        canActivate: [verificaTokenGuard],
+        data: {
+            titulo: 'Ver estadisticas de los entrenamientos',
+            subtitulo: 'entrenamiento',
+            volver: 'estadisticas-entrenamientos'
+        }
+    },
+
+    // Programado
+    {
+        path: 'entrenamiento-programado',
+        component: ProgramadoComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Entrenamiento Programado',
+            subtitulo: 'Entrenamiento Programado',
+            volver: 'dashboard'
+        }
+    },
+
+    // Gestion Programado
+    {
+        path: 'gestion-programado/:id',
+        component: GestionProgramadoComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Gestión entrenamiento programado',
+            subtitulo: 'gestión entrenamiento programado',
+            volver: 'entrenamiento-programado'
+        }
+    },
+
+    // Guardar Programado
+    {
+        path: 'programado/:id/:materia_id',
+        component: GuardarProgramadoComponent,
+        canActivate: [adminGuard, verificaTokenGuard],
+        data: {
+            titulo: 'Guardar Programados',
+            subtitulo: 'guardar programados',
+            volver: 'entrenamiento-programado'
+        }
+    },
+
+    // Ver comparativos
+    {
+        path: 'comparativo',
+        component: ComparativoComponent,
+        canActivate: [verificaTokenGuard],
+        data: {
+            titulo: 'Ver comparativos',
+            subtitulo: 'comparativo',
             volver: 'dashboard'
         }
     },

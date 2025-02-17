@@ -15,53 +15,34 @@
         <div class="card mb-5 mb-xl-8 shadow-sm card-flush">
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <div
-                        class="d-flex align-items-center position-relative my-1">
+                    <div class="d-flex align-items-center position-relative my-1">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                        <span
-                            class="svg-icon svg-icon-1 position-absolute ms-6">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24" viewBox="0 0 24 24"
+                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none">
-                                <rect opacity="0.5" x="17.0365"
-                                    y="15.1223"
-                                    width="8.15546" height="2"
-                                    rx="1"
-                                    transform="rotate(45 17.0365 15.1223)"
-                                    fill="black" />
+                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                    transform="rotate(45 17.0365 15.1223)" fill="black" />
                                 <path
                                     d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
                                     fill="black" />
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <form action method="GET"
-                            autocomplete="off">
-                            <input type="text" name="txtbusqueda"
-                                #input
-                                (keydown.enter)="buscarUsuario( input.value )"
-                                id="txtbusqueda"
-                                value
-                                class="form-control form-control-solid w-600px ps-14 me-3"
-                                placeholder="Enter para buscar Usuarios" 
-                                [(ngModel)]="busqueda"
-                                />
+                        <form action method="GET" autocomplete="off">
+                            <input type="text" name="txtbusqueda" #input (keydown.enter)="buscarUsuario( input.value )"
+                                id="txtbusqueda" value class="form-control form-control-solid w-600px ps-14 me-3"
+                                placeholder="Enter para buscar Usuarios" [(ngModel)]="busqueda" />
                         </form>
-                        <button
-                            (click)="buscarUsuario( input.value )"
-                            class="btn btn-success btn-icon" title="buscar">
+                        <button (click)="buscarUsuario( input.value )" class="btn btn-success btn-icon" title="buscar">
                             <i class="fas fa-search fs-4 "></i>
                         </button>
                     </div>
                 </h3>
                 <div class="card-toolbar">
                     <!--begin::Toolbar-->
-                    <div class="d-flex justify-content-end"
-                        data-kt-user-table-toolbar="base">
+                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                         <!--begin::Add user-->
-                        <a [routerLink]="['/usuario','nuevo']"
-                            class="btn btn-primary">
+                        <a [routerLink]="['/usuario','nuevo']" class="btn btn-primary">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                             <i class="ki-duotone ki-plus">
                             </i>
@@ -79,27 +60,21 @@
                 <div class="card-px pt-1 pb-0">
                     <div class="table-responsive">
                         <!-- <table class="table align-middle table-row-dashed "> -->
-                        <table
-                            class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                        <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
 
                             <thead>
                                 <!--begin::Table row-->
-                                <tr
-                                    class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px text-center">#</th>
-                                    <th
-                                        class="min-w-125px text-center">Foto</th>
-                                    <th
-                                        class="min-w-125px text-end">Identificación</th>
+                                    <th class="min-w-125px text-center">Foto</th>
+                                    <th class="min-w-125px text-end">Identificación</th>
                                     <th class="min-w-125px">Nombre</th>
                                     <th class="min-w-125px">Correo</th>
                                     <!-- <th
                                         class="min-w-125px text-end">Telefono</th> -->
                                     <th class="min-w-125px text-center">Rol</th>
-                                    <th
-                                        class="min-w-125px text-center">Estado</th>
-                                    <th
-                                        class="text-end min-w-100px text-center">Opciones</th>
+                                    <th class="min-w-125px text-center">Estado</th>
+                                    <th class="text-end min-w-100px text-center">Opciones</th>
                                 </tr>
                                 <!--end::Table row-->
                             </thead>
@@ -107,16 +82,13 @@
                             <tbody>
                                 <tr
                                     *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 5, currentPage: p }; let i=index ">
-                                    <td
-                                        style='font-weight: bold;vertical-align: middle;'
-                                        class="text-center">
+                                    <td style='font-weight: bold;vertical-align: middle;' class="text-center">
                                         {{ (i+1) }}
                                     </td>
 
                                     <td class="text-center w70">
-                                        <img
-                                            (click)="mostrarModal( 'foto',usuario.id,usuario.tipo)"
-                                            [src]="usuario.foto! | imagen:usuario.id.toString() :usuario.tipo "
+                                        <img (click)="mostrarModal( 'foto',usuario.id,usuario.tipo)"
+                                            [src]="usuario.foto! | imagen:usuario.id.toString() :usuario.tipo :usuario.institucion_id"
                                             class="img-50 img-fluid rounded pointer">
                                     </td>
 
@@ -126,8 +98,7 @@
                                     <td class="text-end"
                                         style='font-weight: bold;vertical-align: middle;text-transform: capitalize'>
                                         {{ usuario.name }}</td>
-                                    <td
-                                        style='font-weight: bold;vertical-align: middle;'>
+                                    <td style='font-weight: bold;vertical-align: middle;'>
                                         {{ usuario.email }}</td>
                                     <!-- <td class="text-end"
                                         style='font-weight: bold;vertical-align: middle;'>
@@ -137,38 +108,27 @@
                                         {{ usuario.rol?.nombre }}</td>
 
                                     <td class="text-center">
-                                        <div *ngIf="usuario.estado == 1"
-                                            class="badge badge-success fw-bolder">
+                                        <div *ngIf="usuario.estado == 1" class="badge badge-success fw-bolder">
                                             Activo
                                         </div>
-                                        <div *ngIf="usuario.estado == 0"
-                                            class="badge badge-danger fw-bolder">
+                                        <div *ngIf="usuario.estado == 0" class="badge badge-danger fw-bolder">
                                             Inactivo
                                         </div>
                                     </td>
                                     <td class="text-end">
-                                        <a
-                                        (click)="resetearClave(usuario)"
-                                            title="Restablecer clave"
+                                        <a (click)="resetearClave(usuario)" title="Restablecer clave"
                                             class="btn btn-icon btn-primary btn-sm me-1">
-                                            <i
-                                                class="fas fa-sync-alt fs-4 "></i>
+                                            <i class="fas fa-sync-alt fs-4 "></i>
                                         </a>
-                                        <a
-                                            [routerLink]="['/usuario',usuario.id]"
-                                            class="btn btn-icon btn-warning btn-sm me-1"
-                                            title="Editar">
-                                            <i
-                                                class="fas fa-edit fs-4 "></i>
+                                        <a [routerLink]="['/usuario',usuario.id]"
+                                            class="btn btn-icon btn-warning btn-sm me-1" title="Editar">
+                                            <i class="fas fa-edit fs-4 "></i>
                                         </a>
-                                        <a
-                                            type="button"
-                                            class="btn btn-icon btn-sm"
+                                        <a type="button" class="btn btn-icon btn-sm"
                                             [ngClass]="usuario.estado === 1? 'btn-danger': 'btn-success' "
                                             [title]="usuario.estado === 1? 'Eliminar': 'Activar'"
                                             (click)="estadoUsuario(usuario)">
-                                            <i
-                                                class="fas fs-4 "
+                                            <i class="fas fs-4 "
                                                 [ngClass]="usuario.estado === 1? 'fa-trash': 'fa-check'"></i>
                                         </a>
                                     </td>
@@ -177,9 +137,7 @@
                         </table>
 
                         <div class="d-flex justify-content-center">
-                            <pagination-controls
-                                (pageChange)="p = $event"
-                                previousLabel="Anterior"
+                            <pagination-controls (pageChange)="p = $event" previousLabel="Anterior"
                                 nextLabel="Siguiente"></pagination-controls>
                         </div>
 

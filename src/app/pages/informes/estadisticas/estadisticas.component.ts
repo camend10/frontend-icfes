@@ -10,6 +10,8 @@ import { EMPTY, catchError } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Puntaje } from '../../../models/puntaje.model';
 import * as echarts from 'echarts';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 interface maxminData {
   name: string,
@@ -50,7 +52,7 @@ export class EstadisticasComponent implements OnInit {
 
   grado_id: number = 1;
   curso_id: number = 0;
-  simulacro_id: number = 1;
+  simulacro_id: number = 2;
   institucion_id: number = 1;
 
   totalEstudiantes: number = 0;
@@ -201,6 +203,7 @@ export class EstadisticasComponent implements OnInit {
       return;
     }
     this.busqueda = false;
+    this.cargando = true;
     this._informeService.cargarResultadoInstitucion(this.simulacro_id, this.grado_id, this.curso_id, this.institucion_id)
       .pipe(
         catchError(error => {
@@ -254,6 +257,7 @@ export class EstadisticasComponent implements OnInit {
         this.resCompetenciasNaturales = this.resComp['resCompetenciasNaturales' as keyof typeof this.resComp];
         this.resCompetenciasIngles = this.resComp['resCompetenciasIngles' as keyof typeof this.resComp];
         this.busqueda = true;
+        this.cargando = false;
 
         this.grafMaxMin();
 
@@ -476,7 +480,6 @@ export class EstadisticasComponent implements OnInit {
     }, 1000);
   }
 
-
   grafEstVsCurso() {
     setTimeout(() => {
 
@@ -558,5 +561,56 @@ export class EstadisticasComponent implements OnInit {
   returnformateado(numero: string) {
     return parseFloat(numero);
   }
+
+  imprimir() {
+    Swal.fire({
+      title: 'Imprimiendo...',
+      html: 'Espere por favor...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        setTimeout(() => {
+          this.crearPdf();
+        }, 1000);
+      }
+    });
+  }
+
+  async crearPdf() {
+
+    const data = document.getElementById('pdfPreview');
+    if (data) {
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const margin = 10; // Establecer el margen en milímetros
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const contentWidth = pageWidth - margin * 2; // Ajustar ancho del contenido
+      let position = margin;
+
+      const generateSectionPDF = async (section: HTMLElement) => {
+        const canvas = await html2canvas(section);
+        const imgData = canvas.toDataURL('image/png');
+        const imgHeight = canvas.height * contentWidth / canvas.width;
+
+        if (position + imgHeight > pageHeight - margin) {
+          pdf.addPage();
+          position = margin;
+        }
+
+        pdf.addImage(imgData, 'PNG', margin, position, contentWidth, imgHeight);
+        position += imgHeight;
+      };
+
+      const sections = Array.from(data.querySelectorAll('.pdf-section'));
+      for (const section of sections) {
+        await generateSectionPDF(section as HTMLElement);
+      }
+
+      pdf.save('Estudiante.pdf');
+    }
+    Swal.close();
+  }  
 
 }

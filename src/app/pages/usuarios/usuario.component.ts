@@ -86,7 +86,7 @@ export class UsuarioComponent implements OnInit {
           Validators.required,
           Validators.minLength(5),
           Validators.maxLength(20),
-          Validators.pattern(/^([0-9])*$/),
+          // Validators.pattern(/^([0-9])*$/),
         ])
       ],
       name: [
@@ -118,9 +118,9 @@ export class UsuarioComponent implements OnInit {
       email: [
         '',
         Validators.compose([
-          Validators.required,
+          // Validators.required,
           Validators.email,
-          Validators.maxLength(100),
+          // Validators.maxLength(100),
           // Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
         ])
       ],

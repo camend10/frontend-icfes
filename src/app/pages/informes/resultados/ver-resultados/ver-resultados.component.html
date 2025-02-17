@@ -18,12 +18,30 @@
                 <!--begin::Heading-->
                 <div class="mb-1 text-center d-flex justify-content-center">
                     <!--begin::Title-->
-                    <h1 class="mb-1">Resultados de la prueba diagnostica {{
+                    <h1 class="mb-1">Resultados de la prueba diagnóstica {{
                         simulacro_id
                         }}</h1>
                     <!--end::Title-->
                 </div>
-                <!--end::Heading-->            
+                <!--end::Heading-->
+
+                <div class="card-toolbar ">
+                    <!--begin::Toolbar-->
+                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+
+                        <a (click)="imprimir()" class="btn btn-success ms-2">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                            <i class="ki-duotone ki-printer">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                            <!--end::Svg Icon-->
+                            Imprimir
+                        </a>
+                        <!--end::Add user-->
+                    </div>
+                    <!--end::Toolbar-->
+                </div>
 
             </div>
 
@@ -32,1751 +50,1528 @@
 </div>
 
 <ng-container *ngIf="infoCompleta">
-    <div class="row mt-2">
-        <div class="col-md-12">
-            <!--begin::Layout-->
-            <div class="d-flex flex-column flex-lg-row">
-                <!--begin::Content-->
-                <div
-                    class="flex-lg-row-fluid me-lg-15 order-2 order-lg-1 mb-10 mb-lg-0">
-                    <!--begin::Card-->
-                    <div class="card card-flush pt-3 mb-5 mb-xl-10">
-                        <!--begin::Card header-->
-                        <div class="card-header ">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2
-                                    class="fw-bold d-flex align-items-center">Información
-                                    del estudiante</h2>
+    <section id="pdfPreview" ngxPrint class="pdf-preview">
+        <section class="pdf-section">
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <!--begin::Layout-->
+                    <div class="d-flex flex-column flex-lg-row">
+                        <!--begin::Content-->
+                        <div class="flex-lg-row-fluid me-lg-15 order-2 order-lg-1 mb-10 mb-lg-0">
+                            <!--begin::Card-->
+                            <div class="card card-flush pt-3 mb-5 mb-xl-10">
+                                <!--begin::Card header-->
+                                <div class="card-header ">
+                                    <!--begin::Card title-->
+                                    <div class="card-title">
+                                        <h2 class="fw-bold d-flex align-items-center">Información
+                                            del estudiante</h2>
+                                    </div>
+                                    <!--begin::Card title-->
+
+                                </div>
+                                <!--end::Card header-->
+                                <!--begin::Card body-->
+                                <div class="card-body pt-3">
+                                    <!--begin::Section-->
+                                    <div class="mb-10">
+                                        <h1 class="fs-2x text-gray-900 mb-6">{{
+                                            usuario.name }}</h1>
+
+                                        <div class="table-responsive">
+                                            <table
+                                                class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                                                <thead>
+                                                    <!--begin::Table row-->
+                                                    <tr class="text-start fw-bolder fs-4  gs-0">
+                                                        <th class="min-w-125px text-center">Puesto</th>
+                                                        <th class="min-w-125px text-center">Estudiantes
+                                                            evaluados</th>
+                                                        <th class="min-w-125px text-center">Grado</th>
+                                                        <th class="min-w-125px text-center">#
+                                                            De Preguntas</th>
+                                                    </tr>
+                                                    <!--end::Table row-->
+                                                </thead>
+
+                                                <tbody>
+                                                    <td style='font-weight: bold;vertical-align: middle;'
+                                                        class="text-center">{{ puesto }}
+                                                        de
+                                                        {{ totalEstudiantes }}
+                                                    </td>
+                                                    <td style='font-weight: bold;vertical-align: middle;'
+                                                        class="text-center">
+                                                        {{ totalEstudiantes }}
+                                                    </td>
+                                                    <td style='font-weight: bold;vertical-align: middle;'
+                                                        class="text-center">
+                                                        {{ grado }}
+                                                    </td>
+                                                    <td style='font-weight: bold;vertical-align: middle;'
+                                                        class="text-center">
+                                                        {{ totalPreguntas }}
+                                                    </td>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!--begin::Details-->
+                                        <div class="d-flex flex-wrap py-5">
+
+                                            <!-- VA AQUI -->
+
+                                        </div>
+                                        <!--end::Row-->
+                                    </div>
+                                    <!--end::Section-->
+                                </div>
+                                <!--end::Card body-->
                             </div>
-                            <!--begin::Card title-->
-
+                            <!--end::Card-->
                         </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-3">
+                        <!--end::Content-->
+                        <!--begin::Sidebar-->
+                        <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-300px mb-10 order-1 order-lg-2">
+                            <!--begin::Card-->
+                            <div class="card card-flush mb-0" data-kt-sticky="true"
+                                data-kt-sticky-name="subscription-summary"
+                                data-kt-sticky-offset="{default: false, lg: '200px'}"
+                                data-kt-sticky-width="{lg: '250px', xl: '300px'}" data-kt-sticky-left="auto"
+                                data-kt-sticky-top="150px" data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
+                                <!--begin::Card header-->
+                                <div class="card-header">
+                                    <!--begin::Card title-->
+                                    <div class="card-title">
+                                        <h2>Estudiante</h2>
+                                    </div>
+                                    <!--end::Card title-->
+
+                                </div>
+                                <!--end::Card header-->
+                                <!--begin::Card body-->
+                                <div class="card-body pt-0 fs-6">
+                                    <!--begin::Section-->
+                                    <div class="mb-7">
+                                        <!--begin::Details-->
+                                        <div class="d-flex align-items-center">
+                                            <!--begin::Avatar-->
+                                            <div class="symbol symbol-60px symbol-circle me-3">
+                                                <img alt="Pic"
+                                                    [src]="usuario.foto! | imagen:usuario.id.toString() :usuario.tipo "
+                                                    [alt]="usuario.name" />
+                                            </div>
+                                            <!--end::Avatar-->
+                                            <!--begin::Info-->
+                                            <div class="d-flex flex-column">
+                                                <!--begin::Name-->
+                                                <a href="#"
+                                                    class="fs-7 fw-bold text-gray-900 text-hover-primary me-2">{{
+                                                    usuario.name }}</a>
+                                                <!--end::Name-->
+                                                <!--begin::Email-->
+                                                <a href="#" class="fw-semibold text-gray-600 text-hover-primary">{{
+                                                    usuario.username }}</a>
+                                                <!--end::Email-->
+                                            </div>
+                                            <!--end::Info-->
+                                        </div>
+                                        <!--end::Details-->
+                                    </div>
+                                    <!--end::Section-->
+                                    <!--begin::Seperator-->
+                                    <div class="separator separator-dashed mb-7"></div>
+                                    <!--end::Seperator-->
+
+                                    <!--begin::Section-->
+                                    <div class="mb-10">
+                                        <!--begin::Title-->
+                                        <h5 class="mb-4">{{ institucion.nombre }}</h5>
+                                        <!--end::Title-->
+                                        <!--begin::Details-->
+                                        <table class="table fs-6 fw-semibold gs-0 gy-2 gx-2">
+                                            <!--begin::Row-->
+                                            <tr class>
+                                                <td class="text-gray-500">Codigo</td>
+                                                <td class="text-gray-800">{{
+                                                    institucion.codigo }}</td>
+                                            </tr>
+                                            <!--end::Row-->
+                                            <!--begin::Row-->
+                                            <tr class>
+                                                <td class="text-gray-500">Nit</td>
+                                                <td class="text-gray-800">{{
+                                                    institucion.nit
+                                                    }}</td>
+                                            </tr>
+                                            <!--end::Row-->
+                                            <!--begin::Row-->
+                                            <tr class>
+                                                <td class="text-gray-500">Telefono:</td>
+                                                <td class="text-gray-800">{{
+                                                    institucion.telefono }}</td>
+                                            </tr>
+                                            <!--end::Row-->
+                                            <!--begin::Row-->
+                                            <tr class>
+                                                <td class="text-gray-500">Correo:</td>
+                                                <td class="text-gray-800">{{
+                                                    institucion.email }}</td>
+                                            </tr>
+                                            <!--end::Row-->
+                                        </table>
+                                        <!--end::Details-->
+                                    </div>
+                                    <!--end::Section-->
+
+                                </div>
+                                <!--end::Card body-->
+                            </div>
+                            <!--end::Card-->
+                        </div>
+                        <!--end::Sidebar-->
+                    </div>
+                    <!--end::Layout-->
+                </div>
+            </div>
+
+            <div class="row mt-1 justify-content-center">
+                <div class="col-7">
+                    <div class="card shadow-sm card-xl-stretch">
+                        <div class="card-header">
+                            <h2 class="fw-bold d-flex align-items-center">Resultados</h2>
+                        </div>
+                        <div class="card-body">
                             <!--begin::Section-->
-                            <div class="mb-10">
-                                <h1 class="fs-2x text-gray-900 mb-6">{{
-                                    usuario.name }}</h1>
-
+                            <div class="mb-0">
+                                <!--begin::Product table-->
                                 <div class="table-responsive">
-                                    <table
-                                        class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-
+                                    <!--begin::Table-->
+                                    <table class="table align-middle table-row-dashed fs-6 gy-1 mb-0">
+                                        <!--begin::Table head-->
                                         <thead>
+                                            <tr
+                                                class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-6 text-uppercase gs-0">
+                                                <td class="min-w-125px">Puntaje
+                                                    Gobal</td>
+                                                <td class="min-w-125px">
+                                                    <span class="fs-2 badge badge-light-danger">{{
+                                                        global |
+                                                        number:'1.2-2' }} / {{
+                                                        sobre1
+                                                        }}</span>
+                                                </td>
+                                                <th class="min-w-125px"></th>
+                                            </tr>
                                             <!--begin::Table row-->
                                             <tr
-                                                class="text-start fw-bolder fs-4  gs-0">
-                                                <th
-                                                    class="min-w-125px text-center">Puesto</th>
-                                                <th
-                                                    class="min-w-125px text-center">Estudiantes
-                                                    evaluados</th>
-                                                <th
-                                                    class="min-w-125px text-center">Grado</th>
-                                                <th
-                                                    class="min-w-125px text-center">#
-                                                    De Preguntas</th>
+                                                class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
+                                                <th class="min-w-100px">Area</th>
+                                                <th class="min-w-100px">Puntaje</th>
+                                                <th class="min-w-100px">Duración</th>
+                                                <th class="min-w-100px">#
+                                                    Preguntas Sesión</th>
                                             </tr>
                                             <!--end::Table row-->
                                         </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                        <tbody class="fw-semibold text-gray-800" *ngFor="let punt of puntaje">
+                                            <tr>
+                                                <td>
+                                                    <label class="w-150px">{{
+                                                        punt.materia }}</label>
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-light-danger">{{
+                                                        punt.puntaje_total |
+                                                        number:'1.2-2' }} / {{
+                                                        sobre2
+                                                        }}</span>
+                                                </td>
+                                                <td>
+                                                    <label class="w-150px">60
+                                                        (min)</label>
+                                                </td>
+                                                <td>
 
-                                        <tbody>
-                                            <td
-                                                style='font-weight: bold;vertical-align: middle;'
-                                                class="text-center">{{ puesto }}
-                                                de
-                                                {{ totalEstudiantes }}
-                                            </td>
-                                            <td
-                                                style='font-weight: bold;vertical-align: middle;'
-                                                class="text-center">
-                                                {{ totalEstudiantes }}
-                                            </td>
-                                            <td
-                                                style='font-weight: bold;vertical-align: middle;'
-                                                class="text-center">
-                                                {{ grado }}
-                                            </td>
-                                            <td
-                                                style='font-weight: bold;vertical-align: middle;'
-                                                class="text-center">
-                                                {{ totalPreguntas }}
-                                            </td>
+                                                    @if(punt.materia
+                                                    =='Ingles'){
+                                                    45 x
+                                                    }@else{
+                                                    @if(punt.materia
+                                                    =='Lectura Crítica'){
+                                                    41 x
+                                                    }@else{
+                                                    @if(punt.materia
+                                                    =='Matemáticas'){
+                                                    25 x
+                                                    }@else {
+                                                    @if(punt.materia
+                                                    =='Sociales y Ciudadanas'){
+                                                    25 x
+
+                                                    }@else {
+                                                    29 x
+                                                    }
+                                                    }
+                                                    }
+                                                    }
+
+                                                    @if(punt.materia
+                                                    =='Ingles'){
+                                                    S2
+                                                    }@else{
+                                                    @if(punt.materia
+                                                    =='Lectura Crítica'){
+                                                    S1
+                                                    }@else{
+                                                    Ambas
+                                                    }
+                                                    }
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <!--end::Table body-->
+                                    </table>
+                                    <!--end::Table-->
+                                </div>
+                                <!--end::Product table-->
+                            </div>
+                            <!--end::Section-->
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="card shadow-sm card-xl-stretch">
+                        <div class="card-header">
+                            <h2 class="fw-bold d-flex align-items-center">Niveles de
+                                Desempeño</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-0">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-row-dashed fs-8 gy-1 mb-0">
+                                        <thead>
+                                            <tr
+                                                class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
+                                                <th class="min-w-110px text-center">Valoración
+                                                    Cualitativa</th>
+                                                <th class="min-w-100px text-center">Categoria</th>
+                                                <th class="min-w-100px text-center">Mínimo</th>
+                                                <th class="min-w-100px text-center">Máximo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="fw-semibold text-gray-800 ant-table-tbody">
+                                            <tr>
+                                                <td class="text-center">
+                                                    Desempeño Avanzado
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    A
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    437
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    500
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    Desempeño Satisfactorio
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    S
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    325
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    436.99
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    Desempeño Mínimo
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    M
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    221
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    324.99
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    Desempeño Insuficiente
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    I
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    0
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    220.99
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
-
-                                <!--begin::Details-->
-                                <div class="d-flex flex-wrap py-5">
-
-                                    <!-- VA AQUI -->
-
-                                </div>
-                                <!--end::Row-->
                             </div>
-                            <!--end::Section-->
                         </div>
-                        <!--end::Card body-->
                     </div>
-                    <!--end::Card-->
                 </div>
-                <!--end::Content-->
-                <!--begin::Sidebar-->
-                <div
-                    class="flex-column flex-lg-row-auto w-lg-250px w-xl-300px mb-10 order-1 order-lg-2">
-                    <!--begin::Card-->
-                    <div class="card card-flush mb-0" data-kt-sticky="true"
-                        data-kt-sticky-name="subscription-summary"
-                        data-kt-sticky-offset="{default: false, lg: '200px'}"
-                        data-kt-sticky-width="{lg: '250px', xl: '300px'}"
-                        data-kt-sticky-left="auto" data-kt-sticky-top="150px"
-                        data-kt-sticky-animation="false"
-                        data-kt-sticky-zindex="95">
-                        <!--begin::Card header-->
+            </div>
+
+            <div class="row mt-1 justify-content-center">
+                <div class="col-12">
+                    <div class="card shadow-sm card-xl-stretch">
                         <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Estudiante</h2>
-                            </div>
-                            <!--end::Card title-->
-
+                            <h2 class="fw-bold d-flex align-items-center">Nivel de
+                                Desempeño Global</h2>
                         </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0 fs-6">
-                            <!--begin::Section-->
-                            <div class="mb-7">
-                                <!--begin::Details-->
-                                <div class="d-flex align-items-center">
-                                    <!--begin::Avatar-->
-                                    <div
-                                        class="symbol symbol-60px symbol-circle me-3">
-                                        <img alt="Pic"
-                                            [src]="usuario.foto! | imagen:usuario.id.toString() :usuario.tipo "
-                                            [alt]="usuario.name" />
-                                    </div>
-                                    <!--end::Avatar-->
-                                    <!--begin::Info-->
-                                    <div class="d-flex flex-column">
-                                        <!--begin::Name-->
-                                        <a href="#"
-                                            class="fs-7 fw-bold text-gray-900 text-hover-primary me-2">{{
-                                            usuario.name }}</a>
-                                        <!--end::Name-->
-                                        <!--begin::Email-->
-                                        <a href="#"
-                                            class="fw-semibold text-gray-600 text-hover-primary">{{
-                                            usuario.username }}</a>
-                                        <!--end::Email-->
-                                    </div>
-                                    <!--end::Info-->
+                        <div class="card-body">
+                            <div class="mb-0">
+                                <div class="table-responsive">
+                                    <table class="table align-middle gs-1 gy-1 gx-1">
+                                        <tbody class="ant-table-tbody-desem text-center">
+                                            <tr class="fw-semibold fs-6 ">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                        *ngIf="_informeService.obtenerRango(global) == 'Avanzado'"></i>
+                                                </td>
+                                            </tr>
+                                            <tr class="fw-semibold fs-6 ">
+                                                <td></td>
+                                                <td></td>
+                                                <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                        *ngIf="_informeService.obtenerRango(global) == 'Satisfactorio'"></i>
+                                                </td>
+                                                <td class="avanzado text-white">4</td>
+                                            </tr>
+                                            <tr class="fw-semibold fs-6 ">
+                                                <td></td>
+                                                <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                        *ngIf="_informeService.obtenerRango(global) == 'Minimo'"></i>
+                                                </td>
+                                                <td class="satisfactorio text-white">3</td>
+                                                <td class="avanzado"></td>
+                                            </tr>
+                                            <tr class="fw-semibold fs-6 ">
+                                                <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                        *ngIf="_informeService.obtenerRango(global) == 'Insuficiente'"></i>
+                                                </td>
+                                                <td class="minimo text-white">2</td>
+                                                <td class="satisfactorio"></td>
+                                                <td class="avanzado"></td>
+                                            </tr>
+                                            <tr class="fw-semibold fs-6 ">
+                                                <td class="insuficiente text-white">1</td>
+                                                <td class="minimo"></td>
+                                                <td class="satisfactorio"></td>
+                                                <td class="avanzado"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <!--end::Details-->
                             </div>
-                            <!--end::Section-->
-                            <!--begin::Seperator-->
-                            <div class="separator separator-dashed mb-7"></div>
-                            <!--end::Seperator-->
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <!--begin::Section-->
-                            <div class="mb-10">
-                                <!--begin::Title-->
-                                <h5 class="mb-4">{{ institucion.nombre }}</h5>
-                                <!--end::Title-->
-                                <!--begin::Details-->
+            <div class="row mt-1 justify-content-center">
+                <div class="col-12">
+                    <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
+                        <div class="card-header">
+                            <h2 class="fw-bold d-flex align-items-center">Puntaje Máximo
+                                y Mínimo</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div id="graPunMaxMin" style="width: 100%;height: 300px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pdf-section">
+            <div class="row mt-1 justify-content-center">
+                <div class="col-12">
+                    <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
+                        <div class="card-header">
+                            <h2 class="fw-bold d-flex align-items-center">Promedio
+                                Estudiante Vs Salón</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div id="graProEstVsSal" style="width: 100%;height: 500px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-1 justify-content-center">
+                <div class="col-12">
+                    <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
+                        <div class="card-header">
+                            <h2 class="fw-bold d-flex align-items-center">Promedio
+                                Estudiante Vs Curso</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div id="grafEstVsCurso" style="width: 100%;height: 500px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pdf-section">
+            <div class="row mt-1 justify-content-center">
+                <div class="col-8">
+                    <div class="card shadow-sm card-xl-stretch">
+                        <div class="card-header">
+                            <h2 class="fw-bold d-flex align-items-center">Niveles de
+                                Desempeño Por Áreas</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-0">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-row-dashed fs-8 gy-1 mb-0">
+                                        <thead>
+                                            <tr
+                                                class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
+                                                <th class="min-w-110px text-center">Área</th>
+                                                <th colspan="2" class="min-w-100px text-center insuficiente text-white"
+                                                    style="border-radius: 10px;">Desempeño
+                                                    Insuficiente</th>
+                                                <th colspan="2" class="min-w-100px text-center minimo text-white"
+                                                    style="border-radius: 10px;">Desempeño
+                                                    Mínimo</th>
+                                                <th colspan="2" class="min-w-100px text-center satisfactorio text-white"
+                                                    style="border-radius: 10px;">Desempeño
+                                                    Satisfactorio</th>
+                                                <th colspan="2" class="min-w-100px text-center avanzado text-white"
+                                                    style="border-radius: 10px;">Desempeño
+                                                    Avanzado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="fw-semibold text-gray-800 ant-table-tbody">
+                                            <tr>
+                                                <td class="text-center">
+
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    Mínimo
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    Máximo
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    Mínimo
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    Máximo
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    Mínimo
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    Máximo
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    Mínimo
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    Máximo
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    Matemáticas
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    0
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    35
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    36
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    50
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    51
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    70
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    71
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    100
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    Lectura Critica
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    0
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    35
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    36
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    50
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    51
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    65
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    66
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    100
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    Sociales y Ciudadanas
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    0
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    40
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    41
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    55
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    56
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    70
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    71
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    100
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    Ciencias Naturales
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    0
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    40
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    41
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    55
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    56
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    70
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    71
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    100
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="card shadow-sm card-xl-stretch">
+                        <div class="card-header">
+                            <h2 class="fw-bold d-flex align-items-center">Ingles</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-0">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-row-dashed fs-8 gy-1 mb-0">
+                                        <thead>
+                                            <tr
+                                                class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
+                                                <th class="min-w-110px text-center">ND</th>
+                                                <th class="min-w-100px text-center">Mínimo</th>
+                                                <th class="min-w-100px text-center">Máximo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="fw-semibold text-gray-800 ant-table-tbody">
+                                            <tr>
+                                                <td class="text-center">
+                                                    B1
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    71
+                                                </td>
+                                                <td class="avanzado text-white text-center">
+                                                    100
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    A2
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    58
+                                                </td>
+                                                <td class="satisfactorio text-white text-center">
+                                                    70
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    A1
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    37
+                                                </td>
+                                                <td class="minimo text-white text-center">
+                                                    57
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    A-
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    0
+                                                </td>
+                                                <td class="insuficiente text-white text-center">
+                                                    36
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-1 justify-content-center">
+                <div class="col-12">
+                    <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
+                        <div class="card-header bg-primary">
+                            <h2 class="fw-bold d-flex align-items-center text-white">Estadisticas
+                                del estudiante</h2>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-1 justify-content-center">
+                <!-- Matematica -->
+                <div class="col-6">
+                    <div class="card shadow-sm">
+
+                        <div class="card-header bg-warning d-flex justify-content-between py-3 px-5">
+                            <div class="score d-flex align-items-center">
+                                <div class="info-puntaje">
+                                    <p class="ant-typography">Puntaje</p>
+                                    <p class="promedio">{{ puntaje[0].puntaje_total
+                                        |
+                                        number:'1.2-2' }}</p>
+                                </div>
+                            </div>
+                            <div class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
+                                <span class="text-gray-900 fs-3 fw-bold">
+                                    <h1 class="mb-1 ">{{ puntaje[0].materia }}</h1>
+                                </span>
+                            </div>
+                            <div class="timer">
+                                <h2 class="text-gray-900 fs-3 fw-bold text-center">
+                                    <span class="text-info"></span>
+                                </h2>
+                                <p class="text-gray-900 fs-3 fw-bold">
+                                    <span class="text-info"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <h2 class="mb-1">Promedio por componentes</h2>
+
+                            <div class="table-responsive">
                                 <table
-                                    class="table fs-6 fw-semibold gs-0 gy-2 gx-2">
-                                    <!--begin::Row-->
-                                    <tr class>
-                                        <td class="text-gray-500">Codigo</td>
-                                        <td class="text-gray-800">{{
-                                            institucion.codigo }}</td>
-                                    </tr>
-                                    <!--end::Row-->
-                                    <!--begin::Row-->
-                                    <tr class>
-                                        <td class="text-gray-500">Nit</td>
-                                        <td class="text-gray-800">{{
-                                            institucion.nit
-                                            }}</td>
-                                    </tr>
-                                    <!--end::Row-->
-                                    <!--begin::Row-->
-                                    <tr class>
-                                        <td class="text-gray-500">Telefono:</td>
-                                        <td class="text-gray-800">{{
-                                            institucion.telefono }}</td>
-                                    </tr>
-                                    <!--end::Row-->
-                                    <!--begin::Row-->
-                                    <tr class>
-                                        <td class="text-gray-500">Correo:</td>
-                                        <td class="text-gray-800">{{
-                                            institucion.email }}</td>
-                                    </tr>
-                                    <!--end::Row-->
+                                    class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                                    <thead class="bg-warning">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Componente</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let compo of resComponentesMatematicas">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compo.componente }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compo.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
-                                <!--end::Details-->
                             </div>
-                            <!--end::Section-->
 
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card-->
-                </div>
-                <!--end::Sidebar-->
-            </div>
-            <!--end::Layout-->
-        </div>
-    </div>
+                            <hr>
 
-    <div class="row mt-1 justify-content-center">
-        <div class="col-7">
-            <div class="card shadow-sm card-xl-stretch">
-                <div class="card-header">
-                    <h2
-                        class="fw-bold d-flex align-items-center">Resultados</h2>
-                </div>
-                <div class="card-body">
-                    <!--begin::Section-->
-                    <div class="mb-0">
-                        <!--begin::Product table-->
-                        <div class="table-responsive">
-                            <!--begin::Table-->
-                            <table
-                                class="table align-middle table-row-dashed fs-6 gy-1 mb-0">
-                                <!--begin::Table head-->
-                                <thead>
-                                    <tr
-                                        class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-6 text-uppercase gs-0">
-                                        <td class="min-w-125px">Puntaje
-                                            Gobal</td>
-                                        <td
-                                            class="min-w-125px">
-                                            <span
-                                                class="fs-2 badge badge-light-danger">{{
-                                                global |
-                                                number:'1.2-2' }} / {{
-                                                sobre1
-                                                }}</span></td>
-                                        <th class="min-w-125px"></th>
-                                    </tr>
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
-                                        <th
-                                            class="min-w-100px">Area</th>
-                                        <th
-                                            class="min-w-100px">Puntaje</th>
-                                        <th
-                                            class="min-w-100px">Duración</th>
-                                        <th class="min-w-100px">#
-                                            Preguntas Sesión</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
-                                <!--end::Table head-->
-                                <!--begin::Table body-->
-                                <tbody class="fw-semibold text-gray-800"
-                                    *ngFor="let punt of puntaje">
-                                    <tr>
-                                        <td>
-                                            <label class="w-150px">{{
-                                                punt.materia }}</label>
-                                        </td>
-                                        <td>
-                                            <span
-                                                class="badge badge-light-danger">{{
-                                                punt.puntaje_total |
-                                                number:'1.2-2' }} / {{
-                                                sobre2
-                                                }}</span>
-                                        </td>
-                                        <td>
-                                            <label class="w-150px">60
-                                                (min)</label>
-                                        </td>
-                                        <td>
+                            <h2 class="mb-1">Promedio por competencias</h2>
 
-                                            @if(punt.materia
-                                            =='Ingles'){
-                                            45 x
-                                            }@else{
-                                            @if(punt.materia
-                                            =='Lectura Critica'){
-                                            41 x
-                                            }@else{
-                                            @if(punt.materia
-                                            =='Matemáticas'){
-                                            25 x
-                                            }@else {
-                                            @if(punt.materia
-                                            =='Sociales y Ciudadanas'){
-                                            25 x
+                            <div class="table-responsive">
+                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
 
-                                            }@else {
-                                            29 x
-                                            }
-                                            }
-                                            }
-                                            }
+                                    <thead class="bg-warning">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Competencia</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
 
-                                            @if(punt.materia
-                                            =='Ingles'){
-                                            S2
-                                            }@else{
-                                            @if(punt.materia
-                                            =='Lectura Critica'){
-                                            S1
-                                            }@else{
-                                            Ambas
-                                            }
-                                            }
+                                    <tbody>
+                                        <tr *ngFor="let compe of resCompetenciasMatematicas">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compe.competencia }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compe.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
 
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <!--end::Table body-->
-                            </table>
-                            <!--end::Table-->
-                        </div>
-                        <!--end::Product table-->
-                    </div>
-                    <!--end::Section-->
-                </div>
+                                    </tbody>
+                                </table>
+                            </div>
 
-            </div>
-        </div>
+                            <hr>
 
-        <div class="col-5">
-            <div class="card shadow-sm card-xl-stretch">
-                <div class="card-header">
-                    <h2
-                        class="fw-bold d-flex align-items-center">Niveles de
-                        Desempeño</h2>
-                </div>
-                <div class="card-body">
-                    <div class="mb-0">
-                        <div class="table-responsive">
-                            <table
-                                class="table align-middle table-row-dashed fs-8 gy-1 mb-0">
-                                <thead>
-                                    <tr
-                                        class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
-                                        <th
-                                            class="min-w-110px text-center">Valoración
-                                            Cualitativa</th>
-                                        <th
-                                            class="min-w-100px text-center">Categoria</th>
-                                        <th
-                                            class="min-w-100px text-center">Mínimo</th>
-                                        <th
-                                            class="min-w-100px text-center">Máximo</th>
-                                    </tr>
-                                </thead>
-                                <tbody
-                                    class="fw-semibold text-gray-800 ant-table-tbody">
-                                    <tr>
-                                        <td class="text-center">
-                                            Desempeño Avanzado
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            A
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            437
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            500
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            Desempeño Satisfactorio
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            S
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            325
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            436.99
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            Desempeño Mínimo
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            M
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            221
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            324.99
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            Desempeño Insuficiente
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            I
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            0
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            220.99
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                            <h2 class="mb-1">Nivel de desempeño</h2>
 
-    <div class="row mt-1 justify-content-center">
-        <div class="col-12">
-            <div class="card shadow-sm card-xl-stretch">
-                <div class="card-header">
-                    <h2
-                        class="fw-bold d-flex align-items-center">Nivel de
-                        Desempeño Global</h2>
-                </div>
-                <div class="card-body">
-                    <div class="mb-0">
-                        <div class="table-responsive">
-                            <table class="table align-middle gs-1 gy-1 gx-1">
-                                <tbody
-                                    class="ant-table-tbody-desem text-center">
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.obtenerRango(global) == 'Avanzado'"></i></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.obtenerRango(global) == 'Satisfactorio'"></i></td>
-                                        <td class="avanzado text-white">4</td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.obtenerRango(global) == 'Minimo'"></i></td>
-                                        <td
-                                            class="satisfactorio text-white">3</td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.obtenerRango(global) == 'Insuficiente'"></i></td>
-                                        <td class="minimo text-white">2</td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td
-                                            class="insuficiente text-white">1</td>
-                                        <td class="minimo"></td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-1 justify-content-center">
-        <div class="col-12">
-            <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
-                <div class="card-header">
-                    <h2
-                        class="fw-bold d-flex align-items-center">Puntaje Máximo
-                        y Mínimo</h2>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div id="graPunMaxMin"
-                                style="width: 100%;height: 300px;"></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-1 justify-content-center">
-        <div class="col-12">
-            <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
-                <div class="card-header">
-                    <h2
-                        class="fw-bold d-flex align-items-center">Promedio
-                        Estudiante Vs Salón</h2>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div id="graProEstVsSal"
-                                style="width: 100%;height: 500px;"></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-1 justify-content-center">
-        <div class="col-12">
-            <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
-                <div class="card-header">
-                    <h2
-                        class="fw-bold d-flex align-items-center">Promedio
-                        Estudiante Vs Curso</h2>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div id="grafEstVsCurso"
-                                style="width: 100%;height: 500px;"></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-1 justify-content-center">
-        <div class="col-8">
-            <div class="card shadow-sm card-xl-stretch">
-                <div class="card-header">
-                    <h2
-                        class="fw-bold d-flex align-items-center">Niveles de
-                        Desempeño Por Áreas</h2>
-                </div>
-                <div class="card-body">
-                    <div class="mb-0">
-                        <div class="table-responsive">
-                            <table
-                                class="table align-middle table-row-dashed fs-8 gy-1 mb-0">
-                                <thead>
-                                    <tr
-                                        class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
-                                        <th
-                                            class="min-w-110px text-center">Área</th>
-                                        <th
-                                            colspan="2"
-                                            class="min-w-100px text-center insuficiente text-white"
-                                            style="border-radius: 10px;">Desempeño
-                                            Insuficiente</th>
-                                        <th
-                                            colspan="2"
-                                            class="min-w-100px text-center minimo text-white"
-                                            style="border-radius: 10px;">Desempeño
-                                            Mínimo</th>
-                                        <th
-                                            colspan="2"
-                                            class="min-w-100px text-center satisfactorio text-white"
-                                            style="border-radius: 10px;">Desempeño
-                                            Satisfactorio</th>
-                                        <th
-                                            colspan="2"
-                                            class="min-w-100px text-center avanzado text-white"
-                                            style="border-radius: 10px;">Desempeño
-                                            Avanzado</th>
-                                    </tr>
-                                </thead>
-                                <tbody
-                                    class="fw-semibold text-gray-800 ant-table-tbody">
-                                    <tr>
-                                        <td class="text-center">
-
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            Mínimo
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            Máximo
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            Mínimo
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            Máximo
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            Mínimo
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            Máximo
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            Mínimo
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            Máximo
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            Matemáticas
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            0
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            35
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            36
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            50
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            51
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            70
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            71
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            100
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            Lectura Critica
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            0
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            35
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            36
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            50
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            51
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            65
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            66
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            100
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            Sociales y Ciudadanas
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            0
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            40
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            41
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            55
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            56
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            70
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            71
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            100
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            Ciencias Naturales
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            0
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            40
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            41
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            55
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            56
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            70
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            71
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            100
-                                        </td>
-
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-4">
-            <div class="card shadow-sm card-xl-stretch">
-                <div class="card-header">
-                    <h2
-                        class="fw-bold d-flex align-items-center">Ingles</h2>
-                </div>
-                <div class="card-body">
-                    <div class="mb-0">
-                        <div class="table-responsive">
-                            <table
-                                class="table align-middle table-row-dashed fs-8 gy-1 mb-0">
-                                <thead>
-                                    <tr
-                                        class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
-                                        <th
-                                            class="min-w-110px text-center">ND</th>
-                                        <th
-                                            class="min-w-100px text-center">Mínimo</th>
-                                        <th
-                                            class="min-w-100px text-center">Máximo</th>
-                                    </tr>
-                                </thead>
-                                <tbody
-                                    class="fw-semibold text-gray-800 ant-table-tbody">
-                                    <tr>
-                                        <td class="text-center">
-                                            B1
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            71
-                                        </td>
-                                        <td
-                                            class="avanzado text-white text-center">
-                                            100
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            A2
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            58
-                                        </td>
-                                        <td
-                                            class="satisfactorio text-white text-center">
-                                            70
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            A1
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            37
-                                        </td>
-                                        <td
-                                            class="minimo text-white text-center">
-                                            57
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            A-
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            0
-                                        </td>
-                                        <td
-                                            class="insuficiente text-white text-center">
-                                            36
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-1 justify-content-center">
-        <div class="col-12">
-            <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
-                <div class="card-header bg-primary">
-                    <h2
-                        class="fw-bold d-flex align-items-center text-white">Estadisticas
-                        del estudiante</h2>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <ng-container>
-        <div class="row mt-1 justify-content-center">
-            <!-- Matematica -->
-            <div class="col-6">
-                <div class="card shadow-sm">
-
-                    <div
-                        class="card-header bg-warning d-flex justify-content-between py-3 px-5">
-                        <div class="score d-flex align-items-center">
-                            <div class="info-puntaje">
-                                <p class="ant-typography">Puntaje</p>
-                                <p class="promedio">{{ puntaje[0].puntaje_total
-                                    |
-                                    number:'1.2-2' }}</p>
+                            <div class="table-responsive">
+                                <table class="table align-middle gs-1 gy-1 gx-1">
+                                    <tbody class="ant-table-tbody-desem text-center">
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[0].puntaje_total, puntaje[0].materia) == 'Avanzado'"></i>
+                                            </td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[0].puntaje_total, puntaje[0].materia) == 'Satisfactorio'"></i>
+                                            </td>
+                                            <td class="avanzado text-white">4</td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[0].puntaje_total, puntaje[0].materia) == 'Minimo'"></i>
+                                            </td>
+                                            <td class="satisfactorio text-white">3</td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[0].puntaje_total, puntaje[0].materia) == 'Insuficiente'"></i>
+                                            </td>
+                                            <td class="minimo text-white">2</td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td class="insuficiente text-white">1</td>
+                                            <td class="minimo"></td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div
-                            class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
-                            <span class="text-gray-900 fs-3 fw-bold">
-                                <h1 class="mb-1 ">{{ puntaje[0].materia }}</h1>
-                            </span>
-                        </div>
-                        <div class="timer">
-                            <h2 class="text-gray-900 fs-3 fw-bold text-center">
-                                <span class="text-info"></span>
-                            </h2>
-                            <p class="text-gray-900 fs-3 fw-bold">
-                                <span class="text-info"></span>
-                            </p>
-                        </div>
+
                     </div>
-
-                    <div class="card-body">
-                        <h2 class="mb-1">Promedio por componentes</h2>
-
-                        <div class="table-responsive">
-                            <table
-                                class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-
-                                <thead class="bg-warning">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Componente</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
-
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compo of resComponentesMatematicas">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compo.componente }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compo.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <hr>
-
-                        <h2 class="mb-1">Promedio por competencias</h2>
-
-                        <div class="table-responsive">
-                            <table
-                                class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-
-                                <thead class="bg-warning">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Competencia</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
-
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compe of resCompetenciasMatematicas">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compe.competencia }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compe.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <hr>
-
-                        <h2 class="mb-1">Nivel de desempeño</h2>
-
-                        <div class="table-responsive">
-                            <table class="table align-middle gs-1 gy-1 gx-1">
-                                <tbody
-                                    class="ant-table-tbody-desem text-center">
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[0].puntaje_total, puntaje[0].materia) == 'Avanzado'"></i></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[0].puntaje_total, puntaje[0].materia) == 'Satisfactorio'"></i></td>
-                                        <td class="avanzado text-white">4</td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[0].puntaje_total, puntaje[0].materia) == 'Minimo'"></i></td>
-                                        <td
-                                            class="satisfactorio text-white">3</td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[0].puntaje_total, puntaje[0].materia) == 'Insuficiente'"></i></td>
-                                        <td class="minimo text-white">2</td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td
-                                            class="insuficiente text-white">1</td>
-                                        <td class="minimo"></td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
 
-            <!-- Lectura Critica -->
-            <div class="col-6">
-                <div class="card shadow-sm">
+                <!-- Lectura Critica -->
+                <div class="col-6">
+                    <div class="card shadow-sm">
 
-                    <div
-                        class="card-header bg-primary d-flex justify-content-between py-3 px-5">
-                        <div class="score d-flex align-items-center">
-                            <div class="info-puntaje">
-                                <p class="ant-typography">Puntaje</p>
-                                <p class="promedio">{{ puntaje[1].puntaje_total
-                                    |
-                                    number:'1.2-2' }}</p>
+                        <div class="card-header bg-primary d-flex justify-content-between py-3 px-5">
+                            <div class="score d-flex align-items-center">
+                                <div class="info-puntaje">
+                                    <p class="ant-typography">Puntaje</p>
+                                    <p class="promedio">{{ puntaje[1].puntaje_total
+                                        |
+                                        number:'1.2-2' }}</p>
+                                </div>
+                            </div>
+                            <div class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
+                                <span class="text-gray-900 fs-3 fw-bold">
+                                    <h1 class="mb-1 ">{{ puntaje[1].materia }}</h1>
+                                </span>
+                            </div>
+                            <div class="timer">
+                                <h2 class="text-gray-900 fs-3 fw-bold text-center">
+                                    <span class="text-info"></span>
+                                </h2>
+                                <p class="text-gray-900 fs-3 fw-bold">
+                                    <span class="text-info"></span>
+                                </p>
                             </div>
                         </div>
-                        <div
-                            class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
-                            <span class="text-gray-900 fs-3 fw-bold">
-                                <h1 class="mb-1 ">{{ puntaje[1].materia }}</h1>
-                            </span>
-                        </div>
-                        <div class="timer">
-                            <h2 class="text-gray-900 fs-3 fw-bold text-center">
-                                <span class="text-info"></span>
-                            </h2>
-                            <p class="text-gray-900 fs-3 fw-bold">
-                                <span class="text-info"></span>
-                            </p>
-                        </div>
-                    </div>
 
-                    <div class="card-body">
-                        <h2 class="mb-1">Promedio por componentes</h2>
+                        <div class="card-body">
+                            <h2 class="mb-1">Promedio por componentes</h2>
 
-                        <div class="table-responsive">
-                            <table
-                                class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
 
-                                <thead class="bg-primary">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Componente</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
+                                    <thead class="bg-primary">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Componente</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
 
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compo of resComponentesLenguaje">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compo.componente }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compo.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
+                                    <tbody>
+                                        <tr *ngFor="let compo of resComponentesLenguaje">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compo.componente }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compo.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <hr>
+                            <hr>
 
-                        <h2 class="mb-1">Promedio por competencias</h2>
+                            <h2 class="mb-1">Promedio por competencias</h2>
 
-                        <div class="table-responsive">
-                            <table
-                                class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                            <div class="table-responsive">
+                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
 
-                                <thead class="bg-primary">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Competencia</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
+                                    <thead class="bg-primary">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Competencia</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
 
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compe of resCompetenciasLenguaje">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compe.competencia }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compe.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <tbody>
+                                        <tr *ngFor="let compe of resCompetenciasLenguaje">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compe.competencia }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compe.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <hr>
+                            <hr>
 
-                        <h2 class="mb-1">Nivel de desempeño</h2>
+                            <h2 class="mb-1">Nivel de desempeño</h2>
 
-                        <div class="table-responsive">
-                            <table class="table align-middle gs-1 gy-1 gx-1">
-                                <tbody
-                                    class="ant-table-tbody-desem text-center">
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[1].puntaje_total, puntaje[0].materia) == 'Avanzado'"></i></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[1].puntaje_total, puntaje[0].materia) == 'Satisfactorio'"></i></td>
-                                        <td class="avanzado text-white">4</td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[1].puntaje_total, puntaje[0].materia) == 'Minimo'"></i></td>
-                                        <td
-                                            class="satisfactorio text-white">3</td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[1].puntaje_total, puntaje[0].materia) == 'Insuficiente'"></i></td>
-                                        <td class="minimo text-white">2</td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td
-                                            class="insuficiente text-white">1</td>
-                                        <td class="minimo"></td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-3 justify-content-center">
-            <!-- Sociales y Ciudadanas -->
-            <div class="col-6">
-                <div class="card shadow-sm">
-
-                    <div
-                        class="card-header bg-info d-flex justify-content-between py-3 px-5">
-                        <div class="score d-flex align-items-center">
-                            <div class="info-puntaje">
-                                <p class="ant-typography">Puntaje</p>
-                                <p class="promedio">{{ puntaje[2].puntaje_total
-                                    |
-                                    number:'1.2-2' }}</p>
+                            <div class="table-responsive">
+                                <table class="table align-middle gs-1 gy-1 gx-1">
+                                    <tbody class="ant-table-tbody-desem text-center">
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[1].puntaje_total, puntaje[0].materia) == 'Avanzado'"></i>
+                                            </td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[1].puntaje_total, puntaje[0].materia) == 'Satisfactorio'"></i>
+                                            </td>
+                                            <td class="avanzado text-white">4</td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[1].puntaje_total, puntaje[0].materia) == 'Minimo'"></i>
+                                            </td>
+                                            <td class="satisfactorio text-white">3</td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[1].puntaje_total, puntaje[0].materia) == 'Insuficiente'"></i>
+                                            </td>
+                                            <td class="minimo text-white">2</td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td class="insuficiente text-white">1</td>
+                                            <td class="minimo"></td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div
-                            class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
-                            <span class="text-gray-900 fs-3 fw-bold">
-                                <h1 class="mb-1 ">{{ puntaje[2].materia }}</h1>
-                            </span>
-                        </div>
-                        <div class="timer">
-                            <h2 class="text-gray-900 fs-3 fw-bold text-center">
-                                <span class="text-info"></span>
-                            </h2>
-                            <p class="text-gray-900 fs-3 fw-bold">
-                                <span class="text-info"></span>
-                            </p>
-                        </div>
+
                     </div>
-
-                    <div class="card-body">
-                        <h2 class="mb-1">Promedio por componentes</h2>
-
-                        <div class="table-responsive">
-                            <table
-                                class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-
-                                <thead class="bg-info">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Componente</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
-
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compo of resComponentesSociales">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compo.componente }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compo.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <hr>
-
-                        <h2 class="mb-1">Promedio por competencias</h2>
-
-                        <div class="table-responsive">
-                            <table
-                                class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-
-                                <thead class="bg-info">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Competencia</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
-
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compe of resCompetenciasSociales">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compe.competencia }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compe.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <hr>
-
-                        <h2 class="mb-1">Nivel de desempeño</h2>
-
-                        <div class="table-responsive">
-                            <table class="table align-middle gs-1 gy-1 gx-1">
-                                <tbody
-                                    class="ant-table-tbody-desem text-center">
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[2].puntaje_total, puntaje[0].materia) == 'Avanzado'"></i></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[2].puntaje_total, puntaje[0].materia) == 'Satisfactorio'"></i></td>
-                                        <td class="avanzado text-white">4</td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[2].puntaje_total, puntaje[0].materia) == 'Minimo'"></i></td>
-                                        <td
-                                            class="satisfactorio text-white">3</td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[2].puntaje_total, puntaje[0].materia) == 'Insuficiente'"></i></td>
-                                        <td class="minimo text-white">2</td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td
-                                            class="insuficiente text-white">1</td>
-                                        <td class="minimo"></td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-            <!-- Ciencias Naturales -->
-            <div class="col-6">
-                <div class="card shadow-sm">
+        </section>
 
-                    <div
-                        class="card-header bg-danger d-flex justify-content-between py-3 px-5">
-                        <div class="score d-flex align-items-center">
-                            <div class="info-puntaje">
-                                <p class="ant-typography">Puntaje</p>
-                                <p class="promedio">{{ puntaje[3].puntaje_total
-                                    |
-                                    number:'1.2-2' }}</p>
+        <section class="pdf-section">
+            <div class="row mt-3 justify-content-center">
+                <!-- Sociales y Ciudadanas -->
+                <div class="col-6">
+                    <div class="card shadow-sm">
+
+                        <div class="card-header bg-info d-flex justify-content-between py-3 px-5">
+                            <div class="score d-flex align-items-center">
+                                <div class="info-puntaje">
+                                    <p class="ant-typography">Puntaje</p>
+                                    <p class="promedio">{{ puntaje[2].puntaje_total
+                                        |
+                                        number:'1.2-2' }}</p>
+                                </div>
+                            </div>
+                            <div class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
+                                <span class="text-gray-900 fs-3 fw-bold">
+                                    <h1 class="mb-1 ">{{ puntaje[2].materia }}</h1>
+                                </span>
+                            </div>
+                            <div class="timer">
+                                <h2 class="text-gray-900 fs-3 fw-bold text-center">
+                                    <span class="text-info"></span>
+                                </h2>
+                                <p class="text-gray-900 fs-3 fw-bold">
+                                    <span class="text-info"></span>
+                                </p>
                             </div>
                         </div>
-                        <div
-                            class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
-                            <span class="text-gray-900 fs-3 fw-bold">
-                                <h1 class="mb-1 ">{{ puntaje[3].materia }}</h1>
-                            </span>
-                        </div>
-                        <div class="timer">
-                            <h2 class="text-gray-900 fs-3 fw-bold text-center">
-                                <span class="text-info"></span>
-                            </h2>
-                            <p class="text-gray-900 fs-3 fw-bold">
-                                <span class="text-info"></span>
-                            </p>
-                        </div>
-                    </div>
 
-                    <div class="card-body">
-                        <h2 class="mb-1">Promedio por componentes</h2>
+                        <div class="card-body">
+                            <h2 class="mb-1">Promedio por componentes</h2>
 
-                        <div class="table-responsive">
-                            <table
-                                class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
 
-                                <thead class="bg-danger">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Componente</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
+                                    <thead class="bg-info">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Componente</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
 
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compo of resComponentesNaturales">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compo.componente }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compo.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <tbody>
+                                        <tr *ngFor="let compo of resComponentesSociales">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compo.componente }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compo.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
 
-                        <hr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <h2 class="mb-1">Promedio por competencias</h2>
+                            <hr>
 
-                        <div class="table-responsive">
-                            <table
-                                class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                            <h2 class="mb-1">Promedio por competencias</h2>
 
-                                <thead class="bg-danger">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Competencia</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
+                            <div class="table-responsive">
+                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
 
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compe of resCompetenciasNaturales">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compe.competencia }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compe.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <thead class="bg-info">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Competencia</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
 
-                        <hr>
+                                    <tbody>
+                                        <tr *ngFor="let compe of resCompetenciasSociales">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compe.competencia }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compe.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
 
-                        <h2 class="mb-1">Nivel de desempeño</h2>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <div class="table-responsive">
-                            <table class="table align-middle gs-1 gy-1 gx-1">
-                                <tbody
-                                    class="ant-table-tbody-desem text-center">
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[3].puntaje_total, puntaje[0].materia) == 'Avanzado'"></i></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[3].puntaje_total, puntaje[0].materia) == 'Satisfactorio'"></i></td>
-                                        <td class="avanzado text-white">4</td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[3].puntaje_total, puntaje[0].materia) == 'Minimo'"></i></td>
-                                        <td
-                                            class="satisfactorio text-white">3</td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.determinarRango(puntaje[3].puntaje_total, puntaje[0].materia) == 'Insuficiente'"></i></td>
-                                        <td class="minimo text-white">2</td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td
-                                            class="insuficiente text-white">1</td>
-                                        <td class="minimo"></td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                            <hr>
 
-                </div>
-            </div>
-        </div>
+                            <h2 class="mb-1">Nivel de desempeño</h2>
 
-        <div class="row mt-3 justify-content-center">
-            <!-- Ingles -->
-            <div class="col-6">
-                <div class="card shadow-sm">
-
-                    <div
-                        class="card-header bg-success d-flex justify-content-between py-3 px-5">
-                        <div class="score d-flex align-items-center">
-                            <div class="info-puntaje">
-                                <p class="ant-typography">Puntaje</p>
-                                <p class="promedio">{{ puntaje[4].puntaje_total
-                                    |
-                                    number:'1.2-2' }}</p>
+                            <div class="table-responsive">
+                                <table class="table align-middle gs-1 gy-1 gx-1">
+                                    <tbody class="ant-table-tbody-desem text-center">
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[2].puntaje_total, puntaje[0].materia) == 'Avanzado'"></i>
+                                            </td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[2].puntaje_total, puntaje[0].materia) == 'Satisfactorio'"></i>
+                                            </td>
+                                            <td class="avanzado text-white">4</td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[2].puntaje_total, puntaje[0].materia) == 'Minimo'"></i>
+                                            </td>
+                                            <td class="satisfactorio text-white">3</td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[2].puntaje_total, puntaje[0].materia) == 'Insuficiente'"></i>
+                                            </td>
+                                            <td class="minimo text-white">2</td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td class="insuficiente text-white">1</td>
+                                            <td class="minimo"></td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div
-                            class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
-                            <span class="text-gray-900 fs-3 fw-bold">
-                                <h1 class="mb-1 ">{{ puntaje[0].materia }}</h1>
-                            </span>
-                        </div>
-                        <div class="timer">
-                            <h2 class="text-gray-900 fs-3 fw-bold text-center">
-                                <span class="text-info"></span>
-                            </h2>
-                            <p class="text-gray-900 fs-3 fw-bold">
-                                <span class="text-info"></span>
-                            </p>
-                        </div>
+
                     </div>
+                </div>
+                <!-- Ciencias Naturales -->
+                <div class="col-6">
+                    <div class="card shadow-sm">
 
-                    <div class="card-body">
-                        <h2 class="mb-1">Promedio por componentes</h2>
-
-                        <div class="table-responsive">
-                            <table
-                                class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-
-                                <thead class="bg-success">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Componente</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
-
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compo of resComponentesIngles">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compo.componente }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compo.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
+                        <div class="card-header bg-danger d-flex justify-content-between py-3 px-5">
+                            <div class="score d-flex align-items-center">
+                                <div class="info-puntaje">
+                                    <p class="ant-typography">Puntaje</p>
+                                    <p class="promedio">{{ puntaje[3].puntaje_total
+                                        |
+                                        number:'1.2-2' }}</p>
+                                </div>
+                            </div>
+                            <div class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
+                                <span class="text-gray-900 fs-3 fw-bold">
+                                    <h1 class="mb-1 ">{{ puntaje[3].materia }}</h1>
+                                </span>
+                            </div>
+                            <div class="timer">
+                                <h2 class="text-gray-900 fs-3 fw-bold text-center">
+                                    <span class="text-info"></span>
+                                </h2>
+                                <p class="text-gray-900 fs-3 fw-bold">
+                                    <span class="text-info"></span>
+                                </p>
+                            </div>
                         </div>
 
-                        <hr>
+                        <div class="card-body">
+                            <h2 class="mb-1">Promedio por componentes</h2>
 
-                        <h2 class="mb-1">Promedio por competencias</h2>
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
 
-                        <div class="table-responsive">
-                            <table
-                                class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                                    <thead class="bg-danger">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Componente</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
 
-                                <thead class="bg-success">
-                                    <!--begin::Table row-->
-                                    <tr
-                                        class="text-start fw-bolder fs-4  gs-0">
-                                        <th
-                                            class="min-w-125px text-center">Competencia</th>
-                                        <th
-                                            class="min-w-125px text-center">Promedio</th>
-                                    </tr>
-                                    <!--end::Table row-->
-                                </thead>
+                                    <tbody>
+                                        <tr *ngFor="let compo of resComponentesNaturales">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compo.componente }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compo.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                                <tbody>
-                                    <tr
-                                        *ngFor="let compe of resCompetenciasIngles">
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">{{
-                                            compe.competencia }}
-                                        </td>
-                                        <td
-                                            style='font-weight: bold;vertical-align: middle;'
-                                            class="text-center">
-                                            {{
-                                            returnformateado(compe.porcentaje) |
-                                            number:'1.2-2'
-                                            }}
-                                            /100
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <hr>
+
+                            <h2 class="mb-1">Promedio por competencias</h2>
+
+                            <div class="table-responsive">
+                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                                    <thead class="bg-danger">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Competencia</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let compe of resCompetenciasNaturales">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compe.competencia }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compe.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <hr>
+
+                            <h2 class="mb-1">Nivel de desempeño</h2>
+
+                            <div class="table-responsive">
+                                <table class="table align-middle gs-1 gy-1 gx-1">
+                                    <tbody class="ant-table-tbody-desem text-center">
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[3].puntaje_total, puntaje[0].materia) == 'Avanzado'"></i>
+                                            </td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[3].puntaje_total, puntaje[0].materia) == 'Satisfactorio'"></i>
+                                            </td>
+                                            <td class="avanzado text-white">4</td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[3].puntaje_total, puntaje[0].materia) == 'Minimo'"></i>
+                                            </td>
+                                            <td class="satisfactorio text-white">3</td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.determinarRango(puntaje[3].puntaje_total, puntaje[0].materia) == 'Insuficiente'"></i>
+                                            </td>
+                                            <td class="minimo text-white">2</td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td class="insuficiente text-white">1</td>
+                                            <td class="minimo"></td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
-                        <hr>
-
-                        <h2 class="mb-1">Nivel de desempeño</h2>
-
-                        <div class="table-responsive">
-                            <table class="table align-middle gs-1 gy-1 gx-1">
-                                <tbody
-                                    class="ant-table-tbody-desem text-center">
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.encontrarRango(puntaje[4].puntaje_total) == 'B1'"></i></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.encontrarRango(puntaje[4].puntaje_total) == 'A2'"></i></td>
-                                        <td class="avanzado text-white">B1</td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td></td>
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.encontrarRango(puntaje[4].puntaje_total) == 'A1'"></i></td>
-                                        <td
-                                            class="satisfactorio text-white">A2</td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td><i
-                                                class="text-dark fa-solid fa-caret-down fs-4"
-                                                *ngIf="_informeService.encontrarRango(puntaje[4].puntaje_total) == 'A-'"></i></td>
-                                        <td class="minimo text-white">A1</td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                    <tr class="fw-semibold fs-6 ">
-                                        <td
-                                            class="insuficiente text-white">A-</td>
-                                        <td class="minimo"></td>
-                                        <td class="satisfactorio"></td>
-                                        <td class="avanzado"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
-
                 </div>
             </div>
-        </div>
 
-    </ng-container>
+            <div class="row mt-3 justify-content-center">
+                <!-- Ingles -->
+                <div class="col-6">
+                    <div class="card shadow-sm">
+
+                        <div class="card-header bg-success d-flex justify-content-between py-3 px-5">
+                            <div class="score d-flex align-items-center">
+                                <div class="info-puntaje">
+                                    <p class="ant-typography">Puntaje</p>
+                                    <p class="promedio">{{ puntaje[4].puntaje_total
+                                        |
+                                        number:'1.2-2' }}</p>
+                                </div>
+                            </div>
+                            <div class="pregunta d-flex align-items-center justify-content-center flex-grow-1">
+                                <span class="text-gray-900 fs-3 fw-bold">
+                                    <h1 class="mb-1 ">{{ puntaje[4].materia }}</h1>
+                                </span>
+                            </div>
+                            <div class="timer">
+                                <h2 class="text-gray-900 fs-3 fw-bold text-center">
+                                    <span class="text-info"></span>
+                                </h2>
+                                <p class="text-gray-900 fs-3 fw-bold">
+                                    <span class="text-info"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <h2 class="mb-1">Promedio por componentes</h2>
+
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-border table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                                    <thead class="bg-success">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Componente</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let compo of resComponentesIngles">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compo.componente }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compo.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <hr>
+
+                            <h2 class="mb-1">Promedio por competencias</h2>
+
+                            <div class="table-responsive">
+                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                                    <thead class="bg-success">
+                                        <!--begin::Table row-->
+                                        <tr class="text-start fw-bolder fs-4  gs-0">
+                                            <th class="min-w-125px text-center">Competencia</th>
+                                            <th class="min-w-125px text-center">Promedio</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let compe of resCompetenciasIngles">
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">{{
+                                                compe.competencia }}
+                                            </td>
+                                            <td style='font-weight: bold;vertical-align: middle;' class="text-center">
+                                                {{
+                                                returnformateado(compe.porcentaje) |
+                                                number:'1.2-2'
+                                                }}
+                                                /100
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <hr>
+
+                            <h2 class="mb-1">Nivel de desempeño</h2>
+
+                            <div class="table-responsive">
+                                <table class="table align-middle gs-1 gy-1 gx-1">
+                                    <tbody class="ant-table-tbody-desem text-center">
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.encontrarRango(puntaje[4].puntaje_total) == 'B1'"></i>
+                                            </td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.encontrarRango(puntaje[4].puntaje_total) == 'A2'"></i>
+                                            </td>
+                                            <td class="avanzado text-white">B1</td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td></td>
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.encontrarRango(puntaje[4].puntaje_total) == 'A1'"></i>
+                                            </td>
+                                            <td class="satisfactorio text-white">A2</td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td><i class="text-dark fa-solid fa-caret-down fs-4"
+                                                    *ngIf="_informeService.encontrarRango(puntaje[4].puntaje_total) == 'A-'"></i>
+                                            </td>
+                                            <td class="minimo text-white">A1</td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                        <tr class="fw-semibold fs-6 ">
+                                            <td class="insuficiente text-white">A-</td>
+                                            <td class="minimo"></td>
+                                            <td class="satisfactorio"></td>
+                                            <td class="avanzado"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </section>
 
 </ng-container>

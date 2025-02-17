@@ -1,48 +1,59 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>ADMIN PRESABER</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
-    <link rel="shortcut icon" href="assets/media/logos/inicio.ico" />
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-    <!--end::Fonts-->
-    <!--begin::Vendor Stylesheets(used for this page only)-->
-    <link href="assets/plugins/custom/datatables/datatables.bundle.css"
-      rel="stylesheet" type="text/css" />
-    <!--end::Vendor Stylesheets-->
-    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet"
-      type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body id="kt_app_body" data-kt-app-layout="light-sidebar"
-    data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true"
-    data-kt-app-sidebar-fixed="true"
-    data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true"
-    data-kt-app-sidebar-push-toolbar="true"
-    data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true"
-    class="app-default">
-    <app-root></app-root>
 
-    <!--begin::Scrolltop-->
-    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-      <i class="ki-duotone ki-arrow-up">
-        <span class="path1"></span>
-        <span class="path2"></span>
-      </i>
-    </div>
-    <!--end::Scrolltop-->
+<head>
+  <meta charset="utf-8">
+  <title>ADMIN GoSmart Saber</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+  <link rel="shortcut icon" href="assets/media/logos/inicio.ico" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+  <!--end::Fonts-->
+  <!--begin::Vendor Stylesheets(used for this page only)-->
+  <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+  <!--end::Vendor Stylesheets-->
+  <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+  <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
-    <script>var hostUrl = "assets/";</script>
-    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-    <script src="assets/plugins/global/plugins.bundle.js"></script>
-    <script src="assets/js/scripts.bundle.js"></script>
-    <script src="assets/js/funfecha.js"></script>
-<!-- 
+</head>
+
+<body id="kt_app_body" data-kt-app-layout="light-sidebar" data-kt-app-header-fixed="true"
+  data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
+  data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true"
+  data-kt-app-toolbar-enabled="true" class="app-default">
+  <app-root></app-root>
+
+  <!--begin::Scrolltop-->
+  <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+    <i class="ki-duotone ki-arrow-up">
+      <span class="path1"></span>
+      <span class="path2"></span>
+    </i>
+  </div>
+  <!--end::Scrolltop-->
+
+  <script>var hostUrl = "assets/";</script>
+  <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+  <script src="assets/plugins/global/plugins.bundle.js"></script>
+  <script src="assets/js/scripts.bundle.js"></script>
+  <script src="assets/js/funfecha.js"></script>
+
+  <!-- Smartsupp Live Chat script -->
+  <script type="text/javascript">
+    var _smartsupp = _smartsupp || {};
+    _smartsupp.key = '8f18fd1590e9e316eefe59648e4d08b7d500d13c';
+    window.smartsupp || (function (d) {
+      var s, c, o = smartsupp = function () { o._.push(arguments) }; o._ = [];
+      s = d.getElementsByTagName('script')[0]; c = d.createElement('script');
+      c.type = 'text/javascript'; c.charset = 'utf-8'; c.async = true;
+      c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
+    })(document);
+  </script>
+  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+
+  <!-- 
     <script>
       $(document).ready(function() {
      
@@ -53,6 +64,7 @@
 
       });
     </script> -->
-    <!--end::Global Javascript Bundle-->
-  </body>
+  <!--end::Global Javascript Bundle-->
+</body>
+
 </html>

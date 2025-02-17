@@ -7,7 +7,8 @@ export class Simulacro {
         public nombre: string,
         public estado?: number,
         public imagen?: string,
-        public resultados?: string
+        public resultados?: string,
+        public mostrar?: number
     ) {
 
     }

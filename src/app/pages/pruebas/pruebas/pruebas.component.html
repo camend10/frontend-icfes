@@ -1,0 +1,94 @@
+<div class="row" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-dismissible bg-info text-center ">
+            <strong class="text-light">Cargando</strong>
+            <br>
+            <i class="fas fa-refresh fa-spin fa-2x" aria-hidden="true"></i>
+            <br>
+            <span class="text-light">Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card mb-5 mb-xl-8 shadow-sm card-flush">
+            
+            <div class="card-body pb-0">
+                <h3 class="card-title pb-0">Pruebas diagnósticas registradas
+                    (<small>{{ totalRegistros }}</small>)</h3>
+                <div class="card-px pt-1 pb-0">
+                    <div class="table-responsive">
+                        <!-- <table class="table align-middle table-row-dashed "> -->
+                        <table
+                            class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+
+                            <thead>
+                                <!--begin::Table row-->
+                                <tr
+                                    class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="min-w-125px text-center">#</th>
+
+                                    <th
+                                        class="min-w-125px text-start">Prueba</th>
+                                    <th
+                                        class="min-w-125px text-center">Mostrar</th>
+                                    <th
+                                        class="text-end min-w-100px text-center">Opciones</th>
+                                </tr>
+                                <!--end::Table row-->
+                            </thead>
+
+                            <tbody>
+                                <tr
+                                    *ngFor="let simulacro of simulacros | paginate: { itemsPerPage: 10, currentPage: p }; let i=index ">
+                                    <td
+                                        style='font-weight: bold;vertical-align: middle;'
+                                        class="text-center">
+                                        {{ (i+1) }}
+                                    </td>
+
+
+                                    <td class="text-start"
+                                        style='font-weight: bold;vertical-align: middle;text-transform: capitalize'>
+                                        {{ simulacro.nombre }}</td>                                    
+
+                                    <td class="text-center">
+                                        <div *ngIf="simulacro.mostrar == 1"
+                                            class="badge badge-success fw-bolder">
+                                            SI
+                                        </div>
+                                        <div *ngIf="simulacro.mostrar == 0"
+                                            class="badge badge-danger fw-bolder">
+                                            NO
+                                        </div>
+                                    </td>
+                                    <td class="text-center">                                       
+                                        <a
+                                            type="button"
+                                            class="btn btn-icon btn-sm"
+                                            [ngClass]="simulacro.mostrar === 1? 'btn-danger': 'btn-success' "
+                                            [title]="simulacro.mostrar === 1? 'No mostrar': 'Mostrar'"
+                                            (click)="simulacroSimulacro(simulacro)">
+                                            <i
+                                                class="fas fs-4 "
+                                                [ngClass]="simulacro.mostrar === 1? 'fa-eye-slash': 'fa-eye'"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="d-flex justify-content-center">
+                            <pagination-controls
+                                (pageChange)="p = $event"
+                                previousLabel="Anterior"
+                                nextLabel="Siguiente"></pagination-controls>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

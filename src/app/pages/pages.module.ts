@@ -41,6 +41,18 @@ import { VerPreguntaComponent } from './preguntas/ver-pregunta/ver-pregunta.comp
 import { ResultadosComponent } from './informes/resultados/resultados.component';
 import { VerResultadosComponent } from './informes/resultados/ver-resultados/ver-resultados.component';
 import { EstadisticasComponent } from './informes/estadisticas/estadisticas.component';
+import { AyudaComponent } from './dashboard/ayuda/ayuda.component';
+import { PruebasComponent } from './pruebas/pruebas/pruebas.component';
+import { RankingComponent } from './entrenador/ranking/ranking.component';
+import { EstadisticaComponent } from './entrenador/estadistica/estadistica.component';
+import { VerEstadisticasEntrenamientosComponent } from './entrenador/ver-estadisticas-entrenamientos/ver-estadisticas-entrenamientos.component';
+import { ComparativoComponent } from './comparativos/comparativo/comparativo.component';
+import { GraficoComponent } from './comparativos/grafico/grafico.component';
+import { ProgramadoComponent } from './entrenador/programado/programado.component';
+import { GestionProgramadoComponent } from './entrenador/programado/gestion-programado/gestion-programado.component';
+import { GuardarProgramadoComponent } from './entrenador/programado/guardar-programado/guardar-programado.component';
+import { VerPreguntaModalComponent } from './entrenador/programado/ver-pregunta-modal/ver-pregunta-modal.component';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -65,7 +77,18 @@ import { EstadisticasComponent } from './informes/estadisticas/estadisticas.comp
         VerPreguntaComponent,
         ResultadosComponent,
         VerResultadosComponent,
-        EstadisticasComponent
+        EstadisticasComponent,
+        AyudaComponent,
+        PruebasComponent,
+        RankingComponent,
+        EstadisticaComponent,
+        VerEstadisticasEntrenamientosComponent,
+        ComparativoComponent,
+        GraficoComponent,
+        ProgramadoComponent,
+        GestionProgramadoComponent,
+        GuardarProgramadoComponent,
+        VerPreguntaModalComponent
     ],
     exports: [
         DashboardComponent,
@@ -81,7 +104,8 @@ import { EstadisticasComponent } from './informes/estadisticas/estadisticas.comp
         PipesModule,
         CommonModule,
         NgxPaginationModule,
-        FlatpickrModule.forRoot({ locale: Spanish })
+        FlatpickrModule.forRoot({ locale: Spanish }),
+        NgbModule
     ]
 })
 

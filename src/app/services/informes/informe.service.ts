@@ -57,39 +57,39 @@ export class InformeService {
   datosDesempenoAreas: Desempeno[] = [
     {
       area: 'Matemáticas',
-      desempenoInsuficiente: { minimo: 0, maximo: 35 },
-      desempenoMinimo: { minimo: 36, maximo: 50 },
-      desempenoSatisfactorio: { minimo: 51, maximo: 70 },
+      desempenoInsuficiente: { minimo: 0, maximo: 35.99 },
+      desempenoMinimo: { minimo: 36, maximo: 50.99 },
+      desempenoSatisfactorio: { minimo: 51, maximo: 70.99 },
       desempenoAvanzado: { minimo: 71, maximo: 100 }
     },
     {
       area: 'Lectura Crítica',
-      desempenoInsuficiente: { minimo: 0, maximo: 35 },
-      desempenoMinimo: { minimo: 36, maximo: 50 },
-      desempenoSatisfactorio: { minimo: 51, maximo: 65 },
+      desempenoInsuficiente: { minimo: 0, maximo: 35.99 },
+      desempenoMinimo: { minimo: 36, maximo: 50.99 },
+      desempenoSatisfactorio: { minimo: 51, maximo: 65.99 },
       desempenoAvanzado: { minimo: 66, maximo: 100 }
     },
     {
       area: 'Sociales y Ciudadanas',
-      desempenoInsuficiente: { minimo: 0, maximo: 40 },
-      desempenoMinimo: { minimo: 41, maximo: 55 },
-      desempenoSatisfactorio: { minimo: 56, maximo: 70 },
+      desempenoInsuficiente: { minimo: 0, maximo: 40.99 },
+      desempenoMinimo: { minimo: 41, maximo: 55.99 },
+      desempenoSatisfactorio: { minimo: 56, maximo: 70.99 },
       desempenoAvanzado: { minimo: 71, maximo: 100 }
     },
     {
       area: 'Ciencias Naturales',
-      desempenoInsuficiente: { minimo: 0, maximo: 40 },
-      desempenoMinimo: { minimo: 41, maximo: 55 },
-      desempenoSatisfactorio: { minimo: 56, maximo: 70 },
+      desempenoInsuficiente: { minimo: 0, maximo: 40.99 },
+      desempenoMinimo: { minimo: 41, maximo: 55.99 },
+      desempenoSatisfactorio: { minimo: 56, maximo: 70.99 },
       desempenoAvanzado: { minimo: 71, maximo: 100 }
     }
   ];
 
   tabla: Tabla = {
     'B1': { minimo: 71, maximo: 100 },
-    'A2': { minimo: 58, maximo: 70 },
-    'A1': { minimo: 37, maximo: 57 },
-    'A-': { minimo: 0, maximo: 36 }
+    'A2': { minimo: 58, maximo: 70.99 },
+    'A1': { minimo: 37, maximo: 57.99 },
+    'A-': { minimo: 0, maximo: 36.99 }
   };
 
   constructor(public http: HttpClient,
@@ -159,9 +159,9 @@ export class InformeService {
   }
 
   // Función para determinar en qué rango se encuentra un número
-  encontrarRango(numero: number): string | null {
+  encontrarRango(numero: number): string | null {    
     for (const clave in this.tabla) {
-      if (this.tabla.hasOwnProperty(clave)) {
+      if (this.tabla.hasOwnProperty(clave)) {        
         const rango = this.tabla[clave];
         if (numero >= rango.minimo && numero <= rango.maximo) {
           return clave;
@@ -183,4 +183,17 @@ export class InformeService {
 
     return this.http.post(url, data);
   }
+
+  cargarResultadoComparativo = (grado_id: number, institucion_id: number) => {
+    let url = URL_SERVICIOS + '/informes/comparativo';
+
+    let data = {      
+      grado_id: grado_id,
+      institucion_id: institucion_id
+    };
+
+    return this.http.post(url, data);
+  }
+
+
 }

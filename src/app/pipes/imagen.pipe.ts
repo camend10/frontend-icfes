@@ -7,7 +7,7 @@ import { Usuario } from '../models/usuario.model';
 })
 export class ImagenPipe implements PipeTransform {
 
-  transform(imagen: string, id: string, tipo: string): any {
+  transform(imagen: string, id: string, tipo: string, institucion_id: number = 0): any {
 
     if (tipo === 'instituciones') {
       let url = URL_IMAGENES + "/imagenes/instituciones";
@@ -25,7 +25,7 @@ export class ImagenPipe implements PipeTransform {
       return url += `/${id}/` + imagen;
     }
 
-    let url = URL_IMAGENES + "/imagenes/foto";
+    let url = URL_IMAGENES + `/imagenes/foto/${institucion_id}`;
 
     if (imagen == 'xxxxx' || imagen == null || imagen == '') {
       return URL_IMAGENES + "/imagenes/foto/default.png";

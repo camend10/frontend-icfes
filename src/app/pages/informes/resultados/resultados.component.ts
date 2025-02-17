@@ -150,6 +150,7 @@ export class ResultadosComponent implements OnInit {
       return;
     }
     this.usuarios = [];
+    this.cargando = true;
     this._informeService.cargarResultado(this.simulacro_id, this.grado_id, this.curso_id, this.institucion_id)
       .pipe(
         catchError(error => {
@@ -163,7 +164,8 @@ export class ResultadosComponent implements OnInit {
         })
       )
       .subscribe((resp: any) => {
-        this.usuarios = resp.usuarios;        
+        this.usuarios = resp.usuarios; 
+        this.cargando = false;       
       })
   }
 }

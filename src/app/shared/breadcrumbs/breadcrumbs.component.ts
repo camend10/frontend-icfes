@@ -23,7 +23,7 @@ export class BreadcrumbsComponent implements OnInit {
         this.titulo = data['titulo'];
         this.subtitulo = data['subtitulo'];
         this.volver = data['volver'];
-        this.title.setTitle(" PRESABER .::. "+ this.titulo);
+        this.title.setTitle(" GoSmart Saber .::. "+ this.titulo);
 
         const metaTag: MetaDefinition = {
           name: 'description',

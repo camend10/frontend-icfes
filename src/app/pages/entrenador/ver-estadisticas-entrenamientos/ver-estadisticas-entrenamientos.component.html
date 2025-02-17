@@ -1,0 +1,155 @@
+<div class="row" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-dismissible bg-info text-center ">
+            <strong class="text-light">Cargando</strong>
+            <br>
+            <i class="fas fa-refresh fa-spin fa-2x" aria-hidden="true"></i>
+            <br>
+            <span class="text-light">Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header border-0 pt-5">
+
+                <!--begin::Heading-->
+                <div class="mb-1 text-center">
+                    <!--begin::Title-->
+                    <!-- <h1 class="mb-1">Entrena a tu ritmo por área del saber</h1> -->
+                    <h2 class="mb-1 text-danger fs-2 fw-bold" *ngIf="materia !='' ">Estudiante: {{ user.name }}</h2>
+                    <!--end::Title-->
+                </div>
+                <!--end::Heading-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-container *ngIf="isQuizCompleto">
+    <div class="row mt-2">
+        <div class="col-12">
+            <!--begin::Feeds Widget 1-->
+            <div class="card mb-1 mb-xl-1 shadow-sm">
+                <!--begin::Body-->
+                <div class="card-body pb-0">
+                    <!--begin::Heading-->
+                    <div class="mb-1 text-center">
+                        <!--begin::Title-->
+                        <h1 class="mb-1">Resultado Final <span class="text-danger">{{ puntaje |
+                            number:'1.2-2' }} %</span></h1>
+                        <h2 class="mb-1 fs-2 fw-bold" *ngIf="materia !='' ">Area: <span class="text-info">{{ materia
+                                }}</span></h2>
+                        <h3 class="mb-1">Total Preguntas: {{ numpre }}</h3>
+                        <h3 class="mb-1 text-success">Respuestas Correctas: {{
+                            suma }}</h3>
+                        <h3 class="mb-1 text-danger">Respuestas Incorrectas: {{
+                            numpre - suma
+                            }}</h3>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Heading-->
+
+                    <div class="separator"></div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--begin::Product table-->
+                            <div class="table-responsive">
+                                <!--begin::Table-->
+                                <table class="table align-middle table-row-dashed fs-6 gy-4 mb-0">
+                                    <!--begin::Table head-->
+                                    <thead>
+
+                                        <!--begin::Table row-->
+                                        <tr
+                                            class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                            <th class="min-w-100px">#</th>
+                                            <th class="min-w-150px">Pregunta</th>
+                                            <th class="min-w-125px">Respuesta</th>
+                                            <th class="min-w-125px">Correcta</th>
+                                            <th class="min-w-125px">Estado</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+                                    <!--end::Table head-->
+                                    <!--begin::Table body-->
+                                    <tbody class="fw-semibold text-gray-800"
+                                        *ngFor="let pre of preguntas; let i = index">
+                                        <tr>
+                                            <td>
+                                                <label class="w-100px">{{
+                                                    (i + 1) }}</label>
+                                            </td>
+                                            <td>
+                                                <span style="text-align: justify;" class="w-100px ">{{
+                                                    pre.que_desc
+                                                    }}</span>
+                                                <div class="d-flex justify-content-center mb-3">
+                                                    <img *ngIf="pre.img_preg"
+                                                        [src]="pre.img_preg| pregunta:pre.id.toString() :materia_id "
+                                                        class="img-fluid mb-2" [style.width]="'300px'">
+                                                </div>
+                                                <span style="text-align: justify;" class="w-100px">{{
+                                                    pre.que_desc2
+                                                    }}</span>
+                                                <span style="text-align: justify;" class="w-100px">{{
+                                                    pre.que_desc3
+                                                    }}</span>
+                                            </td>
+                                            <td>
+                                                <span style="text-align: justify;" class="w-100px">{{
+                                                    preguntaSel(pre.escojida,i)
+                                                    }}</span>
+
+                                                <div class="d-flex justify-content-center mb-3"
+                                                    *ngIf="banderaSel(pre.escojida,i) == 1">
+                                                    <img *ngIf="banderaSel(pre.escojida,i) == 1"
+                                                        [src]="imagenSel(pre.escojida,i)| pregunta:idsSel(pre.seleccionada,i).toString() :materia_id "
+                                                        class="img-fluid mb-2" [style.width]="'400px'">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span style="text-align: justify;" class="w-100px">{{
+                                                    preguntaCor(pre.true_ans,i)
+                                                    }}</span>
+
+                                                <div class="d-flex justify-content-center mb-3"
+                                                    *ngIf="banderaCor(pre.true_ans,i) == 1">
+                                                    <img *ngIf="banderaCor(pre.true_ans,i) == 1"
+                                                        [src]="imagenCor(pre.true_ans,i)| pregunta:idsCor(pre.true_ans,i).toString() :materia_id "
+                                                        class="img-fluid mb-2" [style.width]="'400px'">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="condicion(pre.escojida,pre.true_ans,i)"><i
+                                                        class="fa-solid fa-check text-success fs-4x"></i></span>
+                                                <span *ngIf="!condicion(pre.escojida,pre.true_ans,i)"><i
+                                                        class="fa-solid fa-xmark text-danger fs-4x"></i></span>
+                                                <!-- <div
+                                                    [style.background-color]="condicion(respuestaSeleccionada[i],pre.true_ans,i) ? 'red' : 'green'"
+                                                    >hola</div> -->
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                                <!--end::Table-->
+                            </div>
+                            <!--end::Product table-->
+                        </div>
+                    </div>
+
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Feeds Widget 1-->
+
+        </div>
+    </div>
+</ng-container>

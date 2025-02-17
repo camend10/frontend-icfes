@@ -1,0 +1,519 @@
+<div class="row" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-dismissible bg-info text-center ">
+            <strong class="text-light">Cargando</strong>
+            <br>
+            <i class="fas fa-refresh fa-spin fa-2x" aria-hidden="true"></i>
+            <br>
+            <span class="text-light">Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<ng-container *ngIf="!cargando">
+
+    <div class="row mt-1 justify-content-center">
+        <div class="col-12">
+            <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
+                <div class="card-header">
+                    <h2 class="fw-bold d-flex align-items-center">Datos de busqueda</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Institución</span>
+                                </label>
+                                <!--end::Label-->
+                                <select class="form-select" data-placeholder="Seleccione" data-control="select2"
+                                    data-hide-search="false" name="institucion_id" [(ngModel)]="institucion_id"
+                                    (change)="cambio()">
+                                    <option *ngFor="let institucion of instituciones" [value]="institucion.id">{{
+                                        institucion.nombre
+                                        }}</option>
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+
+                        <div class="col-md-3">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Grado</span>
+                                </label>
+                                <!--end::Label-->
+                                <select class="form-select " data-placeholder="Seleccione" data-control="select2"
+                                    data-hide-search="false" name="grado_id" [(ngModel)]="grado_id" (change)="cambio()">
+                                    <option *ngFor="let grado of grados" [value]="grado.id">{{
+                                        grado.sigla
+                                        }} - {{grado.nombre }}</option>
+
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class>&nbsp;</span>
+                                </label>
+
+                                <button (click)="buscar()" class="btn btn-success btn-icon" title="buscar">
+                                    <i class="fas fa-search fs-4 "></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="busqueda">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm ">
+                    <div class="card-header border-0 pt-5 d-flex align-items-center">
+
+                        <!--begin::Heading-->
+                        <div class="mb-1 text-center d-flex justify-content-center">
+                            <!--begin::Title-->
+                            <h1 class="mb-1">Comparativos de las pruebas diagnósticas</h1>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+
+                        <div class="card-toolbar ">
+                            <!--begin::Toolbar-->
+                            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+
+                                <a (click)="imprimir()" class="btn btn-success ms-2">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                                    <i class="ki-duotone ki-printer">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                    <!--end::Svg Icon-->
+                                    Imprimir
+                                </a>
+                                <!--end::Add user-->
+                            </div>
+                            <!--end::Toolbar-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <section id="pdfPreview" ngxPrint class="pdf-preview">
+
+
+            <section class="pdf-section">
+
+                <div class="row mt-1 justify-content-center">
+                    <div class="col-12">
+                        <div class="card shadow-sm card-xl-stretch">
+                            <div class="card-header">
+                                <h2 class="fw-bold d-flex align-items-center">Historico Promedio Por Áreas y Prueba
+                                    Dianósticas</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div id="graHistoricosPorAreas" style="width: 100%;height: 500px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-1 justify-content-center">
+                    <div class="col-12">
+                        <div class="card shadow-sm card-xl-stretch">
+                            <div class="card-header">
+                                <h2 class="fw-bold d-flex align-items-center">Historico Promedio Global</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div id="graHistoricosPromedioGlobal" style="width: 100%;height: 300px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-1 justify-content-center">
+                    <div class="col-12">
+                        <div class="card shadow-sm card-xl-stretch">
+                            <div class="card-header">
+                                <h2 class="fw-bold d-flex align-items-center">Historico Cantidad de Estudiantes por
+                                    Pruebas Diagnósticas</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div id="graHistoricosCantidadEstudiantes" style="width: 100%;height: 300px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pdf-section">
+                <div class="row mt-1 justify-content-center">
+                    <div class="col-8">
+                        <div class="card shadow-sm card-xl-stretch">
+                            <div class="card-header">
+                                <h2 class="fw-bold d-flex align-items-center">Niveles de
+                                    Desempeño Por Áreas</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-0">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-row-dashed fs-8 gy-1 mb-0">
+                                            <thead>
+                                                <tr
+                                                    class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
+                                                    <th class="min-w-110px text-center">Área</th>
+                                                    <th colspan="2"
+                                                        class="min-w-100px text-center insuficiente text-white"
+                                                        style="border-radius: 10px;">Desempeño
+                                                        Insuficiente</th>
+                                                    <th colspan="2" class="min-w-100px text-center minimo text-white"
+                                                        style="border-radius: 10px;">Desempeño
+                                                        Mínimo</th>
+                                                    <th colspan="2"
+                                                        class="min-w-100px text-center satisfactorio text-white"
+                                                        style="border-radius: 10px;">Desempeño
+                                                        Satisfactorio</th>
+                                                    <th colspan="2" class="min-w-100px text-center avanzado text-white"
+                                                        style="border-radius: 10px;">Desempeño
+                                                        Avanzado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="fw-semibold text-gray-800 ant-table-tbody">
+                                                <tr>
+                                                    <td class="text-center">
+
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        Mínimo
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        Máximo
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        Mínimo
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        Máximo
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        Mínimo
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        Máximo
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        Mínimo
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        Máximo
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        Matemáticas
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        0
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        35
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        36
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        50
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        51
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        70
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        71
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        100
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        Lectura Critica
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        0
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        35
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        36
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        50
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        51
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        65
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        66
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        100
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        Sociales y Ciudadanas
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        0
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        40
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        41
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        55
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        56
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        70
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        71
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        100
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        Ciencias Naturales
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        0
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        40
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        41
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        55
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        56
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        70
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        71
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        100
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card shadow-sm card-xl-stretch">
+                            <div class="card-header">
+                                <h2 class="fw-bold d-flex align-items-center">Ingles</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-0">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-row-dashed fs-8 gy-1 mb-0">
+                                            <thead>
+                                                <tr
+                                                    class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
+                                                    <th class="min-w-110px text-center">ND</th>
+                                                    <th class="min-w-100px text-center">Mínimo</th>
+                                                    <th class="min-w-100px text-center">Máximo</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="fw-semibold text-gray-800 ant-table-tbody">
+                                                <tr>
+                                                    <td class="text-center">
+                                                        B1
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        71
+                                                    </td>
+                                                    <td class="avanzado text-white text-center">
+                                                        100
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        A2
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        58
+                                                    </td>
+                                                    <td class="satisfactorio text-white text-center">
+                                                        70
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        A1
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        37
+                                                    </td>
+                                                    <td class="minimo text-white text-center">
+                                                        57
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        A-
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        0
+                                                    </td>
+                                                    <td class="insuficiente text-white text-center">
+                                                        36
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pdf-section">
+                <div class="row mt-1 justify-content-center">
+                    <div class="col-12">
+                        <div class="card shadow-sm card-xl-stretch">
+                            <div class="card-header">
+                                <h2 class="fw-bold d-flex align-items-center">Historial de Niveles de
+                                    Desempeño Por Áreas</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-0">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-row-dashed fs-8 gy-1 mb-0">
+                                            <thead class="fw-semibold text-gray-800 ant-table-tbody">
+                                                <tr
+                                                    class="border-bottom border-gray-200 text-start text-gray-500 fw-bold fs-8 text-uppercase gs-0">
+                                                    <th *ngFor="let header of historial_desempenos[0]; let i = index"
+                                                        class="min-w-150px fw-bolder fs-7 text-uppercase gs-0 text-dark text-center">
+                                                        {{ header }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="fw-semibold text-gray-800 ant-table-tbody">
+                                                <tr *ngFor="let item of historial_desempenos.slice(1)">
+                                                    <td class="text-center">{{ item[0] }}</td>
+                                                    <td class="text-center">{{ item[1] }}</td>
+                                                    <td class="text-center text-white"
+                                                        [ngClass]="getClassForValue('Matemáticas', item[2])">{{ item[2]
+                                                        }}</td>
+                                                    <td class="text-center text-white"
+                                                        [ngClass]="getClassForValue('Lectura Crítica', item[3])">{{
+                                                        item[3] }}</td>
+                                                    <td class="text-center text-white"
+                                                        [ngClass]="getClassForValue('Sociales y Ciudadanas', item[4])">
+                                                        {{ item[4] }}</td>
+                                                    <td class="text-center text-white"
+                                                        [ngClass]="getClassForValue('Ciencias Naturales', item[5])">{{
+                                                        item[5] }}</td>
+                                                    <td class="text-center text-white"
+                                                        [ngClass]="getClassForValue('Ingles', item[6])">{{ item[6] }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pdf-section">
+                <div class="row mt-1 justify-content-center">
+                    <div class="col-12">
+                        <div class="card shadow-sm card-xl-stretch">
+                            <div class="card-header">
+                                <h2 class="fw-bold d-flex align-items-center">Desviación Estandar Por Áreas</h2>
+                            </div>
+                            <div class="card-body">
+                                <div *ngFor="let materia of datos_desviaciones" class="row">
+                                    <div class="col-12">
+                                        <app-grafico [chartId]="'chart-' + materia.materiaId"
+                                            [materia]="materia.materia" [datos]="materia.simulacros"
+                                            [totSimu]="TotalSimulacros.slice(1)">
+                                        </app-grafico>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+    </ng-container>
+</ng-container>

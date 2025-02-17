@@ -1,0 +1,273 @@
+<div class="row" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-dismissible bg-info text-center ">
+            <strong class="text-light">Cargando</strong>
+            <br>
+            <i class="fas fa-refresh fa-spin fa-2x" aria-hidden="true"></i>
+            <br>
+            <span class="text-light">Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+
+<ng-container *ngIf="!cargando">
+    <div class="row mt-1 justify-content-center">
+        <div class="col-12">
+            <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
+                <div class="card-header">
+                    <h2 class="fw-bold d-flex align-items-center">Datos del estudiante</h2>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Grado</span>
+                                </label>
+                                <!--end::Label-->
+                                <select class="form-select " data-placeholder="Seleccione" data-control="select2"
+                                    data-hide-search="false" name="grado_id" [(ngModel)]="grado_id"
+                                    (change)="cambiarGrado($event)">
+                                    <option value="0">Grado</option>
+                                    <option *ngFor="let grado of grados" [value]="grado.id">
+                                        {{
+                                        grado.sigla
+                                        }} - {{grado.nombre }}</option>
+
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+
+                        <div class="col-md-3">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Áreas del saber</span>
+                                </label>
+                                <!--end::Label-->
+                                <select class="form-select " data-placeholder="Seleccione" data-control="select2"
+                                    data-hide-search="false" name="materia_id" [(ngModel)]="materia_id"
+                                    (change)="cambiarArea($event)">
+                                    <option value="0" selected>Área</option>
+                                    <option *ngFor="let materia of materiasFiltradas" [value]="materia.id">
+                                        {{ (+grado_id === 1 || +grado_id === 2) ? materia.test_name :
+                                        materia.nombre2 }}
+                                    </option>
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+
+                        <div class="col-md-2">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Tipo</span>
+                                </label>
+                                <!--end::Label-->
+                                <select name="num_preguntas" id="tipo" class="form-select" [(ngModel)]="tipo"
+                                    (change)="cambiarTipo()">
+                                    <option value="" selected>TIPO</option>
+                                    <option value="NORMAL">NORMAL</option>
+                                    <option value="PROGRAMADO">PROGRAMADO</option>
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+
+                        <div class="col-md-2">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Curso</span>
+                                </label>
+                                <!--end::Label-->
+                                <select class="form-select " data-placeholder="Seleccione" data-control="select2"
+                                    data-hide-search="false" name="curso_id" [(ngModel)]="curso_id"
+                                    (change)="cambiarCurso($event)">
+                                    <option value="0" selected>Curso</option>
+                                    <option *ngFor="let curso of cursos" [value]="curso.id">{{
+                                        curso.sigla
+                                        }}</option>
+
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+
+                        <div class="col-md-2">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Número de preguntas</span>
+                                </label>
+                                <!--end::Label-->
+                                <select name="num_preguntas" id="num_preguntas" class="form-select" [(ngModel)]="numpre"
+                                    (change)="cambiar()">
+                                    <option [ngValue]="0" selected># de preguntas</option>
+                                    <option [ngValue]="5">5 Preguntas</option>
+                                    <option [ngValue]="10">10 Preguntas</option>
+                                    <option [ngValue]="15">15 Preguntas</option>
+                                    <option [ngValue]="20">20 Preguntas</option>
+                                    <option [ngValue]="25">25 Preguntas</option>
+                                    <option [ngValue]="30">30 Preguntas</option>
+                                    <option [ngValue]="31">Mayor de 30</option>
+                                </select>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-2">
+                            <div class="input-group ">
+                                <input type="date" name="fecha_inicio" class="form-control form-control-lg "
+                                    (change)="onFechaInicioChange()" [(ngModel)]="fecha_inicio" />
+                            </div>
+                            <!--begin::Description-->
+                            <div class="text-muted fs-7">Fecha de inicio.
+                            </div>
+                            <!--end::Description-->
+                        </div>
+
+                        <div class="col-2">
+                            <div class="input-group ">
+                                <input type="date" name="fecha_final" class="form-control form-control-lg "
+                                    (change)="onFechaFinalChange()" [(ngModel)]="fecha_final" />
+                            </div>
+                            <!--begin::Description-->
+                            <div class="text-muted fs-7">Fecha final.
+                            </div>
+                            <!--end::Description-->
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class=" mb-8 ">
+
+                                <button (click)="buscar()" class="btn btn-success btn-icon me-2" title="buscar">
+                                    <i class="fas fa-search fs-4 "></i>
+                                </button>
+
+                                <button (click)="reset()" class="btn btn-dark btn-icon me-2" placement="top"
+                                    ngbTooltip="Resetear" title="Resetear">
+                                    <i class="ki-duotone ki-arrows-circle fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1 justify-content-center">
+        <div class="col-12">
+            <div class="card shadow-sm card-xl-stretch mb-xl-8 ">
+                <div class="card-header" *ngIf="usuarios.length > 0">
+                    <h2 class="fw-bold d-flex align-items-center" *ngIf="curso_id == 0  ">Ranking de
+                        los primeros 10
+                        estudiantes del grado: {{ grado }} para el entrenamiento de: &nbsp; <span class="text-info">{{
+                            (+grado_id === 1 || +grado_id === 2) ? materia.test_name : materia.nombre2 }}</span></h2>
+                    <h2 class="fw-bold d-flex align-items-center" *ngIf="curso_id != 0  ">Ranking de
+                        los estudiantes del curso: {{ grado }} - {{ curso }} para el entrenamiento de: &nbsp; <span
+                            class="text-info"> {{ (+grado_id === 1 || +grado_id === 2) ? materia.test_name :
+                            materia.nombre2 }}</span></h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-0">
+                                <h3 class="fw-bold d-flex align-items-center" *ngIf="usuariosFiltrados.length >= 0"># de
+                                    estudiantes
+                                    : &nbsp;
+                                    <span class="text-info"> {{usuariosFiltrados.length}}</span>
+                                </h3>
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-row-dashed fs-5 gy-1 mb-0">
+                                        <thead>
+                                            <tr
+                                                class="border-bottom border-gray-200 text-start fw-bold fs-4 text-uppercase gs-0">
+                                                <th class="min-w-50px text-center">Puesto</th>
+                                                <th class="min-w-10px text-start">Identificación</th>
+                                                <th class="min-w-100px text-start">Estudiante</th>
+                                                <th class="min-w-80px text-center">Grado</th>
+                                                <th class="min-w-50px text-center">Puntaje</th>
+                                                <th class="min-w-50px text-center"># de Preguntas</th>
+                                                <th class="min-w-50px text-start">Fecha</th>
+                                                <th class="min-w-50px text-center">Tiempo(hh:mm:ss)</th>
+                                                <th class="min-w-50px text-center">Tipo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="usuariosFiltrados.length === 0">
+                                            <tr>
+                                                <th colspan="9" class="text-center fw-bold fs-3 text-uppercase gs-0">
+                                                    No existen ranking de estudiantes
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="usuariosFiltrados.length > 0">
+                                            <tr *ngFor="let item of usuariosFiltrados; let i=index" class="fs-7 gs-0">
+                                                <td [class]="{'bg-success': item.id === user.id}"
+                                                    style='vertical-align: middle;' class="text-center">
+                                                    {{ (i+1) }}
+                                                </td>
+                                                <td [class]="{'bg-success': item.id === user.id}" class="text-start"
+                                                    style='vertical-align: middle;'>
+                                                    {{
+                                                    item.identificacion
+                                                    }}</td>
+                                                <td [class]="{'bg-success': item.id === user.id}"
+                                                    class="text-start text-capitalize" style='vertical-align: middle;'>
+                                                    {{ item.nombre_estudiante }}</td>
+                                                <td [class]="{'bg-success': item.id === user.id}"
+                                                    class="text-start text-center" style='vertical-align: middle;'>
+                                                    {{ item.grado }} -
+                                                    {{ item.curso }}</td>
+                                                <td [class]="{'bg-success': item.id === user.id}" class="text-center"
+                                                    style='vertical-align: middle;'>
+                                                    {{ item.puntaje |
+                                                    number:'1.2-2' }} %</td>
+                                                <td [class]="{'bg-success': item.id === user.id}" class="text-center"
+                                                    style='vertical-align: middle;'>
+                                                    {{ (item.correctas + item.incorrectas) }}</td>
+                                                <td [class]="{'bg-success': item.id === user.id}" class="text-start">
+                                                    {{ item.fecha }}
+                                                </td>
+                                                <td [class]="{'bg-success': item.id === user.id}" class="text-center">
+                                                    {{ item.horas.toString().padStart(2, '0') }} : {{
+                                                    item.minutos.toString().padStart(2, '0') }} : {{
+                                                    item.segundos.toString().padStart(2, '0') }}
+                                                </td>
+                                                <td [class]="{'bg-success': item.id === user.id}" class="text-center"
+                                                    style='vertical-align: middle;'>
+                                                    {{ item.tipo }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-container>

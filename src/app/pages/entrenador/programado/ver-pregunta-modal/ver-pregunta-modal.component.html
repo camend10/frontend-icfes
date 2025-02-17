@@ -1,0 +1,285 @@
+<!--begin::Modal content CREATE-->
+<div class="modal-content">
+    <!--begin::Modal header-->
+    <div class="modal-header" id="kt_modal_add_user_header">
+        <!--begin::Modal title-->
+        <h2 class="fw-bolder">Pregunta</h2>
+        <!--end::Modal title-->
+
+        <!--begin::Close-->
+        <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary"
+            (click)="modal.dismiss()">
+            <i class="ki-duotone ki-cross fs-1">
+                <span class="path1"></span>
+                <span class="path2"></span>
+            </i>
+        </div>
+        <!--end::Close-->
+    </div>
+    <!--end::Modal header-->
+    <!--begin::Modal body-->
+    <div class="modal-body py-10 px-lg-17 scroll-y mx-5 my-3">
+
+        <ng-container>
+
+            <section>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <!--begin::Feeds Widget 1-->
+                        <div class="card mb-1 mb-xl-1 shadow-sm">
+                            <!--begin::Body-->
+                            <div class="card-body pb-0">
+                                <!--begin::Header-->
+                                <div class="d-flex align-items-center mb-1">
+                                    <!--begin::User-->
+                                    <div class="d-flex align-items-center flex-grow-1">
+                                        <!--begin::Info-->
+                                        <div class="d-flex flex-column" style="text-align: justify">
+                                            <p class="text-gray-900 text-hover-primary fs-5 fw-bold">
+                                                {{pregunta.que_desc}}</p>
+                                        </div>
+                                        <!--end::Info-->
+                                    </div>
+                                    <!--end::User-->
+                                </div>
+                                <div class="d-flex justify-content-center mb-3">
+                                    <img *ngIf="pregunta.img_preg"
+                                        [src]="pregunta.img_preg| pregunta:pregunta.id.toString() :materia_id "
+                                        class="img-fluid mb-2" [style.width]="'450px'">
+                                </div>
+
+                                <div class="d-flex align-items-center mt-2 mb-1" *ngIf="pregunta.que_desc2">
+                                    <!--begin::User-->
+                                    <div class="d-flex align-items-center flex-grow-1">
+                                        <!--begin::Info-->
+                                        <div class="d-flex flex-column" style="text-align: justify">
+                                            <p class="text-gray-900 text-hover-primary fs-5 fw-bold">{{
+                                                pregunta.que_desc2
+                                                }}</p>
+                                        </div>
+                                        <!--end::Info-->
+                                    </div>
+                                    <!--end::User-->
+                                </div>
+
+                                <div class="d-flex align-items-center mb-1" *ngIf="pregunta.que_desc3">
+                                    <!--begin::User-->
+                                    <div class="d-flex align-items-center flex-grow-1">
+                                        <!--begin::Info-->
+                                        <div class="d-flex flex-column" style="text-align: justify">
+                                            <p class="text-gray-900 text-hover-primary fs-5 fw-bold">{{
+                                                pregunta.que_desc3
+                                                }}</p>
+                                        </div>
+                                        <!--end::Info-->
+                                    </div>
+                                    <!--end::User-->
+                                </div>
+                                <!--end::Header-->
+                                <div class="separator"></div>
+
+                            </div>
+                            <!--end::Body-->
+                        </div>
+                        <!--end::Feeds Widget 1-->
+
+                    </div>
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col-md-12">
+                        <!--begin::Tabs-->
+                        <div class="nav flex-column">
+
+                            <div class="card mb-1 mb-xl-8 shadow-sm">
+                                <div class="card-body pb-0">
+                                    <!--begin::Tab link-->
+                                    <label
+                                        class="nav-link btn btn-outline btn-outline-dashed btn-color-dark btn-active-primary d-flex flex-stack text-start p-6 mb-6"
+                                        data-bs-toggle="tab">
+                                        <!--end::Description-->
+                                        <div class="d-flex align-items-center me-2">
+                                            <!--begin::Radio-->
+                                            <div
+                                                class="form-check form-check-custom form-check-solid form-check-success flex-shrink-0 me-6">
+                                                <input class="form-check-input" type="radio" />
+                                            </div>
+                                            <!--end::Radio-->
+                                            <!--begin::Info-->
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center fs-6 flex-wrap">
+                                                    {{
+                                                    pregunta.ans1
+                                                    }}</div>
+
+                                            </div>
+                                            <!--end::Info-->
+
+                                            <div class="d-flex justify-content-center mb-3"
+                                                *ngIf="pregunta.ban_imgr1 == 1">
+                                                <img *ngIf="pregunta.imgr1"
+                                                    [src]="pregunta.imgr1| pregunta:pregunta.id.toString() :materia_id "
+                                                    class="img-fluid mb-2" [style.width]="'400px'">
+                                            </div>
+                                        </div>
+                                        <!--end::Description-->
+
+                                    </label>
+                                    <!--end::Tab link-->
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--end::Tabs-->
+                    </div>
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col-md-12">
+                        <!--begin::Tabs-->
+                        <div class="nav flex-column">
+
+                            <div class="card mb-1 mb-xl-8 shadow-sm">
+                                <div class="card-body pb-0">
+                                    <!--begin::Tab link-->
+                                    <label
+                                        class="nav-link btn btn-outline btn-outline-dashed btn-color-dark btn-active-primary d-flex flex-stack text-start p-6 mb-6"
+                                        data-bs-toggle="tab">
+                                        <!--end::Description-->
+                                        <div class="d-flex align-items-center me-2">
+                                            <!--begin::Radio-->
+                                            <div
+                                                class="form-check form-check-custom form-check-solid form-check-success flex-shrink-0 me-6">
+                                                <input class="form-check-input" type="radio" />
+                                            </div>
+                                            <!--end::Radio-->
+                                            <!--begin::Info-->
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center fs-6 flex-wrap">{{
+                                                    pregunta.ans2
+                                                    }}</div>
+
+                                            </div>
+                                            <!--end::Info-->
+
+                                            <div class="d-flex justify-content-center mb-3"
+                                                *ngIf="pregunta.ban_imgr2 == 1">
+                                                <img *ngIf="pregunta.imgr2"
+                                                    [src]="pregunta.imgr2| pregunta:pregunta.id.toString() :materia_id "
+                                                    class="img-fluid mb-2" [style.width]="'400px'">
+                                            </div>
+                                        </div>
+                                        <!--end::Description-->
+
+                                    </label>
+                                    <!--end::Tab link-->
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--end::Tabs-->
+                    </div>
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col-md-12">
+                        <!--begin::Tabs-->
+                        <div class="nav flex-column">
+
+                            <div class="card mb-1 mb-xl-8 shadow-sm">
+                                <div class="card-body pb-0">
+                                    <!--begin::Tab link-->
+                                    <label
+                                        class="nav-link btn btn-outline btn-outline-dashed btn-color-dark btn-active-primary d-flex flex-stack text-start p-6 mb-6"
+                                        data-bs-toggle="tab">
+                                        <!--end::Description-->
+                                        <div class="d-flex align-items-center me-2">
+                                            <!--begin::Radio-->
+                                            <div
+                                                class="form-check form-check-custom form-check-solid form-check-success flex-shrink-0 me-6">
+                                                <input class="form-check-input" type="radio" />
+                                            </div>
+                                            <!--end::Radio-->
+                                            <!--begin::Info-->
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center fs-6 flex-wrap">{{
+                                                    pregunta.ans3
+                                                    }}</div>
+
+                                            </div>
+                                            <!--end::Info-->
+
+                                            <div class="d-flex justify-content-center mb-3"
+                                                *ngIf="pregunta.ban_imgr3 == 1">
+                                                <img *ngIf="pregunta.imgr3"
+                                                    [src]="pregunta.imgr3| pregunta:pregunta.id.toString() :materia_id "
+                                                    class="img-fluid mb-2" [style.width]="'400px'">
+                                            </div>
+                                        </div>
+                                        <!--end::Description-->
+
+                                    </label>
+                                    <!--end::Tab link-->
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--end::Tabs-->
+                    </div>
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col-md-12">
+                        <!--begin::Tabs-->
+                        <div class="nav flex-column">
+
+                            <div class="card mb-1 mb-xl-8 shadow-sm">
+                                <div class="card-body pb-0">
+                                    <!--begin::Tab link-->
+                                    <label
+                                        class="nav-link btn btn-outline btn-outline-dashed btn-color-dark btn-active-primary d-flex flex-stack text-start p-6 mb-6"
+                                        data-bs-toggle="tab">
+                                        <!--end::Description-->
+                                        <div class="d-flex align-items-center me-2">
+                                            <!--begin::Radio-->
+                                            <div
+                                                class="form-check form-check-custom form-check-solid form-check-success flex-shrink-0 me-6">
+                                                <input class="form-check-input" type="radio" />
+                                            </div>
+                                            <!--end::Radio-->
+                                            <!--begin::Info-->
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center fs-6 flex-wrap">{{
+                                                    pregunta.ans4
+                                                    }}</div>
+
+                                            </div>
+                                            <!--end::Info-->
+
+                                            <div class="d-flex justify-content-center mb-3"
+                                                *ngIf="pregunta.ban_imgr4 == 1">
+                                                <img *ngIf="pregunta.imgr4"
+                                                    [src]="pregunta.imgr4| pregunta:pregunta.id.toString() :materia_id "
+                                                    class="img-fluid mb-2" [style.width]="'400px'">
+                                            </div>
+                                        </div>
+                                        <!--end::Description-->
+
+                                    </label>
+                                    <!--end::Tab link-->
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--end::Tabs-->
+                    </div>
+                </div>
+            </section>
+
+        </ng-container>
+
+
+    </div>
+    <!--end::Modal body-->
+</div>
+<!--end::Modal content CREATE-->

@@ -112,8 +112,8 @@
                                                 class="form-control"
                                                 placeholder="Identificación"
                                                 name="identificacion"
-                                                [ngClass]="{'is-invalid': f['identificacion'].invalid && f['identificacion'].touched }"
-                                                [class.is-valid]="f['identificacion'].valid"
+                                                [ngClass]="{'is-invalid': f['identificacion'].invalid && f['identificacion'].touched }"												
+												[class.is-valid]="f['identificacion'].valid"
                                                 autocomplete="off"
                                                 value
                                                 required>
@@ -126,13 +126,13 @@
                                                     control: f['identificacion']
                                             }"></ng-container>
 
-                                            <ng-container
+                                            <!-- <ng-container
                                                 [ngTemplateOutlet]="formError"
                                                 [ngTemplateOutletContext]="{
                                                     validation: 'pattern',
                                                     message: 'Digite solo números',
                                                     control: f['identificacion']
-                                            }"></ng-container>
+                                            }"></ng-container> -->
 
                                             <ng-container
                                                 [ngTemplateOutlet]="formError"
@@ -338,20 +338,21 @@
                                                 class="form-control "
                                                 placeholder="Correo"
                                                 name="email"
-                                                [ngClass]="{'is-invalid': f['email'].invalid && f['email'].touched }"
-                                                [class.is-valid]="f['email'].valid"
+
+
+                                                [class]="f['email'].valid && f['email'].touched && f['email'].value != ''  ? 'is-valid': ''"
                                                 value
-                                                required
+                                                
                                                 autocomplete="off"
                                                 formControlName="email">
 
-                                            <ng-container
+                                            <!-- <ng-container
                                                 [ngTemplateOutlet]="formError"
                                                 [ngTemplateOutletContext]="{
                                                         validation: 'required',
                                                         message: 'El correo es requerido',
                                                         control: f['email']
-                                                }"></ng-container>
+                                                }"></ng-container> -->
 
                                             <ng-container
                                                 [ngTemplateOutlet]="formError"
@@ -361,13 +362,13 @@
                                                         control: f['email']
                                                 }"></ng-container>
 
-                                            <ng-container
+                                            <!-- <ng-container
                                                 [ngTemplateOutlet]="formError"
                                                 [ngTemplateOutletContext]="{
                                                         validation: 'maxLength',
                                                         message: 'El correo debe tener maximo 100 caracteres',
                                                         control: f['email']
-                                                }"></ng-container>
+                                                }"></ng-container> -->
 
                                         </div>
                                         <!--end::Input group-->
@@ -573,9 +574,13 @@
                                                 formControlName="jornada">
                                                 <option value>Jornada</option>
                                                 <option
-                                                    value="1">Diurna</option>
+                                                    value="1">Mañana</option>
                                                 <option
-                                                    value="2">Nocturna</option>
+                                                    value="2">Tarde</option>
+                                                <option
+                                                    value="3">Única</option>
+                                                <option
+                                                    value="4">Nocturna</option>
 
                                             </select>
                                         </div>
